@@ -28,5 +28,5 @@ CREATE TABLE comments (
   comment TEXT,
   time DATE
 );
-
+bindpopup
 
