@@ -1,0 +1,32 @@
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS pins CASCADE;
+DROP TABLE IF EXISTS comments CASCADE;
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY NOT NULL,
+  username VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE pins (
+  id SERIAL PRIMARY KEY NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  picture VARCHAR(255) NOT NULL,
+  condition VARCHAR(255) NOT NULL,
+  latitude FLOAT NOT NULL,
+  longitude FLOAT NOT NULL,
+  date DATE,
+  creator_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  claimer_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE comments (
+  creator_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  claimer_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  comment TEXT,
+  time DATE
+);
+
+
