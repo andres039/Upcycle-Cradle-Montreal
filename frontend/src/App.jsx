@@ -3,13 +3,14 @@ import './App.css';
 import Button from './components/Button';
 import LoginForm from './components/LoginForm';
 import NewItemForm from './components/SideBar/NewItemForm';
+import RegistrationForm from './components/RegistrationForm';
 
 // import LoginForm from './components/LoginForm';
 
 function App() {
   return (
     <div className="App">
-      <h1>Hell0000</h1>
+      <h1>Hello</h1>
       <Map />
     </div>
   );

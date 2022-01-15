@@ -12,8 +12,8 @@ const RegistrationForm = (props) => {
 
 
   // // States for checking the errors
-  // const [submitted, setSubmitted] = useState(false);
-  // const [error, setError] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
 
   // Handling the name change
   const handleUsername = (e) => {
@@ -50,18 +50,18 @@ const RegistrationForm = (props) => {
     }
   };
 
-  // Showing success message
-  const successMessage = () => {
-    return (
-      <div
-        className="success"
-        style={{
-          display: submitted ? '' : 'none',
-        }}>
-        <h1>User {name} successfully registered!!</h1>
-      </div>
-    );
-  };
+  // // Showing success message
+  // const successMessage = () => {
+  //   return (
+  //     <div
+  //       className="success"
+  //       style={{
+  //         display: submitted ? '' : 'none',
+  //       }}>
+  //       <h1>User {name} successfully registered!!</h1>
+  //     </div>
+  //   );
+  // };
 
   // Showing error message if error is true
   const errorMessage = () => {
@@ -79,28 +79,32 @@ const RegistrationForm = (props) => {
   return (
     <div className="form">
       <div>
-        <h1>User Registration</h1>
+        <h1>Register</h1>
       </div>
 
       {/* Calling to the methods */}
       <div className="messages">
         {errorMessage()}
-        {successMessage()}
+        {/* {successMessage()} */}
       </div>
 
       <form>
         {/* Labels and inputs for form data */}
-        <label className="label">Name</label>
-        <input onChange={handleName} className="input"
-          value={name} type="text" />
+        <label className="username">Username: </label>
+        <input onChange={handleUsername} className="username"
+          value={username} type="text" />
 
-        <label className="label">Email</label>
-        <input onChange={handleEmail} className="input"
+        <label className="email">Email: </label>
+        <input onChange={handleEmail} className="email"
           value={email} type="email" />
 
-        <label className="label">Password</label>
-        <input onChange={handlePassword} className="input"
+        <label className="password">Password: </label>
+        <input onChange={handlePassword} className="password"
           value={password} type="password" />
+
+        <label className="password">Confirm Password: </label>
+        <input onChange={handleConfirmationPassword} className="confirmation_password"
+          value={confirmationPassword} type="password" />
 
         <button onClick={handleSubmit} className="btn" type="submit">
           Submit
