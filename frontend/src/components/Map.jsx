@@ -42,7 +42,6 @@ const Map = () => {
       click(e) {
         setPinPosition(e.latlng);
         newItem.coordinates = [e.latlng.lat, e.latlng.lng];
-        console.log(newItem);
       }
     });
   
