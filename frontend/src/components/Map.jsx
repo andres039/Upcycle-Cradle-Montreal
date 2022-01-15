@@ -32,13 +32,13 @@ const Map = () => {
       click(e) {
         setPinPosition(e.latlng);
       }
-    })
+    });
   
     return pinPosition === null ? null : (
       <Marker position={pinPosition}>
         <Popup>
           You are here
-          <button onClick={() => alert('weeeee')}>Delete</button>
+          <button onClick={() => setPinPosition(null)}>Delete</button>
         </Popup>
       </Marker>
     )
