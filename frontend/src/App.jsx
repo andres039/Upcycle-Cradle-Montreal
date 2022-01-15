@@ -8,9 +8,8 @@ import NewItemForm from './components/SideBar/NewItemForm';
 function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
-      <NewItemForm/>
-      <LoginForm/>
+      <h1>Hello World!!!</h1>
+      <NewItemForm />
     </div>
   );
 }

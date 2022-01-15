@@ -1,7 +1,7 @@
 import React from "react";
 //import classNames from "classnames";
 
-export default function Button(props) {
+ const Button = (props) => {
   let buttonClass = props.class;
   
   if (props.save) {
@@ -16,3 +16,5 @@ export default function Button(props) {
   
   return <button onClick={props.onClick} className={buttonClass}>{props.children}</button>;
 }
+
+export default Button

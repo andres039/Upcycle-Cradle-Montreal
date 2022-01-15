@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Button from "../Button";
 
 
-export default function NewItemForm(props) {
-  const [title, setTitle] = useState ("");
+ const NewItemForm = (props) => {
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [condition, setCondition] = useState("");
   const [picture, setPicture] = useState("");
@@ -11,9 +11,9 @@ export default function NewItemForm(props) {
   const validate = function() {
     alert('validates!')
   }
-  const cancel = function() {
-    alert('canceled!')
-  }
+  const cancel = () => {
+    alert('validates!')
+  };
   
   return (
     <main>
@@ -70,3 +70,4 @@ export default function NewItemForm(props) {
     </main>
   );
 }
+export default NewItemForm
