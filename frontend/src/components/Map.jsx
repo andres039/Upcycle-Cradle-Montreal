@@ -6,12 +6,12 @@ const Map = () => {
   const mapTilesId = 'mapbox/streets-v11';
   const mapAccessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-  function NewMarker() {
-    const [pinPosition, setPinPosition] = useState(null)
+  const NewMarker = () => {
+    const [pinPosition, setPinPosition] = useState(null);
     
     useMapEvents({
       click(e) {
-        setPinPosition(e.latlng)
+        setPinPosition(e.latlng);
       }
     })
   
