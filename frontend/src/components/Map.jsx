@@ -6,6 +6,25 @@ const Map = () => {
   const mapTilesId = 'mapbox/streets-v11';
   const mapAccessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
+  // array of locations for testing
+  const locations = [
+    {
+      title: "Location 1",
+      description: "Description of location 1.",
+      coordinates: [45.4310, -75.7372]
+    },
+    {
+      title: "Location 2",
+      description: "Description of location 2.",
+      coordinates: [45.4411, -75.7592]
+    },
+    {
+      title: "Location 3",
+      description: "Description of location 3.",
+      coordinates: [45.4121, -75.7612]
+    }
+  ];
+
   const NewMarker = () => {
     const [pinPosition, setPinPosition] = useState(null);
     
@@ -17,7 +36,10 @@ const Map = () => {
   
     return pinPosition === null ? null : (
       <Marker position={pinPosition}>
-        <Popup>You are here</Popup>
+        <Popup>
+          You are here
+          <button onClick={() => alert('weeeee')}>Delete</button>
+        </Popup>
       </Marker>
     )
   }
@@ -29,11 +51,14 @@ const Map = () => {
         url={`https://api.mapbox.com/styles/v1/${mapTilesId}/tiles/{z}/{x}/{y}?access_token=${mapAccessToken}`}
       />
       <NewMarker />
-      <Marker position={mapPosition}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.<button>Delete</button>
-        </Popup>
-      </Marker>
+      { locations.map(item => (
+        <Marker position={item.coordinates}>
+          <Popup>
+            <h1>{item.title}</h1>
+            <p>{item.description}</p>
+          </Popup>
+        </Marker>
+      ))}
     </MapContainer>
   );
 }
