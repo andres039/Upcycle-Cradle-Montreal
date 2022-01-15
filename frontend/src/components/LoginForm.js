@@ -47,7 +47,7 @@ const LoginForm = (props) => {
           <label>Email: </label>
           <input
             className=""
-            name="username"
+            name="email"
             type="email"
             placeholder="email"
 
