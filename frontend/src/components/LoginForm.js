@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import Button from "components/Button";
 
 
-function LoginForm(props) {
+const LoginForm = (props) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,7 +47,7 @@ function LoginForm(props) {
           <label>Email: </label>
           <input
             className=""
-            name="username"
+            name="email"
             type="email"
             placeholder="email"
 
