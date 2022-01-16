@@ -1,5 +1,5 @@
 import React from "react";
-//import classNames from "classnames";
+//If there is time to refactor: import classNames from "classnames";
 
  const Button = (props) => {
   let buttonClass = props.class;

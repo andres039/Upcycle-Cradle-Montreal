@@ -1,20 +1,12 @@
 import React, { useState } from "react";
 import Button from "../Button";
 
-
- const NewItemForm = (props) => {
+const NewItemForm = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [condition, setCondition] = useState("");
   const [picture, setPicture] = useState("");
 
-  const validate = function() {
-    alert('validates!')
-  }
-  const cancel = () => {
-    alert('validates!')
-  };
-  
   return (
     <main>
       <section className="new-item">
@@ -44,7 +36,6 @@ import Button from "../Button";
             type="text"
             value={condition}
             onChange={(event) => setCondition(event.target.value)}
-          
           />
 
           <label>Picture</label>
@@ -57,17 +48,15 @@ import Button from "../Button";
             onChange={(event) => setPicture(event.target.value)}
           />
         </form>
-        
-     
-          <Button onClick={() => validate()}>
-            Save
-          </Button>
-          <Button  onClick={() => cancel()}>
-            Cancel
-          </Button>
 
-        </section>
+        <Button
+          onClick={() => props.onSave({title, description, condition, picture})}
+        >
+          Save
+        </Button>
+        <Button onClick={() => props.onCancel()}>Cancel</Button>
+      </section>
     </main>
   );
-}
-export default NewItemForm
+};
+export default NewItemForm;
