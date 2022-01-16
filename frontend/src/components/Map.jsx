@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer } from 'react-leaflet';
+
+import Pin from './Pin';
 
 const Map = () => {
   const mapPosition = [45.4, -75.7];
@@ -35,41 +36,16 @@ const Map = () => {
     description: "Description of location 4."
   };
 
-  const NewMarker = () => {
-    const [pinPosition, setPinPosition] = useState(null);
-    
-    useMapEvents({
-      click(e) {
-        setPinPosition(e.latlng);
-        newItem.coordinates = [e.latlng.lat, e.latlng.lng];
-      }
-    });
-  
-    return pinPosition === null ? null : (
-      <Marker position={pinPosition}>
-        <Popup>
-          <h1>{newItem.title}</h1>
-          <p>{newItem.description}</p>
-          <button onClick={() => setPinPosition(null)}>Delete</button>
-        </Popup>
-      </Marker>
-    )
-  }
-
   return(
     <MapContainer center={mapPosition} zoom={13} style={{ width: '75vw', height: '100vh'}}>
       <TileLayer
         attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
         url={`https://api.mapbox.com/styles/v1/${mapTilesId}/tiles/{z}/{x}/{y}?access_token=${mapAccessToken}`}
       />
-      <NewMarker />
-      { savedItems.map(item => (
-        <Marker position={item.coordinates}>
-          <Popup>
-            <h1>{item.title}</h1>
-            <p>{item.description}</p>
-          </Popup>
-        </Marker>
+      
+      <Pin item = {newItem} allItems={savedItems}/>
+      { savedItems.map(savedItem => (
+        <Pin item = {savedItem}/>
       ))}
     </MapContainer>
   );
