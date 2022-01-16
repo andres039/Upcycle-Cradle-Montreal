@@ -11,20 +11,20 @@ const Map = () => {
   const savedItems = [
     {
       id: 1,
-      title: "Location 1",
-      description: "Description of location 1.",
+      title: "Item 1",
+      description: "Description of Item 1.",
       coordinates: [45.4310, -75.7372]
     },
     {
       id: 2,
-      title: "Location 2",
-      description: "Description of location 2.",
+      title: "Item 2",
+      description: "Description of Item 2.",
       coordinates: [45.4411, -75.7592]
     },
     {
       id: 3,
-      title: "Location 3",
-      description: "Description of location 3.",
+      title: "Item 3",
+      description: "Description of Item 3.",
       coordinates: [45.4121, -75.7612]
     }
   ];
@@ -32,8 +32,8 @@ const Map = () => {
   // object of new item for testing
   const newItem = {
     id: 4,
-    title: "Location 4",
-    description: "Description of location 4."
+    title: "Item 4",
+    description: "Description of Item 4."
   };
 
   return(
