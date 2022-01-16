@@ -18,4 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get("/api/")
 
 
+//fetching information from the database?
+
+
 module.exports = app;
