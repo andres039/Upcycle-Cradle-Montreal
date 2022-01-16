@@ -10,12 +10,16 @@ const Pin = (props) => {
         const len = Object.keys(props.allItems).length;
 
         setPinPosition(e.latlng);
+        
+        // Placeholder for saving to database
         props.allItems.push({
           id: len + 1,
           title: `Location ${len + 1}`,
           description: `Description of location ${len + 1}.`,
           coordinates: [e.latlng.lat, e.latlng.lng]
         });
+        
+        // setPinPosition(null);
       }
     }
   });
