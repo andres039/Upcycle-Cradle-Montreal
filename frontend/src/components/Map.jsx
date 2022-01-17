@@ -55,9 +55,9 @@ const Map = () => {
         attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
         url={`https://api.mapbox.com/styles/v1/${mapTilesId}/tiles/{z}/{x}/{y}?access_token=${mapAccessToken}`}
       />
-      <Pin item = {newItem} allItems={savedItems}/>
+      <Pin item={newItem} allItems={savedItems}/>
       { savedItems.map(savedItem => (
-        <Pin item = {savedItem}/>
+        <Pin key={savedItem.id} id={savedItem.id} item={savedItem}/>
       ))}
     </MapContainer>
   );
