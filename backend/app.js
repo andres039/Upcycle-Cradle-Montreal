@@ -1,9 +1,13 @@
+require("dotenv").config();
+
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const router = require("./routes/index");
 const PORT = 8081;
+
+
 //const cors = require("cors");
 
 const app = express();
@@ -18,6 +22,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 /////////////////////////
+
+// // PG database client/connection setup
+const { Pool } = require("pg");
+const dbParams = require("./lib/db.js");
+const db = new Pool(dbParams);
+db.connect();
+
+////////////
 
 // app.use("/api/pins", pins(db));
 // app.use("/api/users", users(db));
