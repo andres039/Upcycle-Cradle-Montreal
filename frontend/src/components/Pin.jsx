@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Marker, Popup, useMapEvents } from 'react-leaflet';
+// import axios from "axios";
 
 import Button from './Button';
 
 const Pin = (props) => {
   const [pinPosition, setPinPosition] = useState(props.item.coordinates || null);
+  const [claimed, setClaimed] = useState(false);
 
   useMapEvents({
     click(e) {
@@ -25,6 +27,21 @@ const Pin = (props) => {
       }
     }
   });
+
+  // const claimItem = (id, pin) => {
+  //   // add user's ID as claiamer_id in DB
+  //   return axios.put(`/api/pins/${id}`, {data: {pin}})
+  //     .then(() => {
+  //       setClaimed(true);
+  //     });
+  // }
+
+  // const deletePin = (id, pin) => {
+  //   return axios.delete(`/api/pins/${id}`, {data: {pin}})
+  //     .then(() => {
+  //       setPinPosition(null);
+  //     });
+  // }
   
   return pinPosition === null ? null : (
     <Marker position={pinPosition}>
@@ -33,7 +50,7 @@ const Pin = (props) => {
         <p>{props.item.description}</p>
         <p>Picture here...</p>
         <p><strong>Condition:</strong> Like new</p>
-        <Button onClick={'add user\'s ID as claiamer_id in DB'}>Claimed</Button>
+        <Button onClick={'runs claimItem function'}>Claimed</Button>
         <Button onClick={'delete item from DB or mark column picked up as true'}>Picked up</Button>
         <button onClick={() => setPinPosition(null)}>Delete</button>
       </Popup>
