@@ -6,8 +6,14 @@ import Pin from './Pin';
 // Set map to center at user location
 const UserLocation = () => {
   const map = useMap();
+
+  function onLocationError() {
+    map.setView([45.4, -73.6], 13);
+  }
+
   useEffect(() => {
     map.locate({setView: true});
+    map.on('locationerror', onLocationError);
   }, []);
   return null;
 }
