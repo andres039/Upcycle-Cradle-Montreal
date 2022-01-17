@@ -4,12 +4,10 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const router = require("./routes/index");
+const cors = require("cors");
+const router = require("./routes");
+
 const PORT = 8081;
-
-
-//const cors = require("cors");
-
 const app = express();
 
 // const db = require("./db")
@@ -18,8 +16,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 /////////////////////////
 
@@ -39,12 +37,12 @@ db.connect();
 
 
 app.get("/api/users", (req, res) => {
-  const users = [{ name: "Jeremy" }, { name: "Furious" }];
+  const users = [{ username: "Jeremy" }, { username: "Furious" }];
   res.json(users);
 })
 
 app.get("/api/users/:user_id", (req, res) => {
-  const user = { name: "Furious" };
+  const user = { username: "Furious" };
   res.json(user);
 })
 
@@ -58,6 +56,8 @@ app.get("/api/pins/:pin_id", (req, res) => {
   const pin = { 3: 3 };
   res.json(pin);
 })
+
+
 
 app.use('/', router);
 

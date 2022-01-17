@@ -30,8 +30,9 @@ function App() {
     <div className="App container">
       {/* <Map /> */}
 
-      <Map />
-      <SideBar username="Homer Simpson" />
+      {/*<Map />*/}
+            <Map />
+            <SideBar username="Homer Simpson" />
 
     </div >
   );
