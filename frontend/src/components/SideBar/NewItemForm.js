@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../Button";
 
 const NewItemForm = (props) => {
@@ -6,11 +6,20 @@ const NewItemForm = (props) => {
   const [description, setDescription] = useState("");
   const [condition, setCondition] = useState("");
   const [picture, setPicture] = useState("");
+  const [coordinates, setCoordinates] = useState([]);
+
+  {/*The useEffect that follows might be how we could potentially integrate the pin selected on the map with the rest of the fields in the form. */}
+
+  let pinSelected = ''
+  
+  useEffect(() => {
+    setCoordinates(pinSelected)
+  }, [pinSelected])
 
   return (
-    <main>
+    
       <section className="new-item">
-        <form onSubmit={(e) => e.preventDefault()} autoComplete="off">
+        <form onSubmit={(e) => e.preventDefault()} autoComplete="off" className="form">
           <label>Title</label>
           <input
             className="new-item-title"
@@ -50,13 +59,13 @@ const NewItemForm = (props) => {
         </form>
 
         <Button
-          onClick={() => props.onSave({title, description, condition, picture})}
+          onClick={() => props.onSave({title, description, condition, picture, coordinates})}
         >
           Save
         </Button>
         <Button onClick={() => props.onCancel()}>Cancel</Button>
       </section>
-    </main>
+  
   );
 };
 export default NewItemForm;

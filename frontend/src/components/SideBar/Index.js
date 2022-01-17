@@ -4,7 +4,7 @@ import Instructions from "./Instructions";
 import NewItemForm from "./NewItemForm";
 
 const SideBar = (props) => {
-  {/* Defines if we are rendeing the NewItemForm or the Instructions*/}
+  {/* Defines if we are rendering the NewItemForm or the Instructions*/}
   const [item, setItem] = useState(false);
 
   {/*Return an object containing the characteristics of a new posting */}
@@ -18,7 +18,7 @@ const SideBar = (props) => {
 
   return (
     
-    <section>
+    <section className="sidebar">
     <header>
     <h1>TRASH PANDA MTL</h1>
     <h3>Signed in as {props.username}</h3>
