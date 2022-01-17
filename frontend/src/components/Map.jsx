@@ -49,6 +49,12 @@ const Map = () => {
     description: "Description of Item 4."
   };
 
+  const parsedPins = savedItems.map(savedItem => {
+    return(
+      <Pin key={savedItem.id} id={savedItem.id} item={savedItem}/>
+    );
+  });
+
   return(
     <MapContainer center={mapPosition} zoom={13} style={{ width: '75vw', height: '100vh'}}>
       <TileLayer
@@ -56,9 +62,7 @@ const Map = () => {
         url={`https://api.mapbox.com/styles/v1/${mapTilesId}/tiles/{z}/{x}/{y}?access_token=${mapAccessToken}`}
       />
       <Pin item={newItem} allItems={savedItems}/>
-      { savedItems.map(savedItem => (
-        <Pin key={savedItem.id} id={savedItem.id} item={savedItem}/>
-      ))}
+      {parsedPins}
     </MapContainer>
   );
 }
