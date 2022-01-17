@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 
 import Pin from './Pin';
@@ -7,6 +8,18 @@ const Map = () => {
   const mapTilesId = 'mapbox/streets-v11';
   const mapAccessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
+  // Set map to geolocation but not currently working
+  // const mapRef = useRef();
+
+  // useEffect(() => {
+  //   const { current = {} } = mapRef;
+  //   const { leafletElement: map } = current;
+    
+  //   map.locate({
+  //     setView: true
+  //   });
+  // }, []);
+  
   // array of saved items for testing
   const savedItems = [
     {
@@ -42,7 +55,6 @@ const Map = () => {
         attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
         url={`https://api.mapbox.com/styles/v1/${mapTilesId}/tiles/{z}/{x}/{y}?access_token=${mapAccessToken}`}
       />
-      
       <Pin item = {newItem} allItems={savedItems}/>
       { savedItems.map(savedItem => (
         <Pin item = {savedItem}/>
