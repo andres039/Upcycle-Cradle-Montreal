@@ -7,8 +7,8 @@ import Pin from './Pin';
 const UserLocation = () => {
   const map = useMap();
 
-  function onLocationError() {
-    map.setView([45.4, -73.6], 13);
+  const onLocationError = () => {
+    map.setView([45.497, -73.609], 13);
   }
 
   useEffect(() => {
