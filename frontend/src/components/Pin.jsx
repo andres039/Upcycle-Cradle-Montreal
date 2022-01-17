@@ -5,15 +5,17 @@ import { Marker, Popup, useMapEvents } from 'react-leaflet';
 import Button from './Button';
 
 const Pin = (props) => {
-  const [pinPosition, setPinPosition] = useState(props.item.coordinates || null);
+  const [latitude, setLatitude] = useState(props.item.latitude || null);
+  const [longitude, setLongitude] = useState(props.item.longitude || null);
   const [claimed, setClaimed] = useState(false);
 
   useMapEvents({
     click(e) {
-      if (!pinPosition) {
+      if (!latitude) {
         const len = Object.keys(props.allItems).length;
 
-        setPinPosition(e.latlng);
+        setLatitude(e.latlng.lat);
+        setLongitude(e.latlng.lng);
         
         // Placeholder for saving to database
         props.allItems.push({
@@ -36,15 +38,16 @@ const Pin = (props) => {
   //     });
   // }
 
-  // const deletePin = (id, pin) => {
-  //   return axios.delete(`/api/pins/${id}`, {data: {pin}})
-  //     .then(() => {
-  //       setPinPosition(null);
-  //     });
-  // }
+  const deletePin = () => {
+    // return axios.delete(`/api/pins/${id}`, {data: {pin}})
+    //   .then(() => {
+      setLatitude(null);
+      setLongitude(null);
+      // });
+  }
   
-  return pinPosition === null ? null : (
-    <Marker position={pinPosition}>
+  return latitude === null ? null : (
+    <Marker position={[latitude, longitude]}>
       <Popup>
         <h1>{props.item.title}</h1>
         <p>{props.item.description}</p>
@@ -52,7 +55,7 @@ const Pin = (props) => {
         <p><strong>Condition:</strong> Like new</p>
         <Button onClick={'runs claimItem function'}>Claimed</Button>
         <Button onClick={'delete item from DB or mark column picked up as true'}>Picked up</Button>
-        <button onClick={() => setPinPosition(null)}>Delete</button>
+        <button onClick={() => deletePin()}>Delete</button>
       </Popup>
     </Marker>
   )
