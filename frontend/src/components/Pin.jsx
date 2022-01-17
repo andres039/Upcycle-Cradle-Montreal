@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import L from 'leaflet';
 import { Marker, Popup, useMapEvents } from 'react-leaflet';
 // import axios from "axios";
 
@@ -8,6 +9,33 @@ const Pin = (props) => {
   const [latitude, setLatitude] = useState(props.item.latitude || null);
   const [longitude, setLongitude] = useState(props.item.longitude || null);
   const [claimed, setClaimed] = useState(false);
+
+  const bluePinUrl = 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png';
+  const greenPinUrl = 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png';
+  const orangePinUrl = 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png';
+  const violetPinUrl = 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png';
+
+  const customPin = (iconUrl) => new L.Icon({
+    iconUrl: iconUrl,
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+  const blueIcon = customPin(bluePinUrl);
+  const greenIcon = customPin(greenPinUrl);
+  const orangeIcon = customPin(orangePinUrl);
+  const violetIcon = customPin(violetPinUrl);
+
+  const [pinColor, setpinColor] = useState(blueIcon);
+
+  useEffect(() =>{
+    if (!latitude) {
+    setpinColor(greenIcon);
+    }
+  }, []);
 
   useMapEvents({
     click(e) {
@@ -47,7 +75,7 @@ const Pin = (props) => {
   }
   
   return latitude === null ? null : (
-    <Marker position={[latitude, longitude]}>
+    <Marker position={[latitude, longitude]} icon={pinColor}>
       <Popup>
         <h1>{props.item.title}</h1>
         <p>{props.item.description}</p>
