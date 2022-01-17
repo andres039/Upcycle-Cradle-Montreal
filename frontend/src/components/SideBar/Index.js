@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import Button from "../Button";
 import Instructions from "./Instructions";
 import NewItemForm from "./NewItemForm";
-
+import axios from "axios";
 const SideBar = (props) => {
   {/* Defines if we are rendering the NewItemForm or the Instructions*/}
   const [item, setItem] = useState(false);
-
+  const [pin, setPin] = useState('');
   {/*Return an object containing the characteristics of a new posting */}
   const validate = (itemData) => {
     console.log(itemData)
+    return axios.post("http://localhost:8081/").then(() => {
+      console.log(itemData);
+      setPin(itemData);
+    });
   }
   {/*Resets the view to Instructions*/}
   const cancel = () => {

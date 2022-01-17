@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
+const router = require("./routes/index");
+const PORT = 8081;
 //const cors = require("cors");
 
 const app = express();
@@ -46,7 +47,11 @@ app.get("/api/pins/:pin_id", (req, res) => {
   res.json(pin);
 })
 
+app.use('/', router);
+
+app.listen(PORT, () => {
+  console.log(`♻️ listening on port ${PORT} ♻️`);
+});
+
 //fetching information from the database?
-
-
 module.exports = app;
