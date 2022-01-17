@@ -55,6 +55,7 @@ const Map = () => {
     description: "Description of Item 4."
   };
 
+<<<<<<< HEAD
   const parsedPins = savedItems.map(savedItem => {
     return(
       <Pin key={savedItem.id} id={savedItem.id} item={savedItem}/>
@@ -63,13 +64,25 @@ const Map = () => {
 
   return(
     <MapContainer center={mapPosition} style={{ width: '75vw', height: '100vh'}}>
+=======
+  return (
+    <MapContainer center={mapPosition} zoom={13} style={{ width: '75vw', height: '100vh' }}>
+>>>>>>> master
       <TileLayer
         attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
         url={`https://api.mapbox.com/styles/v1/${mapTilesId}/tiles/{z}/{x}/{y}?access_token=${mapAccessToken}`}
       />
+<<<<<<< HEAD
       <UserLocation/>
       <Pin item={newItem} allItems={savedItems}/>
       {parsedPins}
+=======
+
+      <Pin item={newItem} allItems={savedItems} />
+      {savedItems.map(savedItem => (
+        <Pin item={savedItem} />
+      ))}
+>>>>>>> master
     </MapContainer>
   );
 }
