@@ -1,8 +1,13 @@
-
+const logo = require("../logo.png");
 
 const Home = () => {
   return (
-    <h1>Welcome page</h1>
+    <div>
+
+      <h1>Welcome page</h1>
+      <img src={logo} />
+    </div>
+
   );
 };
 
