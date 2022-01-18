@@ -10,6 +10,12 @@ import SideBar from './components/SideBar/Index';
 import NewItemForm from './components/SideBar/NewItemForm';
 import RegistrationForm from './components/RegistrationForm';
 
+//////////////////
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import MapView from "./pages/MapView";
+import NewItem from "./pages/NewItem";
+import Home from "./pages/Home";
 // import LoginForm from './components/LoginForm';
 
 function App() {
@@ -29,7 +35,11 @@ function App() {
   return (
     <div className="App container">
       <Routes>
-        <Route path="/sidebar" element={<SideBar />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/mapview" element={<MapView />} />
+        <Route path="/newitem" element={<NewItem />} />
 
 
       </Routes>
