@@ -73,7 +73,7 @@ const NewItemForm = (props) => {
         Save
       </Button>
       <Link to="/mapview">
-        <Button onClick={() => props.onCancel()}>Cancel</Button>
+        <Button>Cancel</Button>
 
       </Link>
     </section>
