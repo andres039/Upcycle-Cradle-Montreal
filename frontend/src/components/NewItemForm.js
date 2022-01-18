@@ -41,7 +41,7 @@ const NewItemForm = (props) => {
           className="new-item-title"
           name="title"
           type="text"
-          value='the hardcoded title'
+          value={title}
           onChange={(event) => setTitle(event.target.value)}
         />
 
@@ -69,7 +69,7 @@ const NewItemForm = (props) => {
           name="picture"
           type="text"
           placeholder="URL address for now"
-          value='the cool picture'
+          value='cool pic'
           onChange={(event) => setPicture(event.target.value)}
         />
       </form>
