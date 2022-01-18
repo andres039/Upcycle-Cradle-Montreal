@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
 
 import Map from './components/Map';
 import './App.css';
@@ -28,11 +28,16 @@ function App() {
 
   return (
     <div className="App container">
+      <Routes>
+        <Route path="/sidebar" element={<SideBar />} />
+
+
+      </Routes>
       {/* <Map /> */}
 
       {/*<Map />*/}
-            <Map />
-            <SideBar username="Homer Simpson" />
+      <Map />
+      <SideBar username="Homer Simpson" />
 
     </div >
   );
