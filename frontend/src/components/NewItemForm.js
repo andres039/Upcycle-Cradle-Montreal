@@ -13,6 +13,14 @@ const NewItemForm = (props) => {
 
   let pinSelected = ''
 
+  const validate = (itemData) => {
+    console.log(itemData);
+    // return axios.post("http://localhost:8081/", itemData).then(() => {
+    //   console.log(itemData);
+    //   setPin(itemData);
+    // });
+  };
+
   useEffect(() => {
     setCoordinates(pinSelected)
   }, [pinSelected])
@@ -60,15 +68,13 @@ const NewItemForm = (props) => {
       </form>
 
       <Button
-        onClick={() => props.onSave({ title, description, condition, picture, coordinates })}
+        onClick={() => validate({ title, description, condition, picture, coordinates })}
       >
         Save
       </Button>
-      {/* <Button onClick={() => props.onCancel()}>Cancel</Button> */}
       <Link to="/mapview">
-        <button type="button">
-          Cancel
-        </button>
+        <Button onClick={() => props.onCancel()}>Cancel</Button>
+
       </Link>
     </section>
 

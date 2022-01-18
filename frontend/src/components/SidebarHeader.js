@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import Button from "./Button";
+const logo = require("../logo.png");
 
 
 const SidebarHeader = (props) => {
-
+  /* Defines if we are rendering the NewItemForm or the Instructions*/
+  const [item, setItem] = useState(false);
   const [pin, setPin] = useState("");
   const [user, setUser] = useState("");
 
@@ -19,16 +21,16 @@ const SidebarHeader = (props) => {
     });
   };
 
-  //  useEffect(() => {
+  // useEffect(() => {
 
-  //    return axios.get("http://localhost:8081/api/users/123").then((res) => {
-  //       console.log(res);
-  //       const {username} = res.data;
-  //       setUser(username);
-  //     });
+  //   return axios.get("http://localhost:8081/api/users/123").then((res) => {
+  //     console.log(res);
+  //     const { username } = res.data;
+  //     setUser(username);
+  //   });
 
 
-  //   }, [])
+  // }, [])
 
   useEffect(() => {
 
@@ -40,11 +42,13 @@ const SidebarHeader = (props) => {
 
 
   }, [])
+  /*Resets the view to Instructions*/
+
 
   return (
     <section>
       <header>
-        <h1>TRASH PANDA MTL</h1>
+        <img src={logo} style={{ width: "300px" }} />
 
         <h3>Signed in as {user}</h3>
         {/* <Button onClick={() => setItem(true)}>+ new Item</Button> */}
