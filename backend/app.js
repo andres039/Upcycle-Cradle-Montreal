@@ -65,15 +65,69 @@ app.get("/api/pins/:pin_id", (req, res) => {
 //   }
 // });
 
-app.get("/api/users/:id", async (req, res) => {
+app.get("/api/users/:id", (req, res) => {
   db.query("SELECT * FROM users;")
     .then((response) => res.send(response.rows))
     .catch((err) => {
-      console.log('API/users error:', err)
-      res.status(500).send()
+      console.log("API/users error:", err);
+      res.status(500).send();
     });
 });
 
+//create new user
+app.post("/api/users", async (req, res) => {
+  try {
+    const {
+      username, email, password
+    } = req.body;
+
+    const newUser = await db.query(
+      "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *",
+      [
+        username, email, password
+      ]
+    );
+    res.json(newUser);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+//create a new pin
+
+app.post("/api/pins", async (req, res) => {
+  try {
+    const {
+      title,
+      description,
+      picture,
+      condition,
+      latitude,
+      longitude,
+      date,
+      creator_id,
+      claimer_id,
+    } = req.body;
+
+    const newPin = await db.query(
+      "INSERT INTO pins (title, description, picture, condition, latitude, longitude, date, creator_id, claimer_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+      [
+        title,
+        description,
+        picture,
+        condition,
+        latitude,
+        longitude,
+        date,
+        creator_id,
+        claimer_id,
+      ]
+    );
+    res.json(newPin);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 app.use("/", router);
 
 app.listen(PORT, () => {
