@@ -5,12 +5,18 @@ import Map from "../components/Map";
 
 const NewItem = () => {
   return (
-    <div>
+    <div className="container">
 
-      {/* <Map /> */}
-      <SideBar>
-      </SideBar>
-      <NewItemForm />
+
+      <Map />
+
+      <section className="sidebar">
+
+        <SideBar>
+        </SideBar>
+        <NewItemForm />
+
+      </section>
 
     </div>
   );

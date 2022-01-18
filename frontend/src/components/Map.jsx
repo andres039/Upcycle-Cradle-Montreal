@@ -43,19 +43,19 @@ const Map = () => {
   };
 
   const parsedPins = savedItems.map(savedItem => {
-    return(
-      <Pin key={savedItem.id} id={savedItem.id} item={savedItem}/>
+    return (
+      <Pin key={savedItem.id} id={savedItem.id} item={savedItem} />
     );
   });
 
-  return(
+  return (
     <MapContainer center={mapPosition}>
       <TileLayer
         attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
         url={`https://api.mapbox.com/styles/v1/${mapTilesId}/tiles/{z}/{x}/{y}?access_token=${mapAccessToken}`}
       />
-      <UserLocation/>
-      <Pin item={newItem} allItems={savedItems}/>
+      <UserLocation />
+      <Pin item={newItem} allItems={savedItems} />
       {parsedPins}
     </MapContainer>
   );

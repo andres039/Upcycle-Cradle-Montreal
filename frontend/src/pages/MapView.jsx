@@ -1,20 +1,29 @@
+import { Link } from "react-router-dom";
 import Map from "../components/Map";
-import SideBar from "../components/SideBar/Index";
+import Index from "../components/SideBar/Index";
+import Instructions from "../components/SideBar/Instructions";
 
 const MapView = () => {
   return (
-    <div>
+    <div className="container">
 
       <Map />
-      <div>
-        {/* <SideBar />
-       <Button />
-       <Instructions></> */}
+      <section className="sidebar">
 
+        <Index />
+        <Link to="/newitem">
+          <button type="button">
+            + new Item
+          </button>
+        </Link>
 
-      </div>
+        <Instructions />
+
+      </section>
+
 
     </div>
+
   )
 }
 

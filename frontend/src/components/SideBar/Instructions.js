@@ -5,8 +5,8 @@ const Instructions = () => {
   return (
     <ul>
       {/* Example instructions to test the component */}
-      <li key="1">Click on a pin to see more Details about the posting.</li>
-      <li key="2">To post an item, click on the +new item button above.</li>
+      <li key="1">To post an item, click on the +new item button above.</li>
+      <li key="2">Click on a pin for more details!</li>
     </ul>
   )
 }

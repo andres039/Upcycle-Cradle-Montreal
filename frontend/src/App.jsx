@@ -43,11 +43,7 @@ function App() {
 
 
       </Routes>
-      {/* <Map /> */}
 
-      {/*<Map />*/}
-      <Map />
-      <SideBar username="Homer Simpson" />
 
     </div >
   );
