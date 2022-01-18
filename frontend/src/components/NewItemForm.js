@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
@@ -15,15 +16,21 @@ const NewItemForm = (props) => {
 
   const validate = (itemData) => {
     console.log(itemData);
-    // return axios.post("http://localhost:8081/", itemData).then(() => {
-    //   console.log(itemData);
-    //   setPin(itemData);
-    // });
+    return axios.post("http://localhost:8081/api/pins", itemData).then(() => {
+      console.log(itemData);
+      // setPin(itemData);
+    });
   };
 
   useEffect(() => {
     setCoordinates(pinSelected)
   }, [pinSelected])
+
+  // value={title}
+  // value={description}
+  // value={condition}
+  //  value={picture
+  // coordinates
 
   return (
 
@@ -32,43 +39,43 @@ const NewItemForm = (props) => {
         <label>Title</label>
         <input
           className="new-item-title"
-          name="name"
+          name="title"
           type="text"
-          value={title}
+          value='the hardcoded title'
           onChange={(event) => setTitle(event.target.value)}
         />
 
         <label>Description</label>
         <input
           className="new-item-description"
-          name="name"
+          name="description"
           type="text"
-          value={description}
+          value='the hardcoded description'
           onChange={(event) => setDescription(event.target.value)}
         />
 
         <label>Condition</label>
         <input
           className="new-item-Condition"
-          name="name"
+          name="condition"
           type="text"
-          value={condition}
+          value='Like old'
           onChange={(event) => setCondition(event.target.value)}
         />
 
         <label>Picture</label>
         <input
           className="new-item-picture"
-          name="name"
+          name="picture"
           type="text"
           placeholder="URL address for now"
-          value={picture}
+          value='the cool picture'
           onChange={(event) => setPicture(event.target.value)}
         />
       </form>
 
       <Button
-        onClick={() => validate({ title, description, condition, picture, coordinates })}
+        onClick={() => validate({ title, description, condition, picture, longitude: 33.4, latitude: 66.6, creator_id: 1, claimer_id: null })}
       >
         Save
       </Button>
