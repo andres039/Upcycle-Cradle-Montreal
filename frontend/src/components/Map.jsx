@@ -1,22 +1,7 @@
-import { useEffect } from 'react';
-import { MapContainer, TileLayer, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer } from 'react-leaflet';
 
+import UserLocation from './UserLocation';
 import Pin from './Pin';
-
-// Set map to center at user location
-const UserLocation = () => {
-  const map = useMap();
-
-  const onLocationError = () => {
-    map.setView([45.497, -73.609], 13);
-  }
-
-  useEffect(() => {
-    map.locate({setView: true});
-    map.on('locationerror', onLocationError);
-  }, []);
-  return null;
-}
 
 const Map = () => {
   const mapPosition = [45.4, -73.6];
