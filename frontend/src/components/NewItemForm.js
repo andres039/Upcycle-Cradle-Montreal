@@ -26,12 +26,6 @@ const NewItemForm = (props) => {
     setCoordinates(pinSelected)
   }, [pinSelected])
 
-  // value={title}
-  // value={description}
-  // value={condition}
-  //  value={picture
-  // coordinates
-
   return (
 
     <section className="new-item">
@@ -50,7 +44,7 @@ const NewItemForm = (props) => {
           className="new-item-description"
           name="description"
           type="text"
-          value='the hardcoded description'
+          value={description}
           onChange={(event) => setDescription(event.target.value)}
         />
 
@@ -59,7 +53,7 @@ const NewItemForm = (props) => {
           className="new-item-Condition"
           name="condition"
           type="text"
-          value='Like old'
+          value={condition}
           onChange={(event) => setCondition(event.target.value)}
         />
 
@@ -69,7 +63,7 @@ const NewItemForm = (props) => {
           name="picture"
           type="text"
           placeholder="URL address for now"
-          value='cool pic'
+          value={picture}
           onChange={(event) => setPicture(event.target.value)}
         />
       </form>
