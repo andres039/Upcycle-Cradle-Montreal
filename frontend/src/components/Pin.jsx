@@ -1,35 +1,16 @@
 import { useEffect, useState } from 'react';
-import L from 'leaflet';
 import { Marker, Popup, useMapEvents } from 'react-leaflet';
 // import axios from "axios";
 
 import Button from './Button';
+import pinSettings from '../helpers/pinSettings'
 
 const Pin = (props) => {
+  const { blueIcon, greenIcon, orangeIcon, violetIcon } = pinSettings();
+  const [pinColor, setpinColor] = useState(blueIcon);
   const [latitude, setLatitude] = useState(props.item.latitude || null);
   const [longitude, setLongitude] = useState(props.item.longitude || null);
   const [claimed, setClaimed] = useState(false);
-
-  const bluePinUrl = 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png';
-  const greenPinUrl = 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png';
-  const orangePinUrl = 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png';
-  const violetPinUrl = 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png';
-
-  const customPin = (iconUrl) => new L.Icon({
-    iconUrl: iconUrl,
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-
-  const blueIcon = customPin(bluePinUrl);
-  const greenIcon = customPin(greenPinUrl);
-  const orangeIcon = customPin(orangePinUrl);
-  const violetIcon = customPin(violetPinUrl);
-
-  const [pinColor, setpinColor] = useState(blueIcon);
 
   useEffect(() =>{
     if (!latitude) {
@@ -82,7 +63,7 @@ const Pin = (props) => {
         <p>Picture here...</p>
         <p><strong>Condition:</strong> Like new</p>
         <Button onClick={'runs claimItem function'}>Claimed</Button>
-        <Button onClick={'delete item from DB or mark column picked up as true'}>Picked up</Button>
+        <Button onClick={'mark column picked up as true'}>Picked up</Button>
         <button onClick={() => deletePin()}>Delete</button>
       </Popup>
     </Marker>
