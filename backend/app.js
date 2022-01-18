@@ -52,18 +52,16 @@ app.get("/api/pins/:pin_id", (req, res) => {
   res.json(pin);
 });
 
-//database tests!
+app.get("/api/users", (req, res) => {
+  db.query("SELECT * FROM users;")
+    .then((response) => res.send(response.rows))
+    .catch((err) => {
+      console.log("API/users error:", err);
+      res.status(500).send();
+    });
+});
 
-// app.get("/api/users", async (req, res) => {
-//   try {
-//     const users = await db.query("SELECT * FROM users;");
-//     console.log(res.json(users));
-//     const test = res.rows;
-//     console.log(test);
-//   } catch (error) {
-//     console.error(error.message);
-//   }
-// });
+//Refactor to get the :id working
 
 app.get("/api/users/:id", (req, res) => {
   db.query("SELECT * FROM users;")
