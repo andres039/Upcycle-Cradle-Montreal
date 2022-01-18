@@ -40,6 +40,7 @@ const Pin = (props) => {
     }
   });
 
+  // Not finished and likely needs to be edited
   // const claimItem = (id, pin) => {
   //   // add user's ID as claiamer_id in DB
   //   return axios.put(`/api/pins/${id}`, {data: {pin}})
@@ -49,6 +50,7 @@ const Pin = (props) => {
   // }
 
   const deletePin = () => {
+    // Not finished and likely needs to be edited
     // return axios.delete(`/api/pins/${id}`, {data: {pin}})
     //   .then(() => {
       setLatitude(null);
