@@ -10,6 +10,7 @@ const Pin = (props) => {
   const [pinColor, setpinColor] = useState(blueIcon);
   const [latitude, setLatitude] = useState(props.item.latitude || null);
   const [longitude, setLongitude] = useState(props.item.longitude || null);
+  const [newItemMode, setNewItemMode] = useState(false);
   const [claimed, setClaimed] = useState(false);
 
   useEffect(() =>{
@@ -20,7 +21,7 @@ const Pin = (props) => {
 
   useMapEvents({
     click(e) {
-      if (!latitude) {
+      if (!latitude && newItemMode) {
         const len = Object.keys(props.allItems).length;
 
         setLatitude(e.latlng.lat);
