@@ -6,6 +6,7 @@ const UserLocation = () => {
   const map = useMap();
 
   const onLocationError = () => {
+    // Coordinates for Montreal
     map.setView([45.497, -73.609], 13);
   }
 
