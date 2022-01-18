@@ -14,17 +14,17 @@ import RegistrationForm from './components/RegistrationForm';
 
 function App() {
 
-  const [users, setUsers] = useState()
-  const [pins, setPins] = useState()
+  // const [users, setUsers] = useState()
+  // const [pins, setPins] = useState()
 
-  useEffect(() => {
-    //requests for data should have /api
-    axios.get("/api/users").then((res) => setUsers(res.data));
-  }, []);
+  // useEffect(() => {
+  //   //requests for data should have /api
+  //   axios.get("/api/users").then((res) => setUsers(res.data));
+  // }, []);
 
-  useEffect(() => {
-    axios.get("/api/pins").then((res) => setPins(res.data));
-  }, []);
+  // useEffect(() => {
+  //   axios.get("/api/pins").then((res) => setPins(res.data));
+  // }, []);
 
   return (
     <div className="App container">
