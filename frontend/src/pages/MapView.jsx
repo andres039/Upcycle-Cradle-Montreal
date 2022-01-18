@@ -6,7 +6,13 @@ const MapView = () => {
     <div>
 
       <Map />
-      <SideBar />
+      <div>
+        {/* <SideBar />
+       <Button />
+       <Instructions></> */}
+
+
+      </div>
 
     </div>
   )
