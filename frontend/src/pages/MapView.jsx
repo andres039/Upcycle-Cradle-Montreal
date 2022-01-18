@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Map from "../components/Map";
-import Index from "../components/SideBar/Index";
-import Instructions from "../components/SideBar/Instructions";
+import SidebarHeader from "../components/SidebarHeader";
+import Instructions from "../components/Instructions";
 
 const MapView = () => {
   return (
@@ -10,7 +10,7 @@ const MapView = () => {
       <Map />
       <section className="sidebar">
 
-        <Index />
+        <SidebarHeader />
         <Link to="/newitem">
           <button type="button">
             + new Item

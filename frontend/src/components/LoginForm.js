@@ -22,19 +22,6 @@ const LoginForm = (props) => {
   // };
 
 
-  // const reset = () => {
-  //   setStudent("");
-  //   setInterviewer("");
-  //   props.onCancel();
-  // };
-
-  // const cancel = () => {
-  //   reset();
-  //   setError("");
-  //   return <Form />;
-  // };
-
-
   const handleSubmit = event => {
     event.preventDefault();
   }

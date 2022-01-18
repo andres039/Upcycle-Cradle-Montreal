@@ -2,13 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
 
-import Map from './components/Map';
+
 import './App.css';
-import Button from './components/Button';
-import LoginForm from './components/LoginForm';
-import SideBar from './components/SideBar/Index';
-import NewItemForm from './components/SideBar/NewItemForm';
-import RegistrationForm from './components/RegistrationForm';
+
 
 //////////////////
 import Login from "./pages/Login";

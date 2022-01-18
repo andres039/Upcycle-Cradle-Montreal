@@ -1,6 +1,6 @@
-import NewItemForm from "../components/SideBar/NewItemForm";
-import SideBar from "../components/SideBar/Index";
+import NewItemForm from "../components/NewItemForm";
 import Map from "../components/Map";
+import SidebarHeader from "../components/SidebarHeader";
 
 
 const NewItem = () => {
@@ -12,8 +12,7 @@ const NewItem = () => {
 
       <section className="sidebar">
 
-        <SideBar>
-        </SideBar>
+        <SidebarHeader />
         <NewItemForm />
 
       </section>

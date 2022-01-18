@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import Button from "../Button";
-import Instructions from "./Instructions";
-import NewItemForm from "./NewItemForm";
+import Button from "./Button";
 
-const SideBar = (props) => {
-  /* Defines if we are rendering the NewItemForm or the Instructions*/
-  const [item, setItem] = useState(false);
+
+const SidebarHeader = (props) => {
+
   const [pin, setPin] = useState("");
   const [user, setUser] = useState("");
 
@@ -42,11 +40,6 @@ const SideBar = (props) => {
 
 
   }, [])
-  /*Resets the view to Instructions*/
-
-  // const cancel = () => {
-  //   setItem(false);
-  // };
 
   return (
     <section>
@@ -59,13 +52,9 @@ const SideBar = (props) => {
           Logout
         </Button>
       </header>
-      {/* {item ? (
-        <NewItemForm onCancel={cancel} onSave={validate} />
-      ) : (
-        <Instructions />
-      )} */}
+
     </section>
   );
 };
 
-export default SideBar;
+export default SidebarHeader;
