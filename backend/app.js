@@ -27,31 +27,30 @@ const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
 
-////////////
 
-// app.use("/api/pins", pins(db));
-// app.use("/api/users", users(db));
-
-// app.get("/api/users", (req, res) => {
-//   const users = [{ username: "Jeremy" }, { username: "Furious" }];
-//   res.json(users);
-// })
-
-// app.get("/api/users/:user_id", (req, res) => {
-//   const user = { username: "Furious" };
-//   res.json(user);
-// });
+//Select all pins
 
 app.get("/api/pins", (req, res) => {
-  const pins = [{ 3: 3 }, { 4: 4 }];
-  res.json(pins);
+  db.query("SELECT * FROM pins;")
+    .then((response) => res.send(response.rows))
+    .catch((err) => {
+      console.log("API/pins error:", err);
+      res.status(500).send();
+    });
 });
 
-app.get("/api/pins/:pin_id", (req, res) => {
-  const pin = { 3: 3 };
-  res.json(pin);
+//Select individual pins
+
+app.get("/api/pins/:id", (req, res) => {
+  db.query("SELECT * FROM pins WHERE id=$1;", [req.params.id])
+    .then((response) => res.send(response.rows))
+    .catch((err) => {
+      console.log("API/pins error:", err);
+      res.status(500).send();
+    });
 });
 
+//Select all users
 app.get("/api/users", (req, res) => {
   db.query("SELECT * FROM users;")
     .then((response) => res.send(response.rows))
@@ -61,10 +60,11 @@ app.get("/api/users", (req, res) => {
     });
 });
 
-//Refactor to get the :id working
+
+//Select individual users
 
 app.get("/api/users/:id", (req, res) => {
-  db.query("SELECT * FROM users;")
+  db.query("SELECT * FROM users WHERE id=$1;", [req.params.id])
     .then((response) => res.send(response.rows))
     .catch((err) => {
       console.log("API/users error:", err);
@@ -73,6 +73,7 @@ app.get("/api/users/:id", (req, res) => {
 });
 
 //create new user
+
 app.post("/api/users", async (req, res) => {
   try {
     const {
