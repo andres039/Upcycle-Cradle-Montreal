@@ -3,6 +3,8 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import UserLocation from './UserLocation';
 import Pin from './Pin';
 
+import './Map.css';
+
 const Map = () => {
   const mapPosition = [45.4, -73.6];
   const mapTilesId = 'mapbox/streets-v11';
@@ -47,7 +49,7 @@ const Map = () => {
   });
 
   return(
-    <MapContainer center={mapPosition} style={{ width: '75vw', height: '100vh'}}>
+    <MapContainer center={mapPosition}>
       <TileLayer
         attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
         url={`https://api.mapbox.com/styles/v1/${mapTilesId}/tiles/{z}/{x}/{y}?access_token=${mapAccessToken}`}
