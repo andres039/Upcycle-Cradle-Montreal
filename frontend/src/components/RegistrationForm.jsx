@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 // import Button from 'components/Button'
 
@@ -39,6 +40,15 @@ const RegistrationForm = (props) => {
     setSubmitted(false);
   };
 
+
+  const validate = (itemData) => {
+    // console.log(itemData);
+    return axios.post("http://localhost:8081/api/users", itemData).then(() => {
+      console.log(itemData);
+      // setPin(itemData);
+    });
+  };
+
   // Handling the form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,7 +56,9 @@ const RegistrationForm = (props) => {
       setError(true);
     } else {
       setSubmitted(true);
+
       setError(false);
+      validate({ email, password, username })
     }
   };
 
@@ -91,20 +103,35 @@ const RegistrationForm = (props) => {
       <form>
         {/* Labels and inputs for form data */}
         <label className="username">Username: </label>
-        <input onChange={handleUsername} className="username"
-          value={username} type="text" />
+        <input
+          name="username"
+          type="text"
+          className="username"
+          onChange={handleUsername}
+          value={username}
+        />
 
         <label className="email">Email: </label>
         <input onChange={handleEmail} className="email"
           value={email} type="email" />
 
         <label className="password">Password: </label>
-        <input onChange={handlePassword} className="password"
-          value={password} type="password" />
+        <input
+          type="password"
+          name="password"
+          className="password"
+          value={password}
+          onChange={handlePassword}
+        />
 
         <label className="password">Confirm Password: </label>
-        <input onChange={handleConfirmationPassword} className="confirmation_password"
-          value={confirmationPassword} type="password" />
+        <input
+          type="password"
+          name="confirmation_password"
+          className="confirmation_password"
+          value={confirmationPassword}
+          onChange={handleConfirmationPassword}
+        />
 
         <button onClick={handleSubmit} className="btn" type="submit">
           Submit
