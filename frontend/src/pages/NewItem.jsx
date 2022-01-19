@@ -1,13 +1,10 @@
-import { useState } from 'react';
-
 import NewItemForm from "../components/NewItemForm";
 import Map from "../components/Map";
 import SidebarHeader from "../components/SidebarHeader";
 
 
-const NewItem = () => {
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+const NewItem = (props) => {
+  const { latitude, longitude, setLatitude, setLongitude } = props;
 
   return (
     <div className="container">

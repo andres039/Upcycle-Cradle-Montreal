@@ -28,14 +28,37 @@ function App() {
   //   axios.get("/api/pins").then((res) => setPins(res.data));
   // }, []);
 
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+
   return (
     <div className="App container">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/mapview" element={<MapView />} />
-        <Route path="/newitem" element={<NewItem />} />
+        <Route
+          path="/mapview"
+          element={
+            <MapView
+              latitude={latitude}
+              longitude={longitude}
+              setLatitude={setLatitude}
+              setLongitude={setLongitude}
+            />
+          }
+        />
+        <Route
+          path="/newitem"
+          element={
+            <NewItem
+              latitude={latitude}
+              longitude={longitude}
+              setLatitude={setLatitude}
+              setLongitude={setLongitude}
+            />
+          }
+        />
 
 
       </Routes>
