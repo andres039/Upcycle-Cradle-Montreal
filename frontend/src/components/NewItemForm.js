@@ -74,8 +74,8 @@ const NewItemForm = (props) => {
           description,
           condition,
           picture,
-          longitude: props.longitude,
-          latitude: props.latitude,
+          longitude: props.longitude.toFixed(4),
+          latitude: props.latitude.toFixed(4),
           creator_id: 1,
           date: null
         })}
