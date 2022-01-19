@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
@@ -15,10 +16,10 @@ const NewItemForm = (props) => {
 
   const validate = (itemData) => {
     console.log(itemData);
-    // return axios.post("http://localhost:8081/", itemData).then(() => {
-    //   console.log(itemData);
-    //   setPin(itemData);
-    // });
+    return axios.post("http://localhost:8081/api/pins", itemData).then(() => {
+      console.log(itemData);
+      // setPin(itemData);
+    });
   };
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const NewItemForm = (props) => {
         <label>Title</label>
         <input
           className="new-item-title"
-          name="name"
+          name="title"
           type="text"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
@@ -41,7 +42,7 @@ const NewItemForm = (props) => {
         <label>Description</label>
         <input
           className="new-item-description"
-          name="name"
+          name="description"
           type="text"
           value={description}
           onChange={(event) => setDescription(event.target.value)}
@@ -50,7 +51,7 @@ const NewItemForm = (props) => {
         <label>Condition</label>
         <input
           className="new-item-Condition"
-          name="name"
+          name="condition"
           type="text"
           value={condition}
           onChange={(event) => setCondition(event.target.value)}
@@ -59,7 +60,7 @@ const NewItemForm = (props) => {
         <label>Picture</label>
         <input
           className="new-item-picture"
-          name="name"
+          name="picture"
           type="text"
           placeholder="URL address for now"
           value={picture}
@@ -68,7 +69,7 @@ const NewItemForm = (props) => {
       </form>
 
       <Button
-        onClick={() => validate({ title, description, condition, picture, coordinates })}
+        onClick={() => validate({ title, description, condition, picture, longitude: props.longitude, latitude: props.latitude, creator_id: 1, date: null })}
       >
         Save
       </Button>
