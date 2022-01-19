@@ -4,7 +4,7 @@ import SidebarHeader from "../components/SidebarHeader";
 import Instructions from "../components/Instructions";
 
 const MapView = (props) => {
-  const { latitude, longitude, setLatitude, setLongitude } = props;
+  const { latitude, longitude, setLatitude, setLongitude, newItemMode } = props;
 
   return (
     <div className="container">
@@ -14,6 +14,7 @@ const MapView = (props) => {
         longitude={longitude}
         setLatitude={setLatitude}
         setLongitude={setLongitude}
+        newItemMode={newItemMode}
       />
       <section className="sidebar">
 

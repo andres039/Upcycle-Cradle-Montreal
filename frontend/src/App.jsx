@@ -45,6 +45,7 @@ function App() {
               longitude={longitude}
               setLatitude={setLatitude}
               setLongitude={setLongitude}
+              newItemMode={false}
             />
           }
         />
@@ -56,6 +57,7 @@ function App() {
               longitude={longitude}
               setLatitude={setLatitude}
               setLongitude={setLongitude}
+              newItemMode={true}
             />
           }
         />

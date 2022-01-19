@@ -4,7 +4,7 @@ import SidebarHeader from "../components/SidebarHeader";
 
 
 const NewItem = (props) => {
-  const { latitude, longitude, setLatitude, setLongitude } = props;
+  const { latitude, longitude, setLatitude, setLongitude, newItemMode } = props;
 
   return (
     <div className="container">
@@ -15,6 +15,7 @@ const NewItem = (props) => {
         longitude={longitude}
         setLatitude={setLatitude}
         setLongitude={setLongitude}
+        newItemMode={newItemMode}
       />
 
       <section className="sidebar">

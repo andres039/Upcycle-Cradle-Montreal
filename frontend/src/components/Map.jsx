@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 
 import UserLocation from './UserLocation';
 import Pin from './Pin';
+import BluePin from './BluePin';
 
 import './Map.css';
 
@@ -10,7 +12,8 @@ const Map = (props) => {
   const mapTilesId = 'mapbox/streets-v11';
   const mapAccessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-  const { latitude, longitude, setLatitude, setLongitude } = props;
+  const { latitude, longitude, setLatitude, setLongitude, newItemMode } = props;
+
 
   // array of saved items for testing
   const savedItems = [
@@ -45,13 +48,14 @@ const Map = (props) => {
   };
 
   const parsedPins = savedItems.map(savedItem => {
+
     return (
-      <Pin
+      <BluePin
         key={savedItem.id}
         id={savedItem.id}
         item={savedItem}
-        latitude={savedItem.latitude}
-        longitude={savedItem.longitude}
+        
+        
       />
     );
   });
@@ -70,6 +74,7 @@ const Map = (props) => {
         longitude={longitude}
         setLatitude={setLatitude}
         setLongitude={setLongitude}
+        newItemMode={newItemMode}
       />
       {parsedPins}
     </MapContainer>
