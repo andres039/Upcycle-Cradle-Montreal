@@ -8,10 +8,10 @@ import pinSettings from '../helpers/pinSettings'
 const Pin = (props) => {
   const { blueIcon, greenIcon, orangeIcon, violetIcon } = pinSettings();
   const [pinColor, setpinColor] = useState(blueIcon);
-  const [latitude, setLatitude] = useState(props.item.latitude || null);
-  const [longitude, setLongitude] = useState(props.item.longitude || null);
-  const [newItemMode, setNewItemMode] = useState(false);
+  const [newItemMode, setNewItemMode] = useState(true);
   const [claimed, setClaimed] = useState(false);
+  
+  const { latitude, longitude, setLatitude, setLongitude } = props;
 
   useEffect(() =>{
     if (!latitude) {

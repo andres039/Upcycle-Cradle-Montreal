@@ -5,10 +5,12 @@ import Pin from './Pin';
 
 import './Map.css';
 
-const Map = () => {
+const Map = (props) => {
   const mapPosition = [45.4, -73.6];
   const mapTilesId = 'mapbox/streets-v11';
   const mapAccessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+
+  const { latitude, longitude, setLatitude, setLongitude } = props;
 
   // array of saved items for testing
   const savedItems = [
@@ -44,7 +46,13 @@ const Map = () => {
 
   const parsedPins = savedItems.map(savedItem => {
     return (
-      <Pin key={savedItem.id} id={savedItem.id} item={savedItem} />
+      <Pin
+        key={savedItem.id}
+        id={savedItem.id}
+        item={savedItem}
+        latitude={savedItem.latitude}
+        longitude={savedItem.longitude}
+      />
     );
   });
 
@@ -55,7 +63,14 @@ const Map = () => {
         url={`https://api.mapbox.com/styles/v1/${mapTilesId}/tiles/{z}/{x}/{y}?access_token=${mapAccessToken}`}
       />
       <UserLocation />
-      <Pin item={newItem} allItems={savedItems} />
+      <Pin
+        item={newItem}
+        allItems={savedItems}
+        latitude={latitude}
+        longitude={longitude}
+        setLatitude={setLatitude}
+        setLongitude={setLongitude}
+      />
       {parsedPins}
     </MapContainer>
   );
