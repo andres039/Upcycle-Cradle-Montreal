@@ -69,7 +69,16 @@ const NewItemForm = (props) => {
       </form>
 
       <Button
-        onClick={() => validate({ title, description, condition, picture, longitude: props.longitude, latitude: props.latitude, creator_id: 1, date: null })}
+        onClick={() => validate({
+          title,
+          description,
+          condition,
+          picture,
+          longitude: props.longitude,
+          latitude: props.latitude,
+          creator_id: 1,
+          date: null
+        })}
       >
         Save
       </Button>
