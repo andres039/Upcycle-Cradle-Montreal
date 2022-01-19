@@ -14,7 +14,7 @@ const Pin = (props) => {
 
   useEffect(() =>{
     if (!latitude) {
-    setpinColor(greenIcon);
+      setpinColor(greenIcon);
     }
   }, []);
 
