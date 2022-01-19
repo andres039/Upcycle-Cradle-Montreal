@@ -7,7 +7,9 @@ const logger = require("morgan");
 const cors = require("cors");
 const usersRouter = require("./routes/users");
 const pinsRouter = require("./routes/pins")
+const cookieSession = require("cookie-session");
 const PORT = 8081;
+//const exphbs = require('express-handlebars');
 const app = express();
 
 app.use(logger("dev"));
@@ -21,6 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(pinsRouter)
 app.use(usersRouter)
+
 
 app.listen(PORT, () => {
   console.log(`♻️ 🦝 listening on port ${PORT} 🐼 ♻️ `);

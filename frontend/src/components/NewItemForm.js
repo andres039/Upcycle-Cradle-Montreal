@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
@@ -10,9 +10,17 @@ const NewItemForm = (props) => {
   const [picture, setPicture] = useState("");
   const [coordinates, setCoordinates] = useState([]);
 
-  {/*The useEffect that follows might be how we could potentially integrate the pin selected on the map with the rest of the fields in the form. */ }
+  {
+    /*The useEffect that follows might be how we could potentially integrate the pin selected on the map with the rest of the fields in the form. */
+  }
 
-  let pinSelected = ''
+  let pinSelected = "";
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+  const res = await axios.post(
+    `https://loobv.com/api/traveller/add/favorite/car`,
+    { car_id: carId },
+    config
+  );
 
   const validate = (itemData) => {
     console.log(itemData);
@@ -23,13 +31,16 @@ const NewItemForm = (props) => {
   };
 
   useEffect(() => {
-    setCoordinates(pinSelected)
-  }, [pinSelected])
+    setCoordinates(pinSelected);
+  }, [pinSelected]);
 
   return (
-
     <section className="new-item">
-      <form onSubmit={(e) => e.preventDefault()} autoComplete="off" className="form">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        autoComplete="off"
+        className="form"
+      >
         <label>Title</label>
         <input
           className="new-item-title"
@@ -69,16 +80,25 @@ const NewItemForm = (props) => {
       </form>
 
       <Button
-        onClick={() => validate({ title, description, condition, picture, longitude: props.longitude, latitude: props.latitude, creator_id: 1, date: null })}
+        onClick={() =>
+          validate({
+            title,
+            description,
+            condition,
+            picture,
+            longitude: props.longitude,
+            latitude: props.latitude,
+            creator_id: 1,
+            date: null,
+          })
+        }
       >
         Save
       </Button>
       <Link to="/mapview">
         <Button>Cancel</Button>
-
       </Link>
     </section>
-
   );
 };
 export default NewItemForm;
