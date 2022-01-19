@@ -9,7 +9,6 @@ const NewItem = (props) => {
   return (
     <div className="container">
 
-
       <Map
         latitude={latitude}
         longitude={longitude}

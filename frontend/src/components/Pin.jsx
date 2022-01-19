@@ -8,7 +8,6 @@ import pinSettings from '../helpers/pinSettings'
 const Pin = (props) => {
   const { blueIcon, greenIcon, orangeIcon, violetIcon } = pinSettings();
   const [pinColor, setpinColor] = useState(blueIcon);
-  //const [newItemMode, setNewItemMode] = useState(true);
   const [claimed, setClaimed] = useState(false);
   
   const { latitude, longitude, setLatitude, setLongitude, newItemMode } = props;
@@ -53,7 +52,6 @@ const Pin = (props) => {
     // Not finished and likely needs to be edited
     // return axios.delete(`/api/pins/${id}`, {data: {pin}})
     //   .then(() => {
-      console.log('from pins component', setLatitude, setLongitude);
       setLatitude(null);
       setLongitude(null);
       // });

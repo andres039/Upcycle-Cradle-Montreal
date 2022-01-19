@@ -14,7 +14,6 @@ const Map = (props) => {
 
   const { latitude, longitude, setLatitude, setLongitude, newItemMode } = props;
 
-
   // array of saved items for testing
   const savedItems = [
     {
@@ -54,8 +53,6 @@ const Map = (props) => {
         key={savedItem.id}
         id={savedItem.id}
         item={savedItem}
-        
-        
       />
     );
   });
