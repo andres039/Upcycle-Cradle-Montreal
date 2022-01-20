@@ -42,9 +42,12 @@ const RegistrationForm = (props) => {
 
 
   const validate = (itemData) => {
+    localStorage.getItem("token")
     // console.log(itemData);
-    return axios.post("http://localhost:8081/api/users", itemData).then(() => {
-      console.log(itemData);
+    return axios.post("http://localhost:8081/register", itemData).then((response) => {
+      console.log("response", response)
+      localStorage.setItem("token", response.data.token)
+
       // setPin(itemData);
     });
   };

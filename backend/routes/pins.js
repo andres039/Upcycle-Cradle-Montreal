@@ -1,4 +1,5 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 const { Pool } = require("pg");
 const dbParams = require("../lib/db.js");
@@ -13,7 +14,7 @@ router.get("/api/pins", (req, res) => {
       console.log("API/pins error:", err);
       res.status(500).send();
     });
-}); 
+});
 
 //Select individual pins
 
@@ -29,7 +30,11 @@ router.get("/api/pins/:id", (req, res) => {
 //create a new pin
 
 router.post("/api/pins", async (req, res) => {
+  console.log("req.headers", req.headers)
+
   try {
+    const verification = jwt.verify(req.headers.token, process.env.TOKEN_KEY);
+    console.log(verification)
     const {
       title,
       description,

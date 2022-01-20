@@ -30,6 +30,7 @@ function App() {
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+  const isLoggedIn = localStorage.getItem("token")
 
   return (
     <div className="App container">
@@ -37,7 +38,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route
+        {isLoggedIn && <Route
           path="/mapview"
           element={
             <MapView
@@ -48,7 +49,8 @@ function App() {
               newItemMode={false}
             />
           }
-        />
+        />}
+
         <Route
           path="/newitem"
           element={
@@ -61,6 +63,7 @@ function App() {
             />
           }
         />
+        <Route path="/*" />
 
 
       </Routes>
