@@ -21,6 +21,7 @@ const NewItemForm = (props) => {
     return axios.post("http://localhost:8081/api/pins", itemData, { headers: { token: tokenKey } }).then(() => {
       console.log(itemData);
       // setPin(itemData);
+      window.location.reload();
     });
   };
 
