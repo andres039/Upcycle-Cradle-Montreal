@@ -30,8 +30,18 @@ function App() {
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+<<<<<<< HEAD
   const isLoggedIn = localStorage.getItem("token")
+=======
+  const [oldPins, setOldPins] = useState([]);
+>>>>>>> 46210fb1b36f9c957176c85ef4bae3e8e28fc189
 
+  useEffect(() => {
+  axios.get("http://localhost:8081/api/pins").then((result) => {
+    console.log(result.data);
+    return setOldPins(result.data);
+  }).then(result => console.log('oldpins', oldPins));
+}, [])
   return (
     <div className="App container">
       <Routes>
@@ -47,6 +57,7 @@ function App() {
               setLatitude={setLatitude}
               setLongitude={setLongitude}
               newItemMode={false}
+              oldPins = {oldPins}
             />
           }
         />}
@@ -60,6 +71,7 @@ function App() {
               setLatitude={setLatitude}
               setLongitude={setLongitude}
               newItemMode={true}
+              oldPins = {oldPins}
             />
           }
         />
