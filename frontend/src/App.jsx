@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     axios.get("http://localhost:8081/api/pins").then((result) => {
-      return setOldPins(result.data);
+      setOldPins(result.data);
     });
   }, [])
   return (
