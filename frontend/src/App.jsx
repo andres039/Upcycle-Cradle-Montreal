@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Link, Routes, Route, Navigate } from "react-router-dom";
 
 
 import './App.css';
@@ -61,7 +61,7 @@ function App() {
 
         <Route
           path="/newitem"
-          element={
+          element={isLoggedIn ?
             <NewItem
               latitude={latitude}
               longitude={longitude}
@@ -70,9 +70,10 @@ function App() {
               newItemMode={true}
               oldPins={oldPins}
             />
+            : <Navigate to="/login" />
           }
         />
-        <Route path="/*" />
+        <Route path="*" element={<Navigate to="/" />} />
 
 
       </Routes>
