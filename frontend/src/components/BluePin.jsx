@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Marker, Popup, useMapEvents } from 'react-leaflet';
+import chair from '../chair1.jpg';
 // import axios from "axios";
 
 import Button from './Button';
@@ -44,7 +45,7 @@ const BluePin = (props) => {
       <Popup>
         <h1>{props.item.title}</h1>
         <p>{props.item.description}</p>
-        <p>{props.item.picture}</p>
+        <img src={chair} alt='Item'/><p>{props.item.picture}</p>
         <p><strong>Condition:</strong> {props.item.condition}</p>
         <Button onClick={'runs claimItem function'}>Claimed</Button>
         <Button onClick={'mark column picked up as true'}>Picked up</Button>
