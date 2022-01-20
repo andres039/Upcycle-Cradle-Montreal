@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import Button from 'components/Button'
 
 const RegistrationForm = (props) => {
@@ -10,7 +11,7 @@ const RegistrationForm = (props) => {
   const [password, setPassword] = useState('');
   const [confirmationPassword, setConfirmationPassword] = useState('');
   const [username, setUsername] = useState('');
-
+  const navigate = useNavigate();
 
   // // States for checking the errors
   const [submitted, setSubmitted] = useState(false);
@@ -43,13 +44,14 @@ const RegistrationForm = (props) => {
 
   const validate = (itemData) => {
     localStorage.getItem("token")
-    // console.log(itemData);
+    console.log("itemData: ", itemData);
+    console.log("TOKEN: ", localStorage.getItem("token"));
     return axios.post("http://localhost:8081/register", itemData).then((response) => {
       console.log("response", response)
       localStorage.setItem("token", response.data.token)
 
       // setPin(itemData);
-    });
+    }).then(navigate("/mapview"));
   };
 
   // Handling the form submission

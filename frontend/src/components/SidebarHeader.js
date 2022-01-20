@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 const logo = require("../logo.png");
 
 
@@ -10,6 +11,7 @@ const SidebarHeader = (props) => {
   const [item, setItem] = useState(false);
   const [pin, setPin] = useState("");
   const [user, setUser] = useState("");
+  const navigate = useNavigate();
 
   /*Return an object containing the characteristics of a new posting */
   //When posting something pass a body as JSON 
@@ -20,6 +22,12 @@ const SidebarHeader = (props) => {
       setPin(itemData);
     });
   };
+
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  }
 
   // useEffect(() => {
 
@@ -51,8 +59,8 @@ const SidebarHeader = (props) => {
         <img src={logo} style={{ width: "300px" }} />
 
         <h3>Signed in as {user}</h3>
-        {/* <Button onClick={() => setItem(true)}>+ new Item</Button> */}
-        <Button onClick={() => alert("You are successfully logged out")}>
+
+        <Button onClick={() => logout()}>
           Logout
         </Button>
       </header>
