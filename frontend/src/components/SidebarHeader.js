@@ -51,8 +51,8 @@ const SidebarHeader = (props) => {
         <img src={logo} style={{ width: "300px" }} />
 
         <h3>Signed in as {user}</h3>
-        {/* <Button onClick={() => setItem(true)}>+ new Item</Button> */}
-        <Button onClick={() => alert("You are successfully logged out")}>
+
+        <Button onClick={() => localStorage.removeItem("token")}>
           Logout
         </Button>
       </header>
