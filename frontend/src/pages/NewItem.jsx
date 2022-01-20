@@ -21,7 +21,12 @@ const NewItem = (props) => {
       <section className="sidebar">
 
         <SidebarHeader />
-        <NewItemForm latitude={latitude} longitude={longitude} />
+        <NewItemForm
+          latitude={latitude}
+          longitude={longitude}
+          setLatitude={setLatitude}
+          setLongitude={setLongitude}
+        />
 
       </section>
 

@@ -17,6 +17,11 @@ const NewItemForm = (props) => {
     });
   };
 
+  const deletePin = () => {
+    props.setLatitude(null);
+    props.setLongitude(null);
+  }
+
   const currentDate = () => {
     const timeElapsed = Date.now();
     const today = new Date(timeElapsed);
@@ -80,7 +85,7 @@ const NewItemForm = (props) => {
         Save
       </Button>
       <Link to="/mapview">
-        <Button>Cancel</Button>
+        <Button onClick={() => deletePin()}>Cancel</Button>
 
       </Link>
     </section>
