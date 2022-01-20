@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-// import Button from "components/Button";
+
 
 
 const LoginForm = (props) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [error, setError] = useState("");
+  const [error, setError] = useState("");
 
   // const validate = () => {
   //   if (email === "") {
@@ -20,16 +20,28 @@ const LoginForm = (props) => {
   //   setError("");
   //   props.onSave(email, password);
   // };
-
+  const validate = (loginData) => {
+    console.log(loginData)
+  }
 
   const handleSubmit = event => {
     event.preventDefault();
+    if (
+      email === "" ||
+      password === ""    
+    ) {
+      setError(true);
+    }
+    validate({email, password})
   }
 
   return (
 
     <main>
       <section className="login">
+      {error && (
+        <h1>🔥 Please fill the email and password fields, or register to start using 🦝Trash Panda🐼 🔥</h1>
+      )}
         <form autoComplete="off" onSubmit={handleSubmit}>
           <label>Email: </label>
           <input
@@ -62,7 +74,7 @@ const LoginForm = (props) => {
         <section className="">
 
           {/* <Button onClick={validate}{ your code goes here }>Login</Button> */}
-          <button>Login</button>
+          <button onClick={handleSubmit}>Login</button>
 
         </section>
       </section>

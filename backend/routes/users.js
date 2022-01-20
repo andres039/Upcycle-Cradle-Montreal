@@ -8,8 +8,8 @@ const dbParams = require("../lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
 
-//app.use(express.json())
 //Select all users
+
 router.get("/api/users", (req, res) => {
   db.query("SELECT * FROM users;")
     .then((response) => res.send(response.rows))
@@ -47,7 +47,7 @@ router.post("/register", async (req, res) => {
     }
 
     //check if user already exist
-    
+
     db.query("SELECT id FROM users WHERE email=$1;", [email])
       .then((response) => {
         if (response.rowCount === 0) {

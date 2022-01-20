@@ -120,7 +120,7 @@ const RegistrationForm = (props) => {
       </div>
 
       {confirmationPassword === "error" && (
-        <h1>'🔥 Password and password confirmation must match 🔥'</h1>
+        <h1>🔥 Password and password confirmation must match 🔥</h1>
       )}
 
       <form>
