@@ -4,17 +4,18 @@ import SidebarHeader from "../components/SidebarHeader";
 
 
 const NewItem = (props) => {
-  const { latitude, longitude, setLatitude, setLongitude, newItemMode } = props;
-
+  const { latitude, longitude, setLatitude, setLongitude, newItemMode, oldPins } = props;
+  
   return (
     <div className="container">
-
+        
       <Map
         latitude={latitude}
         longitude={longitude}
         setLatitude={setLatitude}
         setLongitude={setLongitude}
         newItemMode={newItemMode}
+        savedItems={oldPins}
       />
 
       <section className="sidebar">

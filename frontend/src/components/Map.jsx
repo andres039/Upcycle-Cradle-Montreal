@@ -1,61 +1,66 @@
-import { useState } from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { useEffect, useState } from "react";
+import { MapContainer, TileLayer } from "react-leaflet";
 
-import UserLocation from './UserLocation';
-import Pin from './Pin';
-import BluePin from './BluePin';
+import UserLocation from "./UserLocation";
+import Pin from "./Pin";
+import BluePin from "./BluePin";
 
-import './Map.css';
+import "./Map.css";
+import axios from "axios";
 
 const Map = (props) => {
   const mapPosition = [45.4, -73.6];
-  const mapTilesId = 'mapbox/streets-v11';
+  const mapTilesId = "mapbox/streets-v11";
   const mapAccessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-  const { latitude, longitude, setLatitude, setLongitude, newItemMode } = props;
+  const {
+    latitude,
+    longitude,
+    setLatitude,
+    setLongitude,
+    newItemMode,
+    savedItems,
+  } = props;
 
   // array of saved items for testing
-  const savedItems = [
-    {
-      id: 1,
-      title: "Item 1",
-      description: "Description of Item 1.",
-      latitude: 45.432,
-      longitude: -73.623
-    },
-    {
-      id: 2,
-      title: "Item 2",
-      description: "Description of Item 2.",
-      latitude: 45.507,
-      longitude: -73.690
-    },
-    {
-      id: 3,
-      title: "Item 3",
-      description: "Description of Item 3.",
-      latitude: 45.527,
-      longitude: -73.583
-    }
-  ];
+  // const savedItems = [
+  //   {
+  //     id: 1,
+  //     title: "Item 1",
+  //     description: "Description of Item 1.",
+  //     latitude: 45.432,
+  //     longitude: -73.623,
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Item 2",
+  //     description: "Description of Item 2.",
+  //     latitude: 45.507,
+  //     longitude: -73.69,
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Item 3",
+  //     description: "Description of Item 3.",
+  //     latitude: 45.527,
+  //     longitude: -73.583,
+  //   },
+  // ];
 
   // object of new item for testing
   const newItem = {
     id: 4,
     title: "Item 4",
-    description: "Description of Item 4."
+    description: "Description of Item 4.",
   };
-
-  const parsedPins = savedItems.map(savedItem => {
-
-    return (
-      <BluePin
-        key={savedItem.id}
-        id={savedItem.id}
-        item={savedItem}
-      />
-    );
-  });
+  
+  const parsedPins = savedItems
+    ? savedItems.map((savedItem) => {
+        return (
+          <BluePin key={savedItem.id} id={savedItem.id} item={savedItem} />
+        );
+      })
+    : [];
 
   return (
     <MapContainer center={mapPosition}>
@@ -76,6 +81,6 @@ const Map = (props) => {
       {parsedPins}
     </MapContainer>
   );
-}
+};
 
 export default Map;

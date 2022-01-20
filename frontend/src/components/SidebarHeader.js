@@ -32,16 +32,16 @@ const SidebarHeader = (props) => {
 
   // }, [])
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    return axios.get("http://localhost:8081/api/users/123").then((res) => {
-      console.log(res);
-      const { username } = res.data[1];
-      setUser(username);
-    });
+  //   return axios.get("http://localhost:8081/api/users/123").then((res) => {
+  //     console.log(res);
+  //     const { username } = res.data[1];
+  //     setUser(username);
+  //   });
 
 
-  }, [])
+  // }, [])
   /*Resets the view to Instructions*/
 
 
