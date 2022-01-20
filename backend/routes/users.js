@@ -38,41 +38,42 @@ router.post("/register", async (req, res) => {
       res.status(400).send("All input is required");
     }
     //check if user already exist
-     db.query("SELECT id FROM users WHERE email=$1;", [email]).then(
+    db.query("SELECT id FROM users WHERE email=$1;", [email]).then(
       response => {
         if (response.rowCount === 0) {
-          
-         return db.query(
-                 "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *",
-                 [username, email, password]
-          ).then(() => {
-            const token = jwt.sign({ user_id: 7, email }, process.env.TOKEN_KEY, {
+
+          return db.query(
+            "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *",
+            [username, email, password]
+          ).then((resp) => {
+            const user_id = resp.rows[0].id
+            const token = jwt.sign({ user_id, email }, process.env.TOKEN_KEY, {
               expiresIn: "2h",
             });
             // save user token
-            const user = {};
+            const user = resp.rows[0];
+            console.log(user)
             user.token = token;
-            res.cookie(process.env.AUTH_COOKIE, token, {
-              withCredentials: true,
-              credentials: "include",
-            });
-            res.send("Login successful")
+            console.log(user.token)
+            res.cookie(process.env.AUTH_COOKIE, token
+            );
+            return res.status(200).send({ status: "logged in", message: "Login successful", user, token })
           }
           )
         } else {
           console.log("Email already in use");
-        res.send("email in use")
+          res.send("email in use")
         }
       }).catch(err => {
         console.log("Query failed:", err.message);
         res.send("Query failed:", err.message)
-       }
+      }
       )
-    
-    
+
+
     //res.json(newUser);
-            
-        
+
+
     // console.log(await db.query("SELECT * FROM users WHERE email=$1;", [email]) ? true : false)
     // check if user already exist
     // else if (await db.query("SELECT * FROM users WHERE email=$1;", [email])) {
@@ -99,11 +100,11 @@ router.post("/register", async (req, res) => {
     // });
 
     // Create token
-   
+
     // // return new user
     // //res.status(201).json(user)
     // res.json(newUser);
-  
+
   } catch (err) {
     console.log(err);
   }

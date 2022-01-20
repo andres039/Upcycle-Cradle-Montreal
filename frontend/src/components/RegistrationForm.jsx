@@ -44,7 +44,8 @@ const RegistrationForm = (props) => {
 
   const validate = (itemData) => {
     localStorage.getItem("token")
-    // console.log(itemData);
+    console.log("itemData: ", itemData);
+    console.log("TOKEN: ", localStorage.getItem("token"));
     return axios.post("http://localhost:8081/register", itemData).then((response) => {
       console.log("response", response)
       localStorage.setItem("token", response.data.token)
