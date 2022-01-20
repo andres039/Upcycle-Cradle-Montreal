@@ -45,7 +45,7 @@ const BluePin = (props) => {
       <Popup>
         <h1>{props.item.title}</h1>
         <p>{props.item.description}</p>
-        <img src={chair} alt='Item'/><p>{props.item.picture}</p>
+        <img src={`${props.item.picture}`} alt='Item'/>
         <p><strong>Condition:</strong> {props.item.condition}</p>
         <Button onClick={'runs claimItem function'}>Claimed</Button>
         <Button onClick={'mark column picked up as true'}>Picked up</Button>
