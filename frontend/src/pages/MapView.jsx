@@ -7,14 +7,14 @@ import axios from "axios";
 
 const MapView = (props) => {
   const { latitude, longitude, setLatitude, setLongitude, newItemMode, oldPins } = props;
-//   const [oldPins, setOldPins] = useState([]);
+  //   const [oldPins, setOldPins] = useState([]);
 
-//   useEffect(() => {
-//   axios.get("http://localhost:8081/api/pins").then((result) => {
-//     console.log(result.data);
-//     return setOldPins(result.data);
-//   }).then(result => console.log('oldpins', oldPins));
-// }, [])
+  //   useEffect(() => {
+  //   axios.get("http://localhost:8081/api/pins").then((result) => {
+  //     console.log(result.data);
+  //     return setOldPins(result.data);
+  //   }).then(result => console.log('oldpins', oldPins));
+  // }, [])
 
   // useEffect(() => {
   //   axios.get("localhost:8081/api/pins", { mode: "cors", method: "get" }).then((res) => {
