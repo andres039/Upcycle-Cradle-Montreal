@@ -4,9 +4,8 @@ INSERT INTO users (username, email, password) VALUES (
   'Bart Simpson', 'bart@nuclearplant.com', 'password'
 );
 
-INSERT INTO pins (title, description, picture, condition, latitude, longitude, date, creator_id, claimer_id) VALUES (
-   'Chair', 'Nice bizantine chair', 'backend/public/images/chair1.jpg', 'Like new',45.5017, 73.5673, '2022-01-05', 1, 2 
-);
-
--- INSERT INTO polls (email, title, description, administrative_link, submission_link, name_required)
--- VALUES ('alice@gmmail.com', 'Weekend activity', 'Hey folks please vote for what we should do for the weekend.', 'aaa', 'bbb', 't');
+INSERT INTO pins (title, description, picture, condition, latitude, longitude, date, creator_id, claimer_id)
+VALUES ('Chair', 'Nice bizantine chair', 'backend/public/images/chair1.jpg', 'Like new', 45.5017, -73.5673, '2022-01-05', 1, 2 ),
+('Pool table', 'Luxurious pool table', 'backend/public/images/chair1.jpg', 'Like old', 45.4323, -73.6237, '2022-01-10', 2, 1),
+('Sofa', 'Nice bizantine sofa', 'backend/public/images/chair1.jpg', 'Like new', 45.5079, -73.6934, '2022-01-13', 1, null),
+('Book shelf', 'Nice bizantine book shelf', 'backend/public/images/chair1.jpg', 'Like old', 45.5271, -73.5832, '2022-01-15', 1, null);
