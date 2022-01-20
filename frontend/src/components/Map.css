@@ -2,3 +2,7 @@
   width: 75vw;
   height: 100vh;
 }
+
+.leaflet-popup-content-wrapper {
+  width: 260px;
+}
