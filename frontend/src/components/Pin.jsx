@@ -63,8 +63,7 @@ const Pin = (props) => {
         <h1>{props.item.title}</h1>
         <p>{props.item.description}</p>
         <p>{props.item.picture}</p>
-        <p>{props.item.condition}</p>
-        <p><strong>Condition:</strong> Like new</p>
+        <p><strong>Condition:</strong> {props.item.condition}</p>
         <Button onClick={'runs claimItem function'}>Claimed</Button>
         <Button onClick={'mark column picked up as true'}>Picked up</Button>
         <button onClick={() => deletePin()}>Delete</button>
