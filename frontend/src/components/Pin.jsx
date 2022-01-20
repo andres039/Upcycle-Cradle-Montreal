@@ -21,20 +21,8 @@ const Pin = (props) => {
   useMapEvents({
     click(e) {
       if (!latitude && newItemMode) {
-        const len = Object.keys(props.allItems).length;
-
         setLatitude(e.latlng.lat);
         setLongitude(e.latlng.lng);
-        
-        // Placeholder for saving to database
-        props.allItems.push({
-          id: len + 1,
-          title: `Location ${len + 1}`,
-          description: `Description of location ${len + 1}.`,
-          coordinates: [e.latlng.lat, e.latlng.lng]
-        });
-        
-        // setPinPosition(null);
       }
     }
   });
