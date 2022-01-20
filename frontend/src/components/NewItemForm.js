@@ -15,12 +15,9 @@ const NewItemForm = (props) => {
   let pinSelected = ''
 
   const validate = (itemData) => {
-    console.log(itemData);
     const tokenKey = localStorage.getItem("token")
     //localStorage.removeItem("token") -- for logout
     return axios.post("http://localhost:8081/api/pins", itemData, { headers: { token: tokenKey } }).then(() => {
-      console.log(itemData);
-      // setPin(itemData);
       window.location.reload();
     });
   };
@@ -28,6 +25,12 @@ const NewItemForm = (props) => {
   useEffect(() => {
     setCoordinates(pinSelected)
   }, [pinSelected])
+
+  const currentDate = () => {
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+    return today.toDateString();
+  }
 
   return (
 
@@ -80,7 +83,7 @@ const NewItemForm = (props) => {
           longitude: props.longitude.toFixed(4),
           latitude: props.latitude.toFixed(4),
           creator_id: 1,
-          date: null
+          date: currentDate()
         })}
       >
         Save
