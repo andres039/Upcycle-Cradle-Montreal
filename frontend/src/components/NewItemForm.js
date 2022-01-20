@@ -8,11 +8,6 @@ const NewItemForm = (props) => {
   const [description, setDescription] = useState("");
   const [condition, setCondition] = useState("");
   const [picture, setPicture] = useState("");
-  const [coordinates, setCoordinates] = useState([]);
-
-  {/*The useEffect that follows might be how we could potentially integrate the pin selected on the map with the rest of the fields in the form. */ }
-
-  let pinSelected = ''
 
   const validate = (itemData) => {
     const tokenKey = localStorage.getItem("token")
@@ -21,10 +16,6 @@ const NewItemForm = (props) => {
       window.location.reload();
     });
   };
-
-  useEffect(() => {
-    setCoordinates(pinSelected)
-  }, [pinSelected])
 
   const currentDate = () => {
     const timeElapsed = Date.now();
