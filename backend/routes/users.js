@@ -1,4 +1,5 @@
 const express = require('express');
+//bcrypt
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const { Pool } = require("pg");
