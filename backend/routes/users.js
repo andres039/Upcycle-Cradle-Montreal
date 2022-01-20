@@ -41,11 +41,13 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
   
-    // Validate user inputq
+    // Validate user input
     if (!(email && password && username)) {
       res.status(400).send("All input is required");
     }
+
     //check if user already exist
+    
     db.query("SELECT id FROM users WHERE email=$1;", [email])
       .then((response) => {
         if (response.rowCount === 0) {
@@ -68,7 +70,7 @@ router.post("/register", async (req, res) => {
               console.log(user);
               user.token = token;
               console.log(user.token);
-              res.cookie(process.env.AUTH_COOKIE, token);
+              // res.cookie(process.env.AUTH_COOKIE, token);
               return res
                 .status(200)
                 .send({
@@ -78,7 +80,6 @@ router.post("/register", async (req, res) => {
                   token,
                 });
             })
-            .catch(res.status(500).send());
         } else {
           console.log("Email already in use");
           res.send("email in use");

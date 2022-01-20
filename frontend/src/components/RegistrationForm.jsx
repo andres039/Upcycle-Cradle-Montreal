@@ -1,16 +1,15 @@
-import axios from 'axios';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import Button from 'components/Button'
 
 const RegistrationForm = (props) => {
-
   // States for registration
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmationPassword, setConfirmationPassword] = useState('');
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmationPassword, setConfirmationPassword] = useState("");
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   // // States for checking the errors
@@ -35,35 +34,49 @@ const RegistrationForm = (props) => {
     setSubmitted(false);
   };
 
-
   const handleConfirmationPassword = (e) => {
     setConfirmationPassword(e.target.value);
     setSubmitted(false);
   };
 
-
   const validate = (itemData) => {
-    localStorage.getItem("token")
-    console.log("itemData: ", itemData);
-    console.log("TOKEN: ", localStorage.getItem("token"));
-    return axios.post("http://localhost:8081/register", itemData).then((response) => {
-      console.log("response", response)
-      localStorage.setItem("token", response.data.token)
+    if (password !== confirmationPassword) {
+      console.log("🔥 passwords must match 🔥");
+      setConfirmationPassword("error");
+      return;
+    } else {
+      localStorage.getItem("token");
 
-      // setPin(itemData);
-    }).then(navigate("/mapview"));
+      console.log("itemData: ", itemData);
+      console.log("TOKEN: ", localStorage.getItem("token"));
+
+      return axios
+        .post("http://localhost:8081/register", itemData)
+        .then((response) => {
+          console.log("response", response);
+          localStorage.setItem("token", response.data.token);
+
+          // setPin(itemData);
+        })
+        .then(navigate("/mapview"));
+    }
   };
 
   // Handling the form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username === '' || email === '' || password === '' || confirmationPassword === '') {
+    if (
+      username === "" ||
+      email === "" ||
+      password === "" ||
+      confirmationPassword === ""
+    ) {
       setError(true);
     } else {
       setSubmitted(true);
 
       setError(false);
-      validate({ email, password, username })
+      validate({ email, password, username });
     }
   };
 
@@ -86,8 +99,9 @@ const RegistrationForm = (props) => {
       <div
         className="error"
         style={{
-          display: error ? '' : 'none',
-        }}>
+          display: error ? "" : "none",
+        }}
+      >
         <h1>Please enter all the fields</h1>
       </div>
     );
@@ -105,6 +119,10 @@ const RegistrationForm = (props) => {
         {/* {successMessage()} */}
       </div>
 
+      {confirmationPassword === "error" && (
+        <h1>'🔥 Password and password confirmation must match 🔥'</h1>
+      )}
+
       <form>
         {/* Labels and inputs for form data */}
         <label className="username">Username: </label>
@@ -117,8 +135,12 @@ const RegistrationForm = (props) => {
         />
 
         <label className="email">Email: </label>
-        <input onChange={handleEmail} className="email"
-          value={email} type="email" />
+        <input
+          onChange={handleEmail}
+          className="email"
+          value={email}
+          type="email"
+        />
 
         <label className="password">Password: </label>
         <input
@@ -144,6 +166,6 @@ const RegistrationForm = (props) => {
       </form>
     </div>
   );
-}
+};
 
-export default RegistrationForm
+export default RegistrationForm;
