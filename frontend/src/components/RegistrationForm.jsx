@@ -9,14 +9,14 @@ const RegistrationForm = (props) => {
   // States for registration
 
   const [error, setError] = useState(false);
-  const [showConfirmationPassError, setShowConfirmationPassError] =
-    useState(false);
-  const [showEmailError, setShowEmailError] = useState(false);
- 
+  
+  
   // Handling the name change
-
+  
   const context = useContext(AuthContext);
-
+  
+  const showConfirmationPassError = context.showConfirmationPassError;
+  const showEmailError = context.showEmailError;
   const email = context.email;
   const username = context.username;
   const password = context.password;

@@ -12,7 +12,9 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
   const [username, setUsername] = useState("");
-
+  const [showEmailError, setShowEmailError] = useState(false);
+  const [showConfirmationPassError, setShowConfirmationPassError] =
+  useState(false);
 
   const navigate = useNavigate();
 
@@ -38,7 +40,7 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   const handleRegistration = (itemData) => {
     if (password !== confirmationPassword) {
       console.log("🔥 passwords must match 🔥");
-      setConfirmationPassword("error");
+      setShowConfirmationPassError(true);
       return;
     } else {
 
@@ -49,12 +51,15 @@ const withAuthProvider = (WrappedComponent) => (props) => {
 
           // setPin(itemData);
         })
-        .then(() => navigate("/mapview"));
+        .then(() => navigate("/mapview")).catch((err) => {
+                  console.log("this is the error:", err);
+                  setShowEmailError(true);
+                });
     }
   };
 
 
-  const providerData = { email, password, confirmationPassword, username, setEmail, setConfirmationPassword, setPassword, setUsername, handleRegistration, confirmationPassword, handleUsername, handlePassword, handleEmail, handleConfirmationPassword }
+  const providerData = { email, password, confirmationPassword, username, setEmail, setConfirmationPassword, setPassword, setUsername, handleRegistration, confirmationPassword, handleUsername, handlePassword, handleEmail, handleConfirmationPassword,showConfirmationPassError, showEmailError }
 
   return (
     <AuthContext.Provider value={providerData}>
