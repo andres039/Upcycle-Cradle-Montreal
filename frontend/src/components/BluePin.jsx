@@ -57,7 +57,7 @@ const BluePin = (props) => {
         <p><strong>Condition:</strong> {item.condition}</p>
         <Button onClick={() => claimItem()}>Claimed</Button>
         <Button onClick={'mark column picked up as true'}>Picked up</Button>
-        <button onClick={() => deletePin()}>Delete</button>
+        <Button onClick={() => deletePin()}>Delete</Button>
       </Popup>
     </Marker>
   )
