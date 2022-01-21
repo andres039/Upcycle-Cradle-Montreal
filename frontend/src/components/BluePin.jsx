@@ -25,6 +25,7 @@ const BluePin = (props) => {
   const claimItem = (id, pin) => {
 
     const pinID = props.id;
+    //track user id
     const userID = 2;
 
     // add user's ID as claiamer_id in DB
@@ -34,14 +35,19 @@ const BluePin = (props) => {
       });
   }
 
+  //userID => get request to db, then set the state for delete button(show
+  // if exists, then when delete is pressed, delete request to db)
+
   const deletePin = () => {
     // Not finished and likely needs to be edited
-    // return axios.delete(`/api/pins/${id}`, {data: {pin}})
-    //   .then(() => {
-    //console.log('from pins component', setLatitude, setLongitude);
-    setBluePinLatitude(null);
-    setBluePinLongitude(null);
-    // });
+    const pinID = props.id;
+    return axios.delete(`/api/pins/${pinID}`, { pinID })
+      .then(() => {
+        //console.log('from pins component', setLatitude, setLongitude);
+        setBluePinLatitude(null);
+        setBluePinLongitude(null);
+        console.log("Deleted successfully")
+      });
   }
 
   return bluePinLatitude === null ? null : (
