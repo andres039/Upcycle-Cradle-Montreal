@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const NewItemForm = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [condition, setCondition] = useState("");
+  const [condition, setCondition] = useState("New");
   const [picture, setPicture] = useState("");
 
   const validate = (itemData) => {
@@ -55,7 +55,7 @@ const NewItemForm = (props) => {
           name="condition"
           value={condition}
           onChange={(event) => setCondition(event.target.value)}>
-            <option value="New" selected>New</option>
+            <option value="New">New</option>
             <option value="Like new">Like new</option>
             <option value="Fair">Fair</option>
             <option value="Old">Old</option>
