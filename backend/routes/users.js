@@ -82,7 +82,7 @@ router.post("/register", async (req, res) => {
             })
         } else {
           console.log("Email already in use");
-          res.send("email in use");
+          res.status(401).send(response);
         }
       })
       .catch((err) => {

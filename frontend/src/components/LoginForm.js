@@ -38,6 +38,7 @@ const LoginForm = (props) => {
       password === ""    
     ) {
       setError(true);
+      return
     }
     validate({email, password})
   }

@@ -30,9 +30,9 @@ function App() {
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const isLoggedIn = localStorage.getItem("token")
+  const isLoggedIn = !!localStorage.getItem("token") //This state has been converted to a boolean. For example: Boolean(localStorage.getItem("token")) => equivalent of line 33, !!. 
   const [oldPins, setOldPins] = useState([]);
-
+  console.log("is logged in", isLoggedIn);
   useEffect(() => {
     axios.get("http://localhost:3002/api/pins").then((result) => {
       setOldPins(result.data);
@@ -44,7 +44,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {isLoggedIn && <Route
+        {/* {isLoggedIn && <Route
           path="/mapview"
           element={
             <MapView
@@ -56,8 +56,22 @@ function App() {
               oldPins={oldPins}
             />
           }
-        />}
+        />} */}
 
+        <Route 
+          path="/mapview"
+          element={isLoggedIn ?
+            <MapView
+              latitude={latitude}
+              longitude={longitude}
+              setLatitude={setLatitude}
+              setLongitude={setLongitude}
+              newItemMode={false}
+              oldPins={oldPins}
+            />
+            : <Navigate to="/login"/>
+          }
+        />
         <Route
           path="/newitem"
           element={isLoggedIn ?

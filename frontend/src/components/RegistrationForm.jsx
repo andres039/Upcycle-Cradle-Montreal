@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import Button from 'components/Button'
 
@@ -15,7 +15,9 @@ const RegistrationForm = (props) => {
   // // States for checking the errors
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
-
+  const [showConfirmationPassError, setShowConfirmationPassError] =
+    useState(false);
+  const [showEmailError, setShowEmailError] = useState(false);
   // Handling the name change
   const handleUsername = (e) => {
     setUsername(e.target.value);
@@ -42,23 +44,34 @@ const RegistrationForm = (props) => {
   const validate = (itemData) => {
     if (password !== confirmationPassword) {
       console.log("🔥 passwords must match 🔥");
-      setConfirmationPassword("error");
+      setShowConfirmationPassError(true);
       return;
     } else {
       localStorage.getItem("token");
 
       console.log("itemData: ", itemData);
       console.log("TOKEN: ", localStorage.getItem("token"));
-
-      return axios
-        .post("http://localhost:8081/register", itemData)
-        .then((response) => {
-          console.log("response", response);
-          localStorage.setItem("token", response.data.token);
-
-          // setPin(itemData);
-        })
-        .then(navigate("/mapview"));
+      return (
+        axios
+          .post("/register", itemData)
+          .then((response) => {
+            console.log("token", response.data.token);
+            localStorage.setItem("token", response.data.token);
+            
+          })
+          .then(() => {
+            while(true) {
+              if (localStorage.getItem("token")) {
+                break
+              }
+            }
+            navigate("/mapview")
+          })
+          .catch((err) => {
+            console.log("this is the error:", err);
+            setShowEmailError(true);
+          })
+      );
     }
   };
 
@@ -119,9 +132,10 @@ const RegistrationForm = (props) => {
         {/* {successMessage()} */}
       </div>
 
-      {confirmationPassword === "error" && (
+      {showConfirmationPassError && (
         <h1>🔥 Password and password confirmation must match 🔥</h1>
       )}
+      {showEmailError && <h1>🔥 Email in use 🔥</h1>}
 
       <form>
         {/* Labels and inputs for form data */}
@@ -169,3 +183,5 @@ const RegistrationForm = (props) => {
 };
 
 export default RegistrationForm;
+
+//REACT, FORMS(registration): Display error message coming from the backend during user registration.
