@@ -36,14 +36,20 @@ const BluePin = (props) => {
   //userID => get request to db, then set the state for delete button(show
   // if exists, then when delete is pressed, delete request to db)
 
-  const deletePin = () => {
+  const deletePin = (deleteType) => {
     const pinID = id;
     return axios.delete(`/api/pins/${pinID}`, { pinID })
       .then(() => {
-        //console.log('from pins component', setLatitude, setLongitude);
-        setBluePinLatitude(null);
-        setBluePinLongitude(null);
-        console.log("Deleted successfully")
+        if (deleteType === 'creator delete') {
+          setBluePinLatitude(null);
+          setBluePinLongitude(null);
+        } else {
+          setClaimed('delete countdown');
+          setTimeout(() => {
+            setBluePinLatitude(null);
+            setBluePinLongitude(null);
+          }, 10000);
+        }
       });
   }
 
@@ -55,9 +61,11 @@ const BluePin = (props) => {
         <img src={`${item.picture}`} alt='Item' />
         <p><strong>Condition:</strong> {item.condition}</p>
         {claimed && <p>You claimed this item. Please pick up at your earliest convinience.</p>}
+        {claimed === 'delete countdown' && <p>You have closed the deal! The pin will be deleted shortly.</p>}
         {!claimed && <Button onClick={() => claimItem()}>Claimed</Button>}
-        <Button onClick={'mark column picked up as true'}>Picked up</Button>
-        <Button onClick={() => deletePin()}>Delete</Button>
+        {claimed && <Button onClick={() => deletePin('claimer delete')}>Picked up</Button>}
+        {/* Put condition on delete button to only allow the creator to use it (user === item.creator_id) once user tracking is set up */}
+        <Button onClick={() => deletePin('creator delete')}>Delete</Button>
       </Popup>
     </Marker>
   )
