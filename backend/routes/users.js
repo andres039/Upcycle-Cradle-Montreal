@@ -90,6 +90,21 @@ router.post("/register", async (req, res) => {
         res.send("Query failed:", err.message);
       });
 
+      //Login 
+      
+      router.post("/login", async (req, res) => {
+        try {
+          const {email, password} = req.body
+          const users = db.query("SELECT * FROM users WHERE email=$1;", [email]);
+          const validPassword = await bcrypt.compare(password, users.rows[0].password)
+          console.log(validPassword)
+        }
+        catch{
+          console.log("Query failed:", err.message);
+          res.send("Query failed:", err.message);
+        }
+      })
+
     //res.json(newUser);
 
     // console.log(await db.query("SELECT * FROM users WHERE email=$1;", [email]) ? true : false)

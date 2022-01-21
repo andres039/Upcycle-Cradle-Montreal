@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-
-
+import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = (props) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
+  const navigate = useNavigate();
   // const validate = () => {
   //   if (email === "") {
   //     setError("Please Enter Email");
@@ -22,6 +22,13 @@ const LoginForm = (props) => {
   // };
   const validate = (loginData) => {
     console.log(loginData)
+
+    return axios
+    .post("http://localhost:8081/login", loginData)
+    .then((response) => {
+      console.log("response", response);
+    })
+   .then(navigate("/mapview"));
   }
 
   const handleSubmit = event => {
