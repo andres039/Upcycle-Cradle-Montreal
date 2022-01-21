@@ -8,9 +8,9 @@ import pinSettings from '../helpers/pinSettings'
 const BluePin = (props) => {
   const { blueIcon, greenIcon, orangeIcon, violetIcon } = pinSettings();
   const [pinColor, setpinColor] = useState(blueIcon);
-  const [claimed, setClaimed] = useState(false);
 
   const { id, item } = props;
+  const [claimed, setClaimed] = useState(item.claimer_id)
   const [bluePinLatitude, setBluePinLatitude] = useState(item.latitude);
   const [bluePinLongitude, setBluePinLongitude] = useState(item.longitude);
 
@@ -20,7 +20,7 @@ const BluePin = (props) => {
     }
   }, [claimed]);
 
-  const claimItem = (id) => {
+  const claimItem = () => {
 
     const pinID = id;
     //track user id
