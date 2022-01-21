@@ -4,7 +4,7 @@ import UserLocation from "./UserLocation";
 import Pin from "./Pin";
 import BluePin from "./BluePin";
 
-import "./Map.css";
+import "./Map.scss";
 
 const Map = (props) => {
   const mapPosition = [45.4, -73.6];

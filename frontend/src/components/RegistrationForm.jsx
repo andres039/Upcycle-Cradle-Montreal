@@ -1,79 +1,64 @@
 import axios from "axios";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
+
 // import Button from 'components/Button'
 
 const RegistrationForm = (props) => {
   // States for registration
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmationPassword, setConfirmationPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const navigate = useNavigate();
-
-  // // States for checking the errors
-  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
   const [showConfirmationPassError, setShowConfirmationPassError] =
     useState(false);
   const [showEmailError, setShowEmailError] = useState(false);
-  const [, updateState] = useState();
-  const forceUpdate = useCallback(() => updateState({}), []);
+ 
   // Handling the name change
-  const handleUsername = (e) => {
-    setUsername(e.target.value);
-    setSubmitted(false);
-  };
 
-  // Handling the email change
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-    setSubmitted(false);
-  };
+  const context = useContext(AuthContext);
 
-  // Handling the password change
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-    setSubmitted(false);
-  };
+  const email = context.email;
+  const username = context.username;
+  const password = context.password;
+  const confirmationPassword = context.confirmationPassword;
 
-  const handleConfirmationPassword = (e) => {
-    setConfirmationPassword(e.target.value);
-    setSubmitted(false);
-  };
+  const handleRegistration = context.handleRegistration;
+  const handleEmail = context.handleEmail;
+  const handleUsername = context.handleUsername;
+  const handlePassword = context.handlePassword;
+  const handleConfirmationPassword = context.handleConfirmationPassword;
+  // const validate = (itemData) => {
+  //   if (password !== confirmationPassword) {
+  //     console.log("🔥 passwords must match 🔥");
+  //     setShowConfirmationPassError(true);
+  //     return;
+  //   } else {
+  //     localStorage.getItem("token");
 
-  const validate = (itemData) => {
-    if (password !== confirmationPassword) {
-      console.log("🔥 passwords must match 🔥");
-      setShowConfirmationPassError(true);
-      return;
-    } else {
-      localStorage.getItem("token");
-
-      return axios
-        .post("/register", itemData)
-        .then((response) => {
-          localStorage.setItem("token", response.data.token);
-          setTimeout(() => forceUpdate(), 1000)
-        })
-        .then(() => {
-          while (true) {
-            if (localStorage.getItem("token")) {
-              break;
-            }
-          }
-          forceUpdate()
-          return navigate("/newitem");
-        })
-        .catch((err) => {
-          console.log("this is the error:", err);
-          setShowEmailError(true);
-        });
-    }
-  };
+  //     return axios
+  //       .post("/register", itemData)
+  //       .then((response) => {
+  //         localStorage.setItem("token", response.data.token);
+  //         setTimeout(() => forceUpdate(), 1000)
+  //       })
+  //       .then(() => {
+  //         while (true) {
+  //           if (localStorage.getItem("token")) {
+  //             break;
+  //           }
+  //         }
+  //         forceUpdate()
+  //         return navigate("/newitem");
+  //       })
+  //       .catch((err) => {
+  //         console.log("this is the error:", err);
+  //         setShowEmailError(true);
+  //       });
+  //   }
+  // };
 
   // Handling the form submission
+  //
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -83,26 +68,13 @@ const RegistrationForm = (props) => {
       confirmationPassword === ""
     ) {
       setError(true);
-    } else {
-      setSubmitted(true);
 
+    } else {
       setError(false);
-      validate({ email, password, username });
+      handleRegistration({ email, password, username });
     }
   };
 
-  // // Showing success message
-  // const successMessage = () => {
-  //   return (
-  //     <div
-  //       className="success"
-  //       style={{
-  //         display: submitted ? '' : 'none',
-  //       }}>
-  //       <h1>User {name} successfully registered!!</h1>
-  //     </div>
-  //   );
-  // };
 
   // Showing error message if error is true
   const errorMessage = () => {
@@ -117,6 +89,8 @@ const RegistrationForm = (props) => {
       </div>
     );
   };
+
+  //
 
   return (
     <div className="form">

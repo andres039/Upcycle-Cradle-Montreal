@@ -40,7 +40,7 @@ router.post("/register", async (req, res) => {
 
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
-  
+
     // Validate user input
     if (!(email && password && username)) {
       res.status(400).send("All input is required");
@@ -71,15 +71,13 @@ router.post("/register", async (req, res) => {
               user.token = token;
               console.log(user.token);
               // res.cookie(process.env.AUTH_COOKIE, token);
-              return res
-                .status(200)
-                .send({
-                  status: "logged in",
-                  message: "Login successful",
-                  user,
-                  token,
-                });
-            })
+              return res.status(200).send({
+                status: "logged in",
+                message: "Login successful",
+                user,
+                token,
+              });
+            });
         } else {
           console.log("Email already in use");
           res.status(401).send(response);
@@ -90,20 +88,25 @@ router.post("/register", async (req, res) => {
         res.send("Query failed:", err.message);
       });
 
-      //Login 
-      
-      router.post("/login", async (req, res) => {
-        try {
-          const {email, password} = req.body
-          const users = db.query("SELECT * FROM users WHERE email=$1;", [email]);
-          const validPassword = await bcrypt.compare(password, users.rows[0].password)
-          console.log(validPassword)
+    //Login
+
+    router.post("/login", async (req, res) => {
+      try {
+        const { email, password } = req.body;
+        if (!(email && password)) {
+          res.status(400).send("All input is required");
         }
-        catch{
-          console.log("Query failed:", err.message);
-          res.send("Query failed:", err.message);
-        }
-      })
+        const users = db.query("SELECT * FROM users WHERE email=$1;", [email]);
+        const validPassword = await bcrypt.compare(
+          password,
+          users.rows[0].password
+        );
+        console.log(validPassword);
+      } catch {
+        console.log("Query failed:", err.message);
+        res.send("Query failed:", err.message);
+      }
+    });
 
   } catch (err) {
     console.log(err);

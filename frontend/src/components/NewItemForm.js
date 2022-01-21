@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 const NewItemForm = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [condition, setCondition] = useState("");
+  const [condition, setCondition] = useState("New");
   const [picture, setPicture] = useState("");
 
   const validate = (itemData) => {
     const tokenKey = localStorage.getItem("token")
     //localStorage.removeItem("token") -- for logout
-    return axios.post("http://localhost:8081/api/pins", itemData, { headers: { token: tokenKey } }).then(() => {
+    return axios.post("/api/pins", itemData, { headers: { token: tokenKey } }).then(() => {
       window.location.reload();
     });
   };
@@ -51,13 +51,17 @@ const NewItemForm = (props) => {
         />
 
         <label>Condition</label>
-        <input
-          className="new-item-Condition"
+        <select className="new-item-Condition"
           name="condition"
-          type="text"
           value={condition}
-          onChange={(event) => setCondition(event.target.value)}
-        />
+          onChange={(event) => setCondition(event.target.value)}>
+            <option value="New">New</option>
+            <option value="Like new">Like new</option>
+            <option value="Fair">Fair</option>
+            <option value="Old">Old</option>
+            <option value="Small imperfections">Small imperfections</option>
+            <option value="Damaged">Damaged</option>
+        </select>
 
         <label>Picture</label>
         <input

@@ -24,7 +24,7 @@ const LoginForm = (props) => {
     console.log(loginData)
 
     return axios
-    .post("http://localhost:8081/login", loginData)
+    .post("/login", loginData)
     .then((response) => {
       console.log("response", response);
     })

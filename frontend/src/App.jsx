@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { BrowserRouter, Link, Routes, Route, Navigate } from "react-router-dom";
-import useCheckAuthentication from "./helpers/useCheckAuthentication";
+//import useCheckAuthentication from "./helpers/useCheckAuthentication";
+import withAuthProvider, { AuthContext } from "./providers/AuthProvider";
 
-import './App.css';
-
+import "./App.scss";
 
 //////////////////
 import Login from "./pages/Login";
@@ -15,6 +15,8 @@ import Home from "./pages/Home";
 // import LoginForm from './components/LoginForm';
 
 function App() {
+  const context = useContext(AuthContext);
+  console.log(context);
 
   // const [users, setUsers] = useState()
   // const [pins, setPins] = useState()
@@ -30,17 +32,17 @@ function App() {
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const isLoggedIn = useCheckAuthentication();
-  // const isLoggedIn = !!localStorage.getItem("token") //This state has been converted to a boolean. For example: Boolean(localStorage.getItem("token")) => equivalent of line 33, !!. 
+  const isLoggedIn = localStorage.getItem("token");
+  // const isLoggedIn = !!localStorage.getItem("token") //This state has been converted to a boolean. For example: Boolean(localStorage.getItem("token")) => equivalent of line 33, !!.
   // const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
   console.log("Token from app", localStorage.getItem("token"));
   const [oldPins, setOldPins] = useState([]);
   console.log("is logged in", isLoggedIn);
-  
+
   //Clear local Storage on loading server for the first time. This is a provisional fix to test registration.
 
   // useEffect(() => {
-  //   localStorage.clear();   
+  //   localStorage.clear();
   // }, []);
   // useEffect(() => {
   //   const timeoutID = setTimeout(() => {
@@ -53,66 +55,71 @@ function App() {
   // }, [])
 
   useEffect(() => {
-    axios.get("/api/pins").then((result) => {
+    axios.get("api/pins").then((result) => {
       setOldPins(result.data);
     });
-  }, [])
+  }, []);
   return (
     <div className="App container">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* {isLoggedIn && <Route
+        {isLoggedIn && (
+          <Route
+            path="/mapview"
+            element={
+              <MapView
+                latitude={latitude}
+                longitude={longitude}
+                setLatitude={setLatitude}
+                setLongitude={setLongitude}
+                newItemMode={false}
+                oldPins={oldPins}
+              />
+            }
+          />
+        )}
+
+        {/* <Route
           path="/mapview"
           element={
-            <MapView
-              latitude={latitude}
-              longitude={longitude}
-              setLatitude={setLatitude}
-              setLongitude={setLongitude}
-              newItemMode={false}
-              oldPins={oldPins}
-            />
+            isLoggedIn ? (
+              <MapView
+                latitude={latitude}
+                longitude={longitude}
+                setLatitude={setLatitude}
+                setLongitude={setLongitude}
+                newItemMode={false}
+                oldPins={oldPins}
+              />
+            ) : (
+              <Navigate to="/login" />
+            )
           }
-        />} */}
-        
-        <Route 
-          path="/mapview"
-          element={isLoggedIn ?
-            <MapView
-              latitude={latitude}
-              longitude={longitude}
-              setLatitude={setLatitude}
-              setLongitude={setLongitude}
-              newItemMode={false}
-              oldPins={oldPins}
-            />
-            : <Navigate to="/login"/>
-          }
-        />
+        /> */}
+
         <Route
           path="/newitem"
-          element={isLoggedIn ?
-            <NewItem
-              latitude={latitude}
-              longitude={longitude}
-              setLatitude={setLatitude}
-              setLongitude={setLongitude}
-              newItemMode={true}
-              oldPins={oldPins}
-            />
-            : <Navigate to="/login" />
+          element={
+            isLoggedIn ? (
+              <NewItem
+                latitude={latitude}
+                longitude={longitude}
+                setLatitude={setLatitude}
+                setLongitude={setLongitude}
+                newItemMode={true}
+                oldPins={oldPins}
+              />
+            ) : (
+              <Navigate to="/login" />
+            )
           }
         />
         <Route path="*" element={<Navigate to="/" />} />
-
-
       </Routes>
-
-
-    </div >
+    </div>
   );
 }
 
-export default App;
+export default withAuthProvider(App);
