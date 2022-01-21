@@ -10,7 +10,7 @@ const Pin = (props) => {
   const [pinColor, setpinColor] = useState(blueIcon);
   const [claimed, setClaimed] = useState(false);
   
-  const { latitude, longitude, setLatitude, setLongitude, newItemMode } = props;
+  const { latitude, longitude, setLatitude, setLongitude, newItemMode, item } = props;
 
   useEffect(() =>{
     if (!latitude) {
@@ -48,10 +48,10 @@ const Pin = (props) => {
   return latitude === null ? null : (
     <Marker position={[latitude, longitude]} icon={pinColor}>
       <Popup>
-        <h1>{props.item.title}</h1>
-        <p>{props.item.description}</p>
-        <p>{props.item.picture}</p>
-        {props.item.condition && <p><strong>Condition:</strong> {props.item.condition}</p>}
+        <h1>{item.title}</h1>
+        <p>{item.description}</p>
+        <p>{item.picture}</p>
+        {item.condition && <p><strong>Condition:</strong> {props.item.condition}</p>}
         <Button onClick={'runs claimItem function'}>Claimed</Button>
         <Button onClick={'mark column picked up as true'}>Picked up</Button>
         <button onClick={() => deletePin()}>Delete</button>

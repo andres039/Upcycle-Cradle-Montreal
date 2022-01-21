@@ -11,7 +11,7 @@ const BluePin = (props) => {
   const [pinColor, setpinColor] = useState(blueIcon);
   const [claimed, setClaimed] = useState(false);
 
-  const { item } = props;
+  const { id, item } = props;
   const [bluePinLatitude, setBluePinLatitude] = useState(item.latitude);
   const [bluePinLongitude, setBluePinLongitude] = useState(item.longitude);
 
@@ -24,7 +24,7 @@ const BluePin = (props) => {
 
   const claimItem = (id, pin) => {
 
-    const pinID = props.id;
+    const pinID = id;
     //track user id
     const userID = 2;
 
@@ -39,8 +39,7 @@ const BluePin = (props) => {
   // if exists, then when delete is pressed, delete request to db)
 
   const deletePin = () => {
-    // Not finished and likely needs to be edited
-    const pinID = props.id;
+    const pinID = id;
     return axios.delete(`/api/pins/${pinID}`, { pinID })
       .then(() => {
         //console.log('from pins component', setLatitude, setLongitude);
@@ -53,10 +52,10 @@ const BluePin = (props) => {
   return bluePinLatitude === null ? null : (
     <Marker position={[bluePinLatitude, bluePinLongitude]} icon={pinColor}>
       <Popup>
-        <h1>{props.item.title}</h1>
-        <p>{props.item.description}</p>
-        <img src={`${props.item.picture}`} alt='Item' />
-        <p><strong>Condition:</strong> {props.item.condition}</p>
+        <h1>{item.title}</h1>
+        <p>{item.description}</p>
+        <img src={`${item.picture}`} alt='Item' />
+        <p><strong>Condition:</strong> {item.condition}</p>
         <Button onClick={() => claimItem()}>Claimed</Button>
         <Button onClick={'mark column picked up as true'}>Picked up</Button>
         <button onClick={() => deletePin()}>Delete</button>
