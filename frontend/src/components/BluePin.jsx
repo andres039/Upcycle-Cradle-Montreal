@@ -14,14 +14,13 @@ const BluePin = (props) => {
   const [bluePinLatitude, setBluePinLatitude] = useState(item.latitude);
   const [bluePinLongitude, setBluePinLongitude] = useState(item.longitude);
 
-  // useEffect(() =>{
-  //   if (condition) {
-  //    setpinColor(orangeIcon);
-  //   }
-  // }, []);
+  useEffect(() =>{
+    if (claimed) {
+     setpinColor(orangeIcon);
+    }
+  }, [claimed]);
 
-
-  const claimItem = (id, pin) => {
+  const claimItem = (id) => {
 
     const pinID = id;
     //track user id
