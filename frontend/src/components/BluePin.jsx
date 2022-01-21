@@ -55,7 +55,8 @@ const BluePin = (props) => {
         <p>{item.description}</p>
         <img src={`${item.picture}`} alt='Item' />
         <p><strong>Condition:</strong> {item.condition}</p>
-        <Button onClick={() => claimItem()}>Claimed</Button>
+        {claimed && <p>You claimed this item. Please pick up at your earliest convinience.</p>}
+        {!claimed && <Button onClick={() => claimItem()}>Claimed</Button>}
         <Button onClick={'mark column picked up as true'}>Picked up</Button>
         <Button onClick={() => deletePin()}>Delete</Button>
       </Popup>
