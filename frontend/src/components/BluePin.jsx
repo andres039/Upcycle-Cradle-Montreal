@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Marker, Popup, useMapEvents } from 'react-leaflet';
-import chair from '../chair1.jpg';
 import axios from "axios";
 
 import Button from './Button';
