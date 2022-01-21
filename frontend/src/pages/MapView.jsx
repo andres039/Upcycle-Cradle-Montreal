@@ -35,7 +35,7 @@ const MapView = (props) => {
       <section className="sidebar">
         <SidebarHeader />
         <Link to="/newitem">
-          <button type="button">+ new Item</button>
+          <button type="button">+ New item</button>
         </Link>
 
         <Instructions />
