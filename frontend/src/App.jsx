@@ -34,7 +34,7 @@ function App() {
   const [oldPins, setOldPins] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3002/api/pins").then((result) => {
+    axios.get("api/pins").then((result) => {
       setOldPins(result.data);
     });
   }, [])

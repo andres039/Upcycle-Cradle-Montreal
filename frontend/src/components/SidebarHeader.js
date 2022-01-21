@@ -17,7 +17,7 @@ const SidebarHeader = (props) => {
   //When posting something pass a body as JSON 
   const validate = (itemData) => {
     console.log(itemData);
-    return axios.post("http://localhost:8081/", itemData).then(() => {
+    return axios.post("/", itemData).then(() => {
       console.log(itemData);
       setPin(itemData);
     });

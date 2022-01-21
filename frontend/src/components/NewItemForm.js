@@ -12,7 +12,7 @@ const NewItemForm = (props) => {
   const validate = (itemData) => {
     const tokenKey = localStorage.getItem("token")
     //localStorage.removeItem("token") -- for logout
-    return axios.post("http://localhost:8081/api/pins", itemData, { headers: { token: tokenKey } }).then(() => {
+    return axios.post("/api/pins", itemData, { headers: { token: tokenKey } }).then(() => {
       window.location.reload();
     });
   };
