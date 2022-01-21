@@ -27,6 +27,17 @@ router.get("/api/pins/:id", (req, res) => {
     });
 });
 
+
+
+router.put("/api/pins/:id", (req, res) => {
+
+  console.log("PUT/API/PINS", req.body)
+  res.status(200).send();
+});
+
+
+
+
 //create a new pin
 
 router.post("/api/pins", async (req, res) => {
