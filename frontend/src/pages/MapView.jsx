@@ -5,6 +5,8 @@ import Instructions from "../components/Instructions";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+import './MapView.scss';
+
 const MapView = (props) => {
   const { latitude, longitude, setLatitude, setLongitude, newItemMode, oldPins } = props;
   //   const [oldPins, setOldPins] = useState([]);
