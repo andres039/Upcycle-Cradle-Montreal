@@ -5,10 +5,11 @@ import SidebarHeader from "../components/SidebarHeader";
 
 const NewItem = (props) => {
   const { latitude, longitude, setLatitude, setLongitude, newItemMode, oldPins } = props;
-  
+
   return (
+
     <div className="container">
-        
+
       <Map
         latitude={latitude}
         longitude={longitude}

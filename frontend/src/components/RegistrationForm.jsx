@@ -1,11 +1,16 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
+
 // import Button from 'components/Button'
 
 const RegistrationForm = (props) => {
   // States for registration
+  const context = useContext(AuthContext);
 
+
+  //
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
@@ -13,30 +18,25 @@ const RegistrationForm = (props) => {
   const navigate = useNavigate();
 
   // // States for checking the errors
-  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
 
   // Handling the name change
   const handleUsername = (e) => {
     setUsername(e.target.value);
-    setSubmitted(false);
   };
 
   // Handling the email change
   const handleEmail = (e) => {
     setEmail(e.target.value);
-    setSubmitted(false);
   };
 
   // Handling the password change
   const handlePassword = (e) => {
     setPassword(e.target.value);
-    setSubmitted(false);
   };
 
   const handleConfirmationPassword = (e) => {
     setConfirmationPassword(e.target.value);
-    setSubmitted(false);
   };
 
   const validate = (itemData) => {
@@ -45,24 +45,20 @@ const RegistrationForm = (props) => {
       setConfirmationPassword("error");
       return;
     } else {
-      localStorage.getItem("token");
-
-      console.log("itemData: ", itemData);
-      console.log("TOKEN: ", localStorage.getItem("token"));
 
       return axios
         .post("http://localhost:8081/register", itemData)
         .then((response) => {
-          console.log("response", response);
           localStorage.setItem("token", response.data.token);
 
           // setPin(itemData);
         })
-        .then(navigate("/mapview"));
+        .then(() => navigate("/mapview"));
     }
   };
 
   // Handling the form submission
+  //
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -73,25 +69,13 @@ const RegistrationForm = (props) => {
     ) {
       setError(true);
     } else {
-      setSubmitted(true);
 
       setError(false);
+      //registrationHandle
       validate({ email, password, username });
     }
   };
 
-  // // Showing success message
-  // const successMessage = () => {
-  //   return (
-  //     <div
-  //       className="success"
-  //       style={{
-  //         display: submitted ? '' : 'none',
-  //       }}>
-  //       <h1>User {name} successfully registered!!</h1>
-  //     </div>
-  //   );
-  // };
 
   // Showing error message if error is true
   const errorMessage = () => {
@@ -106,6 +90,8 @@ const RegistrationForm = (props) => {
       </div>
     );
   };
+
+  //
 
   return (
     <div className="form">

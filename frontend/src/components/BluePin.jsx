@@ -14,9 +14,9 @@ const BluePin = (props) => {
   const [bluePinLatitude, setBluePinLatitude] = useState(item.latitude);
   const [bluePinLongitude, setBluePinLongitude] = useState(item.longitude);
 
-  useEffect(() =>{
+  useEffect(() => {
     if (claimed) {
-     setpinColor(orangeIcon);
+      setpinColor(orangeIcon);
     }
   }, [claimed]);
 
