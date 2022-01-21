@@ -60,7 +60,7 @@ const BluePin = (props) => {
         <p>{item.description}</p>
         <img src={`${item.picture}`} alt='Item' />
         <p><strong>Condition:</strong> {item.condition}</p>
-        {claimed && <p>You claimed this item. Please pick up at your earliest convinience.</p>}
+        {claimed && claimed !== 'delete countdown' && <p>You claimed this item. Please pick up at your earliest convinience.</p>}
         {claimed === 'delete countdown' && <p>You have closed the deal! The pin will be deleted shortly.</p>}
         {!claimed && <Button onClick={() => claimItem()}>Claimed</Button>}
         {claimed && <Button onClick={() => deletePin('claimer delete')}>Picked up</Button>}
