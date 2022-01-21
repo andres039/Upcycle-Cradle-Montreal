@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import './Instructions.scss';
 
 const Instructions = () => {
   return (
