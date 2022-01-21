@@ -25,11 +25,10 @@ const BluePin = (props) => {
   const claimItem = (id, pin) => {
 
     const pinID = props.id;
-    const userID = 7;
-    console.log(pinID)
-    const data = { userID, pinID }
+    const userID = 2;
+
     // add user's ID as claiamer_id in DB
-    return axios.put(`/api/pins/${pinID}`, { data })
+    return axios.put(`/api/pins/${pinID}`, { userID, pinID })
       .then(() => {
         setClaimed(true);
       });

@@ -19,7 +19,7 @@ CREATE TABLE pins (
   longitude FLOAT NOT NULL,
   date DATE,
   creator_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  claimer_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  claimer_id INTEGER REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE comments (
