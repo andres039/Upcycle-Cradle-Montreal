@@ -3,7 +3,7 @@ import axios from "axios";
 import { BrowserRouter, Link, Routes, Route, Navigate } from "react-router-dom";
 import withAuthProvider, { AuthContext } from "./providers/AuthProvider";
 
-import './App.css';
+import './App.scss';
 
 
 //////////////////
