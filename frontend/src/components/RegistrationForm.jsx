@@ -8,33 +8,23 @@ import { AuthContext } from "../providers/AuthProvider";
 const RegistrationForm = (props) => {
   // States for registration
 
+  const [error, setError] = useState(false);
 
 
   const context = useContext(AuthContext);
-  console.log(context)
+
   const email = context.email;
   const username = context.username;
   const password = context.password;
   const confirmationPassword = context.confirmationPassword;
-  const handleRegistration = context.handleRegistration;
 
-  const [error, setError] = useState(false);
+
+  const handleRegistration = context.handleRegistration;
   const handleEmail = context.handleEmail;
   const handleUsername = context.handleUsername;
   const handlePassword = context.handlePassword;
   const handleConfirmationPassword = context.handleConfirmationPassword;
 
-
-  //
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmationPassword, setConfirmationPassword] = useState("");
-  // const [username, setUsername] = useState("");
-
-
-
-
-  // // States for checking the errors
 
 
   // Handling the form submission

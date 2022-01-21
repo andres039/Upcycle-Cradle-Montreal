@@ -54,7 +54,7 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   };
 
 
-  const providerData = { email, password, confirmationPassword, username, setEmail, setConfirmationPassword, setPassword, setUsername, handleRegistration, confirmationPassword }
+  const providerData = { email, password, confirmationPassword, username, setEmail, setConfirmationPassword, setPassword, setUsername, handleRegistration, confirmationPassword, handleUsername, handlePassword, handleEmail, handleConfirmationPassword }
 
   return (
     <AuthContext.Provider value={providerData}>
