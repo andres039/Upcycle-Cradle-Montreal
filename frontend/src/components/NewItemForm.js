@@ -51,13 +51,15 @@ const NewItemForm = (props) => {
         />
 
         <label>Condition</label>
-        <input
-          className="new-item-Condition"
+        <select className="new-item-Condition"
           name="condition"
-          type="text"
           value={condition}
-          onChange={(event) => setCondition(event.target.value)}
-        />
+          onChange={(event) => setCondition(event.target.value)}>
+            <option value="New" selected>New</option>
+            <option value="Like new">Like new</option>
+            <option value="Like old">Like old</option>
+            <option value="Old">Old</option>
+        </select>
 
         <label>Picture</label>
         <input
