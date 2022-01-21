@@ -43,49 +43,49 @@ function App() {
     });
   }, [])
   return (
-    < withAuthProvider>
-
-      <div className="App container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          {isLoggedIn && <Route
-            path="/mapview"
-            element={
-              <MapView
-                latitude={latitude}
-                longitude={longitude}
-                setLatitude={setLatitude}
-                setLongitude={setLongitude}
-                newItemMode={false}
-                oldPins={oldPins}
-              />
-            }
-          />}
-
-          <Route
-            path="/newitem"
-            element={isLoggedIn ?
-              <NewItem
-                latitude={latitude}
-                longitude={longitude}
-                setLatitude={setLatitude}
-                setLongitude={setLongitude}
-                newItemMode={true}
-                oldPins={oldPins}
-              />
-              : <Navigate to="/login" />
-            }
-          />
-          <Route path="*" element={<Navigate to="/" />} />
 
 
-        </Routes>
+    <div className="App container">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        {isLoggedIn && <Route
+          path="/mapview"
+          element={
+            <MapView
+              latitude={latitude}
+              longitude={longitude}
+              setLatitude={setLatitude}
+              setLongitude={setLongitude}
+              newItemMode={false}
+              oldPins={oldPins}
+            />
+          }
+        />}
+
+        <Route
+          path="/newitem"
+          element={isLoggedIn ?
+            <NewItem
+              latitude={latitude}
+              longitude={longitude}
+              setLatitude={setLatitude}
+              setLongitude={setLongitude}
+              newItemMode={true}
+              oldPins={oldPins}
+            />
+            : <Navigate to="/login" />
+          }
+        />
+        <Route path="*" element={<Navigate to="/" />} />
 
 
-      </div >
-    </withAuthProvider>
+      </Routes>
+
+
+    </div >
+
   );
 }
 

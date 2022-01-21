@@ -7,55 +7,35 @@ import { AuthContext } from "../providers/AuthProvider";
 
 const RegistrationForm = (props) => {
   // States for registration
+
+
+
   const context = useContext(AuthContext);
+  console.log(context)
+  const email = context.email;
+  const username = context.username;
+  const password = context.password;
+  const confirmationPassword = context.confirmationPassword;
+  const handleRegistration = context.handleRegistration;
+
+  const [error, setError] = useState(false);
+  const handleEmail = context.handleEmail;
+  const handleUsername = context.handleUsername;
+  const handlePassword = context.handlePassword;
+  const handleConfirmationPassword = context.handleConfirmationPassword;
 
 
   //
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmationPassword, setConfirmationPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const navigate = useNavigate();
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [confirmationPassword, setConfirmationPassword] = useState("");
+  // const [username, setUsername] = useState("");
+
+
+
 
   // // States for checking the errors
-  const [error, setError] = useState(false);
 
-  // Handling the name change
-  const handleUsername = (e) => {
-    setUsername(e.target.value);
-  };
-
-  // Handling the email change
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  // Handling the password change
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleConfirmationPassword = (e) => {
-    setConfirmationPassword(e.target.value);
-  };
-
-  const validate = (itemData) => {
-    if (password !== confirmationPassword) {
-      console.log("🔥 passwords must match 🔥");
-      setConfirmationPassword("error");
-      return;
-    } else {
-
-      return axios
-        .post("http://localhost:8081/register", itemData)
-        .then((response) => {
-          localStorage.setItem("token", response.data.token);
-
-          // setPin(itemData);
-        })
-        .then(() => navigate("/mapview"));
-    }
-  };
 
   // Handling the form submission
   //
@@ -68,11 +48,10 @@ const RegistrationForm = (props) => {
       confirmationPassword === ""
     ) {
       setError(true);
-    } else {
 
+    } else {
       setError(false);
-      //registrationHandle
-      validate({ email, password, username });
+      handleRegistration({ email, password, username });
     }
   };
 
