@@ -105,38 +105,6 @@ router.post("/register", async (req, res) => {
         }
       })
 
-    //res.json(newUser);
-
-    // console.log(await db.query("SELECT * FROM users WHERE email=$1;", [email]) ? true : false)
-    // check if user already exist
-    // else if (await db.query("SELECT * FROM users WHERE email=$1;", [email])) {
-    //   console.log("Email already in use");
-    //   res.send("Email already in use");
-    // } else {
-    // Validate if user exist in our database
-    //?????
-    // const oldUser = await User.findOne({ email });
-
-    // if (oldUser) {
-    //   return res.status(409).send("User Already Exist. Please Login");
-    // }
-
-    //Encrypt user password
-    // const encryptedPassword = await bcrypt.hash(password, 10);
-
-    // Create user in our database
-    //??????????
-    // const user = await User.create({
-    //   username,
-    //   email: email.toLowerCase(), // sanitize: convert email to lowercase
-    //   password: encryptedPassword,
-    // });
-
-    // Create token
-
-    // // return new user
-    // //res.status(201).json(user)
-    // res.json(newUser);
   } catch (err) {
     console.log(err);
   }

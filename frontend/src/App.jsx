@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BrowserRouter, Link, Routes, Route, Navigate } from "react-router-dom";
-
+import useCheckAuthentication from "./helpers/useCheckAuthentication";
 
 import './App.css';
 
@@ -30,9 +30,28 @@ function App() {
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const isLoggedIn = !!localStorage.getItem("token") //This state has been converted to a boolean. For example: Boolean(localStorage.getItem("token")) => equivalent of line 33, !!. 
+  const isLoggedIn = useCheckAuthentication();
+  // const isLoggedIn = !!localStorage.getItem("token") //This state has been converted to a boolean. For example: Boolean(localStorage.getItem("token")) => equivalent of line 33, !!. 
+  // const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+  console.log("Token from app", localStorage.getItem("token"));
   const [oldPins, setOldPins] = useState([]);
   console.log("is logged in", isLoggedIn);
+  
+  //Clear local Storage on loading server for the first time. This is a provisional fix to test registration.
+
+  // useEffect(() => {
+  //   localStorage.clear();   
+  // }, []);
+  // useEffect(() => {
+  //   const timeoutID = setTimeout(() => {
+  //    const fetchedStatus = !!localStorage.getItem("token")
+  //    if (fetchedStatus !== isLoggedIn) {
+  //    setIsLoggedIn(!!localStorage.getItem("token"))
+  //    }
+  // }, 1000);
+  // return () => clearTimeout(timeoutID);
+  // }, [])
+
   useEffect(() => {
     axios.get("/api/pins").then((result) => {
       setOldPins(result.data);
@@ -57,7 +76,7 @@ function App() {
             />
           }
         />} */}
-
+        
         <Route 
           path="/mapview"
           element={isLoggedIn ?

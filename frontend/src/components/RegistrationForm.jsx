@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 // import Button from 'components/Button'
 
@@ -18,6 +18,8 @@ const RegistrationForm = (props) => {
   const [showConfirmationPassError, setShowConfirmationPassError] =
     useState(false);
   const [showEmailError, setShowEmailError] = useState(false);
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
   // Handling the name change
   const handleUsername = (e) => {
     setUsername(e.target.value);
@@ -49,29 +51,25 @@ const RegistrationForm = (props) => {
     } else {
       localStorage.getItem("token");
 
-      console.log("itemData: ", itemData);
-      console.log("TOKEN: ", localStorage.getItem("token"));
-      return (
-        axios
-          .post("/register", itemData)
-          .then((response) => {
-            console.log("token", response.data.token);
-            localStorage.setItem("token", response.data.token);
-            
-          })
-          .then(() => {
-            while(true) {
-              if (localStorage.getItem("token")) {
-                break
-              }
+      return axios
+        .post("/register", itemData)
+        .then((response) => {
+          localStorage.setItem("token", response.data.token);
+          setTimeout(() => forceUpdate(), 1000)
+        })
+        .then(() => {
+          while (true) {
+            if (localStorage.getItem("token")) {
+              break;
             }
-            navigate("/mapview")
-          })
-          .catch((err) => {
-            console.log("this is the error:", err);
-            setShowEmailError(true);
-          })
-      );
+          }
+          forceUpdate()
+          return navigate("/newitem");
+        })
+        .catch((err) => {
+          console.log("this is the error:", err);
+          setShowEmailError(true);
+        });
     }
   };
 
