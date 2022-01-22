@@ -3,6 +3,8 @@ import axios from 'axios';
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
+import './NewItemForm.scss';
+
 const NewItemForm = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -42,7 +44,7 @@ const NewItemForm = (props) => {
         />
 
         <label>Description</label>
-        <input
+        <textarea
           className="new-item-description"
           name="description"
           type="text"
@@ -68,7 +70,7 @@ const NewItemForm = (props) => {
           className="new-item-picture"
           name="picture"
           type="text"
-          placeholder="URL address for now"
+          placeholder="https://www.picture-url.com"
           value={picture}
           onChange={(event) => setPicture(event.target.value)}
         />

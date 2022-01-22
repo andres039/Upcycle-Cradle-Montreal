@@ -1,0 +1,19 @@
+@import "../styles/variables.scss";
+
+label {
+  text-align: left;
+  font-weight: bold;
+  color: $black;
+}
+
+input, select, textarea {
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  font-size: 1em;
+}
+
+textarea {
+  resize: none;
+  font-size: 1.3em;
+  height: 4em;
+}

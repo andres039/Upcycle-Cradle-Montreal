@@ -2,6 +2,7 @@
 
 .App {
   text-align: center;
+  font-size: 1.4em;
 }
 .container {
   display: flex;
@@ -14,12 +15,11 @@
   width: 25.7vw;
   background: $medium-green;
   color: $white;
-  font-size: 1.4em;
   padding: 1em;
 }
 
 .form {
   display: flex;
   flex-flow: column;
-  padding: 2rem;
+  padding: 1rem;
 }
