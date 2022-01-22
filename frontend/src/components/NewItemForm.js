@@ -6,8 +6,6 @@ import { AuthContext } from "../providers/AuthProvider";
 
 import './NewItemForm.scss';
 
-import './NewItemForm.scss';
-
 const NewItemForm = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
