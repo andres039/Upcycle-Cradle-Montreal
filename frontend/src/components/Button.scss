@@ -1,18 +1,29 @@
 @import "../styles/variables.scss";
 
 .button {
-  padding: 0.5em 2em;
+  padding: 0.5em 1.5em;
   border-radius: 5px;
   border: none;
   font-size: 0.9em;
   color: $white;
+  cursor: pointer;
 
   &--confirm {
     background-color: $green;
   }
+
+  &--confirm:hover {
+    background-color: $plant-green;
+  }
+
   &--cancel {
     background-color: $orange;
   }
+
+  &--cancel:hover {
+    background-color: $red;
+  }
+
   &--new-item {
     background-color: $aqua;
   }
