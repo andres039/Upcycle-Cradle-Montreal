@@ -42,8 +42,7 @@ const NewItemForm = (props) => {
   const validate = (itemData) => {
     const tokenKey = localStorage.getItem("token")
     return axios.post("/api/pins", itemData, { headers: { token: tokenKey } }).then(() => {
-      // window.location.reload();
-      navigate("/mapview",)
+      window.location.reload();
     });
   };
 
@@ -102,17 +101,15 @@ const NewItemForm = (props) => {
           value={picture}
           onChange={(event) => setPicture(event.target.value)}
         />
+        <Button onClick={() => handleSavePin()} type="Submit">
+          Save
+        </Button>
+        <Link to="/mapview">
+          <Button onClick={() => deletePin()}>Cancel</Button>
+
+        </Link>
       </form>
 
-      <Button
-        onClick={() => handleSavePin()}
-      >
-        Save
-      </Button>
-      <Link to="/mapview">
-        <Button onClick={() => deletePin()}>Cancel</Button>
-
-      </Link>
     </section>
 
   );
