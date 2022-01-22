@@ -109,12 +109,33 @@ router.post("/login", async (req, res) => {
     }
     db.query("SELECT * FROM users WHERE email=$1;", [email])
       .then((response) => {
-        console.log(response)
         if (response.rows.length === 0) {
           return res.status(401).json({ error: "Email is incorrect" }
           )
         };
-        return validPassword(password, response.rows[0].password);
+        const user_id = response.rows[0].id;
+        const token = jwt.sign(
+          { user_id, email },
+          process.env.TOKEN_KEY,
+          {
+            expiresIn: "2h",
+          }
+        );
+        // save user token
+        const user = response.rows[0];
+        console.log(user);
+        user.token = token;
+        console.log(user.token);
+        // res.cookie(process.env.AUTH_COOKIE, token);
+        if (validPassword(password, response.rows[0].password)) {
+          return res.status(200).send({
+            status: "logged in",
+            message: "Login successful",
+            user,
+            token,
+          });
+        };
+
 
       });
 

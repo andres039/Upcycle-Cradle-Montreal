@@ -26,9 +26,14 @@ const withAuthProvider = (WrappedComponent) => (props) => {
     return axios
       .post("/login", loginData)
       .then((response) => {
-        console.log("response", response);
+        localStorage.setItem("token", response.data.token);
+
+        // setPin(itemData);
       })
-      .then(navigate("/mapview"));
+      .then(() => navigate("/mapview")).catch((err) => {
+        console.log("this is the error:", err);
+        setShowEmailError(true);
+      });
   }
 
 
