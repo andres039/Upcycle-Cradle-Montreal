@@ -69,7 +69,6 @@ router.put("/api/pins/:id", async (req, res) => {
 //create a new pin
 
 router.post("/api/pins", async (req, res) => {
-  console.log("req.headers", req.headers)
 
   try {
     const verification = jwt.verify(req.headers.token, process.env.TOKEN_KEY);
