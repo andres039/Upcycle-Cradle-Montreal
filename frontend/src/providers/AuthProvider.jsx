@@ -104,7 +104,6 @@ const withAuthProvider = (WrappedComponent) => (props) => {
       // setShowConfirmationPassError(true);
       return;
     } else {
-
       return axios
         .post("/register", itemData)
         .then((response) => {
@@ -154,6 +153,9 @@ const withAuthProvider = (WrappedComponent) => (props) => {
       <WrappedComponent {...props} />
     </AuthContext.Provider>
   );
-}
+};
 
 export default withAuthProvider;
+
+
+//REACT: Displaying error messages coming from a post request error in a form. I'm not sure how to handle or access the error that comes from a login attempt.

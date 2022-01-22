@@ -35,7 +35,6 @@ const RegistrationForm = (props) => {
   }, []);
 
 
-
   //
 
   return (
