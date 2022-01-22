@@ -24,21 +24,19 @@ const BluePin = (props) => {
   useEffect(() => {
     if (claimed && current_user_id !== item.creator_id) {
       setpinColor(orangeIcon);
-      console.log(current_user_id)
-      console.log(item.creator_id)
     }
-  }, [claimed]);
+  }, []);
 
 
   useEffect(() => {
 
     if (claimed && current_user_id === item.creator_id) {
-      console.log(current_user_id)
-      console.log(item.creator_id)
 
-      setpinColor(greenIcon);
+      setpinColor(violetIcon);
     }
-  }, []);
+  }, [claimed]);
+
+
   const claimItem = () => {
     const pinID = id;
 
