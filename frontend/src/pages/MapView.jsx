@@ -38,6 +38,7 @@ const MapView = (props) => {
         <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only"/>
         <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only"/>
         <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only"/>
+        
         <div className="sidebar__text">
           <SidebarHeader />
           <Link to="/newitem">

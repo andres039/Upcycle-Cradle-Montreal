@@ -1,18 +1,22 @@
 @import "../styles/variables.scss";
 
-label {
+.new-item-form__label {
   text-align: left;
   font-weight: bold;
-  color: $black;
+  color: $yellow;
+  margin-bottom: 0.3rem;
 }
 
-input, select, textarea {
-  margin-top: 0.3rem;
-  margin-bottom: 1rem;
-  font-size: 1em;
+.new-item {
+  &__input, &__text-area, &__select  {
+    margin-top: 0.3rem;
+    margin-bottom: 1.5rem;
+    font-size: 1em;
+    background-color: $grey;
+  }
 }
 
-textarea {
+.new-item__text-area {
   resize: none;
   font-size: 1.3em;
   height: 4em;

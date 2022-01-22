@@ -34,26 +34,26 @@ const NewItemForm = (props) => {
 
     <section className="new-item">
       <form onSubmit={(e) => e.preventDefault()} autoComplete="off" className="form">
-        <label>Title</label>
+        <label className="new-item-form__label">Title</label>
         <input
-          className="new-item-title"
+          className="new-item__input"
           name="title"
           type="text"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
         />
 
-        <label>Description</label>
+        <label className="new-item-form__label">Description</label>
         <textarea
-          className="new-item-description"
+          className="new-item__text-area"
           name="description"
           type="text"
           value={description}
           onChange={(event) => setDescription(event.target.value)}
         />
 
-        <label>Condition</label>
-        <select className="new-item-Condition"
+        <label className="new-item-form__label">Condition</label>
+        <select className="new-item__select"
           name="condition"
           value={condition}
           onChange={(event) => setCondition(event.target.value)}>
@@ -65,9 +65,9 @@ const NewItemForm = (props) => {
             <option value="Damaged">Damaged</option>
         </select>
 
-        <label>Picture</label>
+        <label className="new-item-form__label">Picture</label>
         <input
-          className="new-item-picture"
+          className="new-item__input"
           name="picture"
           type="text"
           placeholder="https://www.picture-url.com"
