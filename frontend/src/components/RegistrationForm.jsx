@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useContext } from "react";
+import { useEffect, useState, useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
@@ -11,13 +11,16 @@ const RegistrationForm = (props) => {
   const [error, setError] = useState(false);
 
 
+  // Handling the name change
+
   const context = useContext(AuthContext);
 
+  const showConfirmationPassError = context.showConfirmationPassError;
+  const showEmailError = context.showEmailError;
   const email = context.email;
   const username = context.username;
   const password = context.password;
   const confirmationPassword = context.confirmationPassword;
-
 
   const handleRegistration = context.handleRegistration;
   const handleEmail = context.handleEmail;
@@ -26,9 +29,6 @@ const RegistrationForm = (props) => {
   const handleConfirmationPassword = context.handleConfirmationPassword;
 
 
-
-  // Handling the form submission
-  //
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -74,9 +74,10 @@ const RegistrationForm = (props) => {
         {/* {successMessage()} */}
       </div>
 
-      {confirmationPassword === "error" && (
+      {showConfirmationPassError && (
         <h1>🔥 Password and password confirmation must match 🔥</h1>
       )}
+      {showEmailError && <h1>🔥 Email in use 🔥</h1>}
 
       <form>
         {/* Labels and inputs for form data */}
@@ -124,3 +125,5 @@ const RegistrationForm = (props) => {
 };
 
 export default RegistrationForm;
+
+//REACT, FORMS(registration): Display error message coming from the backend during user registration.

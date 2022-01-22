@@ -48,8 +48,8 @@ router.post("/register", async (req, res) => {
 
     //check if user already exist
 
-    db.query("SELECT id FROM users WHERE email=$1;", [email])
-      .then((response) => {
+    db.query("SELECT id FROM users WHERE email=$1;", [email]).then(
+      (response) => {
         if (response.rowCount === 0) {
           return db
             .query(
@@ -80,71 +80,103 @@ router.post("/register", async (req, res) => {
             });
         } else {
           console.log("Email already in use");
-          res.send("email in use");
+          res.status(401).send(response);
         }
-      })
-      .catch((err) => {
-        console.log("Query failed:", err.message);
-        res.send("Query failed:", err.message);
-      });
-
-    //Login
-
-    router.post("/login", async (req, res) => {
-      try {
-        const { email, password } = req.body;
-        if (!(email && password)) {
-          res.status(400).send("All input is required");
-        }
-        const users = db.query("SELECT * FROM users WHERE email=$1;", [email]);
-        const validPassword = await bcrypt.compare(
-          password,
-          users.rows[0].password
-        );
-        console.log(validPassword);
-      } catch {
-        console.log("Query failed:", err.message);
-        res.send("Query failed:", err.message);
       }
-    });
-
-    //res.json(newUser);
-
-    // console.log(await db.query("SELECT * FROM users WHERE email=$1;", [email]) ? true : false)
-    // check if user already exist
-    // else if (await db.query("SELECT * FROM users WHERE email=$1;", [email])) {
-    //   console.log("Email already in use");
-    //   res.send("Email already in use");
-    // } else {
-    // Validate if user exist in our database
-    //?????
-    // const oldUser = await User.findOne({ email });
-
-    // if (oldUser) {
-    //   return res.status(409).send("User Already Exist. Please Login");
-    // }
-
-    //Encrypt user password
-    // const encryptedPassword = await bcrypt.hash(password, 10);
-
-    // Create user in our database
-    //??????????
-    // const user = await User.create({
-    //   username,
-    //   email: email.toLowerCase(), // sanitize: convert email to lowercase
-    //   password: encryptedPassword,
+    );
+    // .catch((err) => {
+    //   console.log("Query failed:", err.message);
+    //   res.send("Query failed:", err.message);
     // });
-
-    // Create token
-
-    // // return new user
-    // //res.status(201).json(user)
-    // res.json(newUser);
   } catch (err) {
-    console.log(err);
+    console.log("Query failed:", err.message);
+    res.send("Query failed:", err.message);
   }
 
   // Our register logic ends here
+});
+
+//Login
+
+// router.post("/login", async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+//     if (!(email && password)) {
+//       res.status(400).send("All input is required");
+//     }
+//     db.query("SELECT * FROM users WHERE email=$1;", [email]).then(
+//       (response) => {
+//         if (response.rows.length === 0) {
+//           return res.status(401).json({ error: "Email is incorrect" });
+//         }
+//         const user_id = response.rows[0].id;
+//         const token = jwt.sign({ user_id, email }, process.env.TOKEN_KEY, {
+//           expiresIn: "2h",
+//         });
+//         // save user token
+//         const user = response.rows[0];
+//         user.token = token;
+//         // Verify password
+//         if (validPassword(password, response.rows[0].password)) {
+//           return res.status(200).send({
+//             status: "logged in",
+//             message: "Login successful",
+//             user,
+//             token,
+//           });
+//         } else {
+//           return res.status(401).send({
+//             status: "Unauthorized",
+//             message: "Password incorrect",
+//           });
+//         }
+//       }
+//     );
+//   } catch (err) {
+//     console.log("Query failed:", err.message);
+//     res.send("Query failed:", err.message);
+//   }
+// });
+
+// const validPassword = async (password, hashedPassword) => {
+//   return bcrypt.compareSync(password, hashedPassword);
+// };
+
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!(email && password)) {
+      res.status(400).send("All input is required");
+    }
+    const users = await db.query("SELECT * FROM users WHERE email=$1;", [
+      email,
+    ]);
+    if (users.rows.length === 0)
+      return res.status(401).json({ message: "Email is incorrect" });
+    //password check
+    const validPassword = await bcrypt.compare(
+      password,
+      users.rows[0].password
+    );
+    if (!validPassword) {
+      return res.status(401).json({
+        status: "Unauthorized",
+        message: "Incorrect password",
+      });
+    }
+    //sets up the token
+    const user_id = users.rows[0].id;
+    const token = jwt.sign({ user_id, email }, process.env.TOKEN_KEY, {
+      expiresIn: "2h",
+    });
+    // save user token
+    const user = users.rows[0];
+    user.token = token;
+    return res.status(200).json({message: "Success", token, user});
+  
+  } catch (error) {
+    console.log(error)
+  }
 });
 
 module.exports = router;
