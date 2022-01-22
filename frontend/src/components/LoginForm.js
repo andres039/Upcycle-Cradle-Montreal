@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios"
 import { AuthContext } from "../providers/AuthProvider";
 
@@ -15,10 +15,8 @@ const LoginForm = (props) => {
   const handleEmail = context.handleEmail;
   const handleLoginSubmit = context.handleLoginSubmit;
   const loginError = context.loginError;
-
-
-
-
+  const showEmailError = context.showEmailError;
+  const showConfirmationPassError = context.showConfirmationPassError;
 
   return (
 
@@ -27,6 +25,13 @@ const LoginForm = (props) => {
         {loginError && (
           <h1>🔥 Please fill the email and password fields, or register to start using 🦝Trash Panda🐼 🔥</h1>
         )}
+        {showEmailError && (
+          <h1>🔥 Incorrect Email. Please verify your email or register at 🦝Trash Panda🐼 🔥</h1>
+        )}
+
+        {showConfirmationPassError && (
+          <h1>🔥 Incorrect Password. Please verify your password or register at 🦝Trash Panda🐼 🔥</h1>
+        )}  
         <form>
           <label>Email: </label>
           <input

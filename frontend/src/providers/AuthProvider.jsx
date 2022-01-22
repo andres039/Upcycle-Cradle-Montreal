@@ -2,12 +2,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const { useState, createContext } = require("react");
 
-
 export const AuthContext = createContext();
 //in App.jsx ==> {user, login, logout = useContext(authContext)}
 
 const withAuthProvider = (WrappedComponent) => (props) => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
@@ -19,10 +17,8 @@ const withAuthProvider = (WrappedComponent) => (props) => {
 
   const navigate = useNavigate();
 
-
-
   const handleLogin = (loginData) => {
-    console.log("loginData", loginData)
+    console.log("loginData", loginData);
     return axios
       .post("/login", loginData)
       .then((response) => {
@@ -30,26 +26,27 @@ const withAuthProvider = (WrappedComponent) => (props) => {
 
         // setPin(itemData);
       })
-      .then(() => navigate("/mapview")).catch((err) => {
-        console.log("this is the error:", err);
+      .then(() => navigate("/mapview"))
+      .catch((err) => {
+        //optional chaining
+        console.log("Error record:", err?.response?.data?.message);
+        if (err?.response?.data?.message === "Incorrect password"){
+          setShowConfirmationPassError(true)
+          return
+        }
         setShowEmailError(true);
+        return;
       });
-  }
+  };
 
-
-
-  const handleLoginSubmit = event => {
+  const handleLoginSubmit = (event) => {
     event.preventDefault();
-    if (
-      email === "" ||
-      password === ""
-    ) {
+    if (email === "" || password === "") {
       setLoginError(true);
-      return
+      return;
     }
-    handleLogin({ email, password })
-  }
-
+    handleLogin({ email, password });
+  };
 
   // Handling the name change
   const handleUsername = (e) => {
@@ -76,7 +73,6 @@ const withAuthProvider = (WrappedComponent) => (props) => {
       setShowConfirmationPassError(true);
       return;
     } else {
-
       return axios
         .post("/register", itemData)
         .then((response) => {
@@ -84,21 +80,44 @@ const withAuthProvider = (WrappedComponent) => (props) => {
 
           // setPin(itemData);
         })
-        .then(() => navigate("/mapview")).catch((err) => {
-          console.log("this is the error:", err);
+        .then(() => navigate("/mapview"))
+        .catch((err) => {
+          console.log("Error record:", err.response);
           setShowEmailError(true);
         });
     }
   };
 
-
-  const providerData = { email, password, confirmationPassword, username, setEmail, setConfirmationPassword, setPassword, setUsername, handleRegistration, confirmationPassword, handleUsername, handlePassword, handleEmail, handleConfirmationPassword, showConfirmationPassError, showEmailError, handleLogin, handleLoginSubmit, loginError }
+  const providerData = {
+    email,
+    password,
+    confirmationPassword,
+    username,
+    setEmail,
+    setConfirmationPassword,
+    setPassword,
+    setUsername,
+    handleRegistration,
+    confirmationPassword,
+    handleUsername,
+    handlePassword,
+    handleEmail,
+    handleConfirmationPassword,
+    showConfirmationPassError,
+    showEmailError,
+    handleLogin,
+    handleLoginSubmit,
+    loginError,
+  };
 
   return (
     <AuthContext.Provider value={providerData}>
       <WrappedComponent {...props} />
     </AuthContext.Provider>
   );
-}
+};
 
 export default withAuthProvider;
+
+
+//REACT: Displaying error messages coming from a post request error in a form. I'm not sure how to handle or access the error that comes from a login attempt.

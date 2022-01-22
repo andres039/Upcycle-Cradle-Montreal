@@ -29,7 +29,6 @@ const RegistrationForm = (props) => {
   const handleConfirmationPassword = context.handleConfirmationPassword;
 
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
