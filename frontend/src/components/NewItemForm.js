@@ -33,6 +33,7 @@ const NewItemForm = (props) => {
   return (
 
     <section className="new-item">
+      <h1 className="new-item-form__title">New Item</h1>
       <form onSubmit={(e) => e.preventDefault()} autoComplete="off" className="form">
         <label className="new-item-form__label">Title</label>
         <input

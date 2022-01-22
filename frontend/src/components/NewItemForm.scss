@@ -1,23 +1,39 @@
 @import "../styles/variables.scss";
 
-.new-item-form__label {
-  text-align: left;
-  font-weight: bold;
-  color: $yellow;
-  margin-bottom: 0.3rem;
+.new-item-form {
+  &__title {
+    color: $light-purple;
+    margin-bottom: 0.25em;
+  }
+  
+  &__label {
+    text-align: left;
+    font-weight: bold;
+    color: $light-purple;
+    margin-bottom: 0.3rem;
+  }
 }
 
 .new-item {
   &__input, &__text-area, &__select  {
     margin-top: 0.3rem;
     margin-bottom: 1.5rem;
-    font-size: 1em;
+    font-size: 0.9em;
+    color: $dark-purple;
     background-color: $grey;
+    border-radius: 5px;
+    height: 1.5em;
   }
 }
 
 .new-item__text-area {
   resize: none;
-  font-size: 1.3em;
+  font-size: 1.0em;
   height: 4em;
+}
+
+.new-item__select {
+  resize: none;
+  height: 2em;
+  font-size: 0.8em;
 }
