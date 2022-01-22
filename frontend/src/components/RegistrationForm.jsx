@@ -27,38 +27,43 @@ const RegistrationForm = (props) => {
   const handleUsername = context.handleUsername;
   const handlePassword = context.handlePassword;
   const handleConfirmationPassword = context.handleConfirmationPassword;
+  const handleRegistrationSubmit = context.handleRegistrationSubmit;
+  const errorMessage = context.errorMessage;
+  const handleErrorMessageReset = context.handleErrorMessageReset;
+  useEffect(() => {
+    handleErrorMessageReset();
+  }, []);
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (
+  //     username === "" ||
+  //     email === "" ||
+  //     password === "" ||
+  //     confirmationPassword === ""
+  //   ) {
+  //     setError(Please enter all the fields);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (
-      username === "" ||
-      email === "" ||
-      password === "" ||
-      confirmationPassword === ""
-    ) {
-      setError(true);
-
-    } else {
-      setError(false);
-      handleRegistration({ email, password, username });
-    }
-  };
+  //   } else {
+  //     setError(false);
+  //     handleRegistration({ email, password, username });
+  //   }
+  // };
 
 
   // Showing error message if error is true
-  const errorMessage = () => {
-    return (
-      <div
-        className="error"
-        style={{
-          display: error ? "" : "none",
-        }}
-      >
-        <h1>Please enter all the fields</h1>
-      </div>
-    );
-  };
+  // const errorMessage2 = () => {
+  //   return (
+  //     <div
+  //       className="error"
+  //       style={{
+  //         display: error ? "" : "none",
+  //       }}
+  //     >
+  //       <h1>Please enter all the fields</h1>
+  //     </div>
+  //   );
+  // };
 
   //
 
@@ -68,17 +73,14 @@ const RegistrationForm = (props) => {
         <h1>Register</h1>
       </div>
 
-      {/* Calling to the methods */}
+     { /*Calling to the methods
       <div className="messages">
-        {errorMessage()}
-        {/* {successMessage()} */}
-      </div>
-
-      {showConfirmationPassError && (
-        <h1>🔥 Password and password confirmation must match 🔥</h1>
-      )}
-      {showEmailError && <h1>🔥 Email in use 🔥</h1>}
-
+        {errorMessage2()}
+        {/* {successMessage()} </div>*/}
+       
+      {/*password doesnt match */}
+      {errorMessage &&   <h1>🔥 {errorMessage} 🔥</h1>}
+      
       <form>
         {/* Labels and inputs for form data */}
         <label className="username">Username: </label>
@@ -116,7 +118,7 @@ const RegistrationForm = (props) => {
           onChange={handleConfirmationPassword}
         />
 
-        <button onClick={handleSubmit} className="btn" type="submit">
+        <button onClick={handleRegistrationSubmit} className="btn" type="submit">
           Submit
         </button>
       </form>

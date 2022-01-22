@@ -21,7 +21,6 @@ const withAuthProvider = (WrappedComponent) => (props) => {
     setErrorMessage('')
   }
 
-  
   const handleLogin = (loginData) => {
     console.log("loginData", loginData);
     return axios
@@ -74,8 +73,8 @@ const withAuthProvider = (WrappedComponent) => (props) => {
 
   const handleRegistration = (itemData) => {
     if (password !== confirmationPassword) {
-      console.log("🔥 passwords must match 🔥");
-      setShowConfirmationPassError(true);
+      
+      setErrorMessage("🔥 passwords must match 🔥");
       return;
     } else {
       return axios
@@ -88,10 +87,24 @@ const withAuthProvider = (WrappedComponent) => (props) => {
         .then(() => navigate("/mapview"))
         .catch((err) => {
           console.log("Error record:", err.response);
-          setShowEmailError(true);
+          setErrorMessage("Email already in use")
         });
     }
   };
+  const handleRegistrationSubmit = (e) => {
+      e.preventDefault();
+      if (
+        username === "" ||
+        email === "" ||
+        password === "" ||
+        confirmationPassword === ""
+      ) {
+        setErrorMessage('Please enter all the fields');
+        return
+      } else {
+        handleRegistration({ email, password, username });
+      }
+     };
 
   const providerData = {
     email,
@@ -114,7 +127,8 @@ const withAuthProvider = (WrappedComponent) => (props) => {
     handleLoginSubmit,
     loginError,
     errorMessage,
-    handleErrorMessageReset
+    handleErrorMessageReset,
+    handleRegistrationSubmit
   };
 
   return (

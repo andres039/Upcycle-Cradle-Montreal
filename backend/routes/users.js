@@ -34,17 +34,17 @@ router.post("/register", async (req, res) => {
   // Our register logic starts here
   try {
     // Get user input
-    const { username, email, password, confirmation_password } = req.body;
+    const { username, email, password } = req.body;
 
     //hash the password
 
     const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     // Validate user input
-    if (!(email && password && username)) {
-      res.status(400).send("All input is required");
-    }
+    // if (!(email && password && username)) {
+    //   res.status(400).send("All input is required");
+    // }
 
     //check if user already exist
 
@@ -84,10 +84,6 @@ router.post("/register", async (req, res) => {
         }
       }
     );
-    // .catch((err) => {
-    //   console.log("Query failed:", err.message);
-    //   res.send("Query failed:", err.message);
-    // });
   } catch (err) {
     console.log("Query failed:", err.message);
     res.send("Query failed:", err.message);
@@ -145,9 +141,6 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    if (!(email && password)) {
-      res.status(400).send("All input is required");
-    }
     const users = await db.query("SELECT * FROM users WHERE email=$1;", [
       email,
     ]);
@@ -175,7 +168,7 @@ router.post("/login", async (req, res) => {
     return res.status(200).json({message: "Success", token, user});
   
   } catch (error) {
-    console.log(error)
+    console.log("Query error:", error)
   }
 });
 
