@@ -1,11 +1,13 @@
 import React from "react";
 //If there is time to refactor: import classNames from "classnames";
 
+import "./Button.scss";
+
  const Button = (props) => {
   let buttonClass = props.class;
   
-  if (props.save) {
-    buttonClass += " button--save";
+  if (props.confirm) {
+    buttonClass += " button--confirm";
   }
   if (props.cancel) {
     buttonClass += " button--cancel";

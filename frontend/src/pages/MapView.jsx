@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 import Map from "../components/Map";
 import SidebarHeader from "../components/SidebarHeader";
 import Instructions from "../components/Instructions";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import Button from "../components/Button";
 
 import './MapView.scss';
 
@@ -42,7 +44,7 @@ const MapView = (props) => {
         <div className="sidebar__text">
           <SidebarHeader />
           <Link to="/newitem">
-            <button type="button">+ New item</button>
+            <Button className="button" confirm>+ New item</Button>
           </Link>
 
           <Instructions />
