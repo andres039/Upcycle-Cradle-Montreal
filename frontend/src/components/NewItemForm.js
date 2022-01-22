@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from 'axios';
 import Button from "./Button";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 const NewItemForm = (props) => {
   const [title, setTitle] = useState("");
@@ -9,6 +10,11 @@ const NewItemForm = (props) => {
   const [condition, setCondition] = useState("New");
   const [picture, setPicture] = useState("");
   const [savePinError, setSavePinError] = useState(false);
+
+  const context = useContext(AuthContext);
+  const id = context.id;
+
+
 
   const navigate = useNavigate();
 
@@ -33,7 +39,7 @@ const NewItemForm = (props) => {
       picture,
       longitude: props.longitude.toFixed(4),
       latitude: props.latitude.toFixed(4),
-      creator_id: 1,
+      creator_id: id,
       date: currentDate()
     })
   }

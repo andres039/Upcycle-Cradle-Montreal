@@ -123,7 +123,7 @@ router.post("/login", async (req, res) => {
         );
         // save user token
         const user = response.rows[0];
-        console.log(user);
+        console.log("THIS IS USER", user);
         user.token = token;
         console.log(user.token);
         // res.cookie(process.env.AUTH_COOKIE, token);

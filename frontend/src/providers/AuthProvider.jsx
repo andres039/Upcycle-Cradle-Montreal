@@ -15,6 +15,7 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   const [showEmailError, setShowEmailError] = useState(false);
   const [showConfirmationPassError, setShowConfirmationPassError] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const [id, setId] = useState(null);
 
   //handle navigation upon successful authentication
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ const withAuthProvider = (WrappedComponent) => (props) => {
     return axios
       .post("/login", loginData)
       .then((response) => {
+        getUserId(response.data.user.id)
         localStorage.setItem("token", response.data.token);
 
       })
@@ -51,6 +53,10 @@ const withAuthProvider = (WrappedComponent) => (props) => {
       });
   }
 
+
+  //helper fct
+
+  const getUserId = (data) => setId(data);
 
   const handleLoginSubmit = event => {
     event.preventDefault();
@@ -94,7 +100,7 @@ const withAuthProvider = (WrappedComponent) => (props) => {
     setEmail, setConfirmationPassword, setPassword, setUsername, handleRegistration,
     confirmationPassword, handleUsername, handlePassword, handleEmail,
     handleConfirmationPassword, showConfirmationPassError, showEmailError,
-    handleLogin, handleLoginSubmit, loginError
+    handleLogin, handleLoginSubmit, loginError, id, setId
   }
 
   return (
