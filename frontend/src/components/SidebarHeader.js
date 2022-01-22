@@ -59,7 +59,7 @@ const SidebarHeader = (props) => {
 
         <h3>Signed in as {user}</h3>
 
-        <Button onClick={() => logout()}>
+        <Button cancel onClick={() => logout()}>
           Logout
         </Button>
       </header>

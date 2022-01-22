@@ -4,7 +4,7 @@ import React from "react";
 import "./Button.scss";
 
  const Button = (props) => {
-  let buttonClass = props.class;
+  let buttonClass = "button";
   
   if (props.confirm) {
     buttonClass += " button--confirm";
@@ -12,11 +12,11 @@ import "./Button.scss";
   if (props.cancel) {
     buttonClass += " button--cancel";
   }
-  if (props.login) {
-    buttonClass += " button--login";
+  if (props.newItem) {
+    buttonClass += " button--new-item";
   }
   
   return <button onClick={props.onClick} className={buttonClass}>{props.children}</button>;
 }
 
-export default Button
+export default Button;

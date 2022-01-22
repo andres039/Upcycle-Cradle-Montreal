@@ -12,6 +12,12 @@
     color: $light-purple;
     margin-bottom: 0.3rem;
   }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0.5em;
+  }
 }
 
 .new-item {

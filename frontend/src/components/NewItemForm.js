@@ -77,24 +77,26 @@ const NewItemForm = (props) => {
         />
       </form>
 
-      <Button
-        onClick={() => validate({
-          title,
-          description,
-          condition,
-          picture,
-          longitude: props.longitude.toFixed(4),
-          latitude: props.latitude.toFixed(4),
-          creator_id: 1,
-          date: currentDate()
-        })}
-      >
-        Save
-      </Button>
-      <Link to="/mapview">
-        <Button onClick={() => deletePin()}>Cancel</Button>
+      <div className="new-item-form__buttons">
+        <Button
+          confirm onClick={() => validate({
+            title,
+            description,
+            condition,
+            picture,
+            longitude: props.longitude.toFixed(4),
+            latitude: props.latitude.toFixed(4),
+            creator_id: 1,
+            date: currentDate()
+          })}
+        >
+          Save
+        </Button>
+        <Link to="/mapview">
+          <Button cancel onClick={() => deletePin()}>Cancel</Button>
 
-      </Link>
+        </Link>
+      </div>
     </section>
 
   );
