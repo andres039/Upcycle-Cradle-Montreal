@@ -16,6 +16,10 @@
   background: $medium-green;
   color: $white;
   padding: 1em;
+
+  &__logo {
+    width: 200px;
+  }
 }
 
 .form {
