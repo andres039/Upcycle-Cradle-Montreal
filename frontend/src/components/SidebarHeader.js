@@ -3,7 +3,6 @@ import axios from "axios";
 
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
-const logo = require("../logo.png");
 
 
 const SidebarHeader = (props) => {
@@ -56,7 +55,7 @@ const SidebarHeader = (props) => {
   return (
     <section>
       <header>
-        <img src={logo} style={{ width: "300px" }} />
+        <img className="sidebar__logo" src="images/logo.png" alt="Trash Panda Montreal" />
 
         <h3>Signed in as {user}</h3>
 

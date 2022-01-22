@@ -34,17 +34,13 @@ router.post("/register", async (req, res) => {
   // Our register logic starts here
   try {
     // Get user input
-    const { username, email, password, confirmation_password } = req.body;
+    const { username, email, password } = req.body;
 
     //hash the password
 
     const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Validate user input
-    if (!(email && password && username)) {
-      res.status(400).send("All input is required");
-    }
 
     //check if user already exist
 
@@ -82,13 +78,8 @@ router.post("/register", async (req, res) => {
           console.log("Email already in use");
           res.status(401).send(response);
         }
-      })
-    // .catch((err) => {
-    //   console.log("Query failed:", err.message);
-    //   res.send("Query failed:", err.message);
-    // });
-
-
+      }
+      );
   } catch (err) {
     console.log("Query failed:", err.message);
     res.send("Query failed:", err.message);
@@ -100,59 +91,39 @@ router.post("/register", async (req, res) => {
 //Login
 
 router.post("/login", async (req, res) => {
-  console.log("SUCCESS")
-
   try {
     const { email, password } = req.body;
-    if (!(email && password)) {
-      res.status(400).send("All input is required");
+    const users = await db.query("SELECT * FROM users WHERE email=$1;", [
+      email,
+    ]);
+    if (users.rows.length === 0)
+      return res.status(401).json({ message: "Email is incorrect" });
+    //password check
+    const validPassword = await bcrypt.compare(
+      password,
+      users.rows[0].password
+    );
+    if (!validPassword) {
+      return res.status(401).json({
+        status: "Unauthorized",
+        message: "Incorrect password",
+      })
     }
-    db.query("SELECT * FROM users WHERE email=$1;", [email])
-      .then((response) => {
-        if (response.rows.length === 0) {
-          return res.status(401).json({ error: "Email is incorrect" }
-          )
-        };
-        const user_id = response.rows[0].id;
-        const token = jwt.sign(
-          { user_id, email },
-          process.env.TOKEN_KEY,
-          {
-            expiresIn: "2h",
-          }
-        );
-        // save user token
-        const user = response.rows[0];
-        console.log("THIS IS USER", user);
-        user.token = token;
-        console.log(user.token);
-        // res.cookie(process.env.AUTH_COOKIE, token);
-        if (validPassword(password, response.rows[0].password)) {
-          return res.status(200).send({
-            status: "logged in",
-            message: "Login successful",
-            user,
-            token,
-          });
-        };
+    const user_id = users.rows[0].id;
+    const token = jwt.sign({ user_id, email }, process.env.TOKEN_KEY, {
+      expiresIn: "2h",
+    });
+    // save user token
+    const user = users.rows[0];
+    user.token = token;
+    return res.status(200).json({ message: "Success", token, user });
 
-
-      });
-
-  } catch (err) {
-    console.log("Query failed:", err.message);
-    res.send("Query failed:", err.message);
+  } catch (error) {
+    console.log("Query error:", error)
   }
 });
 
-const validPassword = async (password, hashedPassword) => {
-
-  return bcrypt.compareSync(
-    password,
-    hashedPassword
-
-  )
-};
+//sets up the token
 
 
 module.exports = router;

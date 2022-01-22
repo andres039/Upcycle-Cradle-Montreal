@@ -4,6 +4,8 @@ import Button from "./Button";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
+import './NewItemForm.scss';
+
 const NewItemForm = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -13,7 +15,6 @@ const NewItemForm = (props) => {
 
   const context = useContext(AuthContext);
   const id = context.id;
-
 
 
   const navigate = useNavigate();
@@ -66,27 +67,28 @@ const NewItemForm = (props) => {
   return (
 
     <section className="new-item">
+      <h1 className="new-item-form__title">New Item</h1>
       <form onSubmit={(e) => e.preventDefault()} autoComplete="off" className="form">
-        <label>Title</label>
+        <label className="new-item-form__label">Title</label>
         <input
-          className="new-item-title"
+          className="new-item__input"
           name="title"
           type="text"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
         />
 
-        <label>Description</label>
-        <input
-          className="new-item-description"
+        <label className="new-item-form__label">Description</label>
+        <textarea
+          className="new-item__text-area"
           name="description"
           type="text"
           value={description}
           onChange={(event) => setDescription(event.target.value)}
         />
 
-        <label>Condition</label>
-        <select className="new-item-Condition"
+        <label className="new-item-form__label">Condition</label>
+        <select className="new-item__select"
           name="condition"
           value={condition}
           onChange={(event) => setCondition(event.target.value)}>
@@ -98,12 +100,12 @@ const NewItemForm = (props) => {
           <option value="Damaged">Damaged</option>
         </select>
 
-        <label>Picture</label>
+        <label className="new-item-form__label">Picture</label>
         <input
-          className="new-item-picture"
+          className="new-item__input"
           name="picture"
           type="text"
-          placeholder="URL address for now"
+          placeholder="https://www.picture-url.com"
           value={picture}
           onChange={(event) => setPicture(event.target.value)}
         />

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const { useState, createContext } = require("react");
+const { useState, createContext, useEffect } = require("react");
 export const AuthContext = createContext();
 
 
@@ -16,9 +16,14 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   const [showConfirmationPassError, setShowConfirmationPassError] = useState(false);
   const [loginError, setLoginError] = useState("");
   const [id, setId] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   //handle navigation upon successful authentication
   const navigate = useNavigate();
+
+  const handleErrorMessageReset = () => {
+    setErrorMessage('')
+  }
 
   // Functions handling username, password, confirmation password and email changes
   const handleUsername = (e) => {
@@ -39,7 +44,9 @@ const withAuthProvider = (WrappedComponent) => (props) => {
 
 
   //Handling login functions
+
   const handleLogin = (loginData) => {
+    console.log("loginData", loginData);
     return axios
       .post("/login", loginData)
       .then((response) => {
@@ -47,28 +54,44 @@ const withAuthProvider = (WrappedComponent) => (props) => {
         localStorage.setItem("token", response.data.token);
 
       })
-      .then(() => navigate("/mapview")).catch((err) => {
-        console.log("Login error:", err);
-        setShowEmailError(true);
+      .then(() => navigate("/mapview"))
+      .catch((err) => {
+        //optional chaining
+        console.log("Error record:", err?.response?.data?.message);
+        if (err?.response?.data?.message === "Incorrect password") {
+          setErrorMessage(err?.response?.data?.message)
+          return
+        }
+        setErrorMessage(err?.response?.data?.message);
+        return;
       });
   }
 
-
-  //helper fct
-
   const getUserId = (data) => setId(data);
 
-  const handleLoginSubmit = event => {
+  const handleLoginSubmit = (event) => {
     event.preventDefault();
-    if (
-      email === "" ||
-      password === ""
-    ) {
-      setLoginError(true);
-      return
+    if (email === "" || password === "") {
+      setErrorMessage("Please fill in all the fields");
+      return;
     }
-    handleLogin({ email, password })
-  }
+    handleLogin({ email, password });
+  };
+
+  const handleRegistrationSubmit = (e) => {
+    e.preventDefault();
+    if (
+      username === "" ||
+      email === "" ||
+      password === "" ||
+      confirmationPassword === ""
+    ) {
+      setErrorMessage('Please enter all the fields');
+      return
+    } else {
+      handleRegistration({ email, password, username });
+    }
+  };
 
 
 
@@ -76,8 +99,9 @@ const withAuthProvider = (WrappedComponent) => (props) => {
 
   const handleRegistration = (itemData) => {
     if (password !== confirmationPassword) {
-      console.log("🔥 passwords must match 🔥");
-      setShowConfirmationPassError(true);
+
+      setErrorMessage("🔥 passwords must match 🔥");
+      // setShowConfirmationPassError(true);
       return;
     } else {
 
@@ -87,20 +111,42 @@ const withAuthProvider = (WrappedComponent) => (props) => {
           localStorage.setItem("token", response.data.token);
 
         })
-        .then(() => navigate("/mapview")).catch((err) => {
+        .then(() => navigate("/mapview"))
+        .catch((err) => {
           console.log("Registration error:", err);
-          setShowEmailError(true);
+          // setShowEmailError(true);
+          console.log("Error record:", err.response);
+          setErrorMessage("Email already in use")
         });
     }
   };
 
   // variables to include in user state-related files:
   const providerData = {
-    email, password, confirmationPassword, username,
-    setEmail, setConfirmationPassword, setPassword, setUsername, handleRegistration,
-    confirmationPassword, handleUsername, handlePassword, handleEmail,
-    handleConfirmationPassword, showConfirmationPassError, showEmailError,
-    handleLogin, handleLoginSubmit, loginError, id, setId
+    email,
+    password,
+    confirmationPassword,
+    username,
+    setEmail,
+    setConfirmationPassword,
+    setPassword,
+    setUsername,
+    handleRegistration,
+    confirmationPassword,
+    handleUsername,
+    handlePassword,
+    handleEmail,
+    handleConfirmationPassword,
+    showConfirmationPassError,
+    showEmailError,
+    handleLogin,
+    handleLoginSubmit,
+    loginError,
+    errorMessage,
+    handleErrorMessageReset,
+    handleRegistrationSubmit,
+    id,
+    setId
   }
 
   return (
