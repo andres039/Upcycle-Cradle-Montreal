@@ -14,9 +14,37 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   const [username, setUsername] = useState("");
   const [showEmailError, setShowEmailError] = useState(false);
   const [showConfirmationPassError, setShowConfirmationPassError] =
-  useState(false);
+    useState(false);
+  const [loginError, setLoginError] = useState("");
 
   const navigate = useNavigate();
+
+
+
+  const handleLogin = (loginData) => {
+    console.log("loginData", loginData)
+    return axios
+      .post("/login", loginData)
+      .then((response) => {
+        console.log("response", response);
+      })
+      .then(navigate("/mapview"));
+  }
+
+
+
+  const handleLoginSubmit = event => {
+    event.preventDefault();
+    if (
+      email === "" ||
+      password === ""
+    ) {
+      setLoginError(true);
+      return
+    }
+    handleLogin({ email, password })
+  }
+
 
   // Handling the name change
   const handleUsername = (e) => {
@@ -52,14 +80,14 @@ const withAuthProvider = (WrappedComponent) => (props) => {
           // setPin(itemData);
         })
         .then(() => navigate("/mapview")).catch((err) => {
-                  console.log("this is the error:", err);
-                  setShowEmailError(true);
-                });
+          console.log("this is the error:", err);
+          setShowEmailError(true);
+        });
     }
   };
 
 
-  const providerData = { email, password, confirmationPassword, username, setEmail, setConfirmationPassword, setPassword, setUsername, handleRegistration, confirmationPassword, handleUsername, handlePassword, handleEmail, handleConfirmationPassword,showConfirmationPassError, showEmailError }
+  const providerData = { email, password, confirmationPassword, username, setEmail, setConfirmationPassword, setPassword, setUsername, handleRegistration, confirmationPassword, handleUsername, handlePassword, handleEmail, handleConfirmationPassword, showConfirmationPassError, showEmailError, handleLogin, handleLoginSubmit, loginError }
 
   return (
     <AuthContext.Provider value={providerData}>

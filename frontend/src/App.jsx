@@ -16,7 +16,7 @@ import Home from "./pages/Home";
 
 function App() {
   const context = useContext(AuthContext);
-  console.log(context);
+
 
   // const [users, setUsers] = useState()
   // const [pins, setPins] = useState()
@@ -119,7 +119,7 @@ function App() {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
-    );
+  );
 }
 
 export default withAuthProvider(App);

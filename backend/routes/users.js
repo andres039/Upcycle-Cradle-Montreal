@@ -83,36 +83,55 @@ router.post("/register", async (req, res) => {
           res.status(401).send(response);
         }
       })
-      .catch((err) => {
-        console.log("Query failed:", err.message);
-        res.send("Query failed:", err.message);
-      });
+    // .catch((err) => {
+    //   console.log("Query failed:", err.message);
+    //   res.send("Query failed:", err.message);
+    // });
 
-    //Login
-
-    router.post("/login", async (req, res) => {
-      try {
-        const { email, password } = req.body;
-        if (!(email && password)) {
-          res.status(400).send("All input is required");
-        }
-        const users = db.query("SELECT * FROM users WHERE email=$1;", [email]);
-        const validPassword = await bcrypt.compare(
-          password,
-          users.rows[0].password
-        );
-        console.log(validPassword);
-      } catch {
-        console.log("Query failed:", err.message);
-        res.send("Query failed:", err.message);
-      }
-    });
 
   } catch (err) {
-    console.log(err);
+    console.log("Query failed:", err.message);
+    res.send("Query failed:", err.message);
   }
 
   // Our register logic ends here
 });
+
+//Login
+
+router.post("/login", async (req, res) => {
+  console.log("SUCCESS")
+
+  try {
+    const { email, password } = req.body;
+    if (!(email && password)) {
+      res.status(400).send("All input is required");
+    }
+    db.query("SELECT * FROM users WHERE email=$1;", [email])
+      .then((response) => {
+        console.log(response)
+        if (response.rows.length === 0) {
+          return res.status(401).json({ error: "Email is incorrect" }
+          )
+        };
+        return validPassword(password, response.rows[0].password);
+
+      });
+
+  } catch (err) {
+    console.log("Query failed:", err.message);
+    res.send("Query failed:", err.message);
+  }
+});
+
+const validPassword = async (password, hashedPassword) => {
+
+  return bcrypt.compareSync(
+    password,
+    hashedPassword
+
+  )
+};
+
 
 module.exports = router;

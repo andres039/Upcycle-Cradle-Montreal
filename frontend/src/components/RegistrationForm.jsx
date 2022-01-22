@@ -9,12 +9,12 @@ const RegistrationForm = (props) => {
   // States for registration
 
   const [error, setError] = useState(false);
-  
-  
+
+
   // Handling the name change
-  
+
   const context = useContext(AuthContext);
-  
+
   const showConfirmationPassError = context.showConfirmationPassError;
   const showEmailError = context.showEmailError;
   const email = context.email;
@@ -27,38 +27,9 @@ const RegistrationForm = (props) => {
   const handleUsername = context.handleUsername;
   const handlePassword = context.handlePassword;
   const handleConfirmationPassword = context.handleConfirmationPassword;
-  // const validate = (itemData) => {
-  //   if (password !== confirmationPassword) {
-  //     console.log("🔥 passwords must match 🔥");
-  //     setShowConfirmationPassError(true);
-  //     return;
-  //   } else {
-  //     localStorage.getItem("token");
 
-  //     return axios
-  //       .post("/register", itemData)
-  //       .then((response) => {
-  //         localStorage.setItem("token", response.data.token);
-  //         setTimeout(() => forceUpdate(), 1000)
-  //       })
-  //       .then(() => {
-  //         while (true) {
-  //           if (localStorage.getItem("token")) {
-  //             break;
-  //           }
-  //         }
-  //         forceUpdate()
-  //         return navigate("/newitem");
-  //       })
-  //       .catch((err) => {
-  //         console.log("this is the error:", err);
-  //         setShowEmailError(true);
-  //       });
-  //   }
-  // };
 
-  // Handling the form submission
-  //
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (

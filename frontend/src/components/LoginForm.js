@@ -1,92 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios"
-import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 const LoginForm = (props) => {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-  // const validate = () => {
-  //   if (email === "") {
-  //     setError("Please Enter Email");
-  //     return;
-  //   }
-  //   if (password === "") {
-  //     setError("Please Enter Password");
-  //     return;
-  //   }
-  //   setError("");
-  //   props.onSave(email, password);
-  // };
-  const validate = (loginData) => {
-    console.log(loginData)
+  const context = useContext(AuthContext);
 
-    return axios
-    .post("/login", loginData)
-    .then((response) => {
-      console.log("response", response);
-    })
-   .then(navigate("/mapview"));
-  }
+  const email = context.email;
+  const setEmail = context.setEmail;
+  const password = context.password;
+  const setPassword = context.setPassword;
+  const handleLogin = context.handleLogin;
+  const handlePassword = context.handlePassword;
+  const handleEmail = context.handleEmail;
+  const handleLoginSubmit = context.handleLoginSubmit;
+  const loginError = context.loginError;
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    if (
-      email === "" ||
-      password === ""    
-    ) {
-      setError(true);
-      return
-    }
-    validate({email, password})
-  }
+
+
+
 
   return (
 
-    <main>
+    <div>
       <section className="login">
-      {error && (
-        <h1>🔥 Please fill the email and password fields, or register to start using 🦝Trash Panda🐼 🔥</h1>
-      )}
-        <form autoComplete="off" onSubmit={handleSubmit}>
+        {loginError && (
+          <h1>🔥 Please fill the email and password fields, or register to start using 🦝Trash Panda🐼 🔥</h1>
+        )}
+        <form>
           <label>Email: </label>
           <input
-            className=""
+            className="email"
             name="email"
             type="email"
-            placeholder="email"
+            // placeholder="email"
 
 
             value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={handleEmail}
 
           />
 
           <label>Password: </label>
           <input
-            className=""
+            className="password"
             name="password"
             type="password"
-            placeholder="password"
+            // placeholder="password"
 
 
             value={password}
-            onChange={(event) => setPassword(event.target.password)}
+            onChange={handlePassword}
           />
+          <button onClick={handleLoginSubmit} className="btn" type="submit">Login</button>
         </form>
 
       </section>
-      <section className="">
-        <section className="">
 
-          {/* <Button onClick={validate}{ your code goes here }>Login</Button> */}
-          <button onClick={handleSubmit}>Login</button>
-
-        </section>
-      </section>
-    </main>
+    </div>
   );
 };
 
