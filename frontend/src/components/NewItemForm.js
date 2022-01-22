@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import Button from "./Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const NewItemForm = (props) => {
   const [title, setTitle] = useState("");
@@ -9,6 +9,8 @@ const NewItemForm = (props) => {
   const [condition, setCondition] = useState("New");
   const [picture, setPicture] = useState("");
   const [savePinError, setSavePinError] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSavePin = () => {
 
@@ -40,7 +42,8 @@ const NewItemForm = (props) => {
   const validate = (itemData) => {
     const tokenKey = localStorage.getItem("token")
     return axios.post("/api/pins", itemData, { headers: { token: tokenKey } }).then(() => {
-      window.location.reload();
+      // window.location.reload();
+      navigate("/mapview",)
     });
   };
 
