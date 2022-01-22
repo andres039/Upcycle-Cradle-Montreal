@@ -25,17 +25,16 @@
   &__text {
     position: absolute;
     top: 0px;
-    left: 2em;
-    padding-right: 1.5em;
+    left: 1em;
     display: flex;
     flex-flow: column;
     gap: 1rem;
-    width: 23vw;
+    width: 25vw;
   }
 }
 
 .form {
   display: flex;
   flex-flow: column;
-  padding: 1rem;
+  padding-left: 1rem;
 }
