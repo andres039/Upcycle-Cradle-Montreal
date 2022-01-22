@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Marker, Popup, useMapEvents } from 'react-leaflet';
 import axios from "axios";
+import { AuthContext } from "../providers/AuthProvider";
 
 import Button from './Button';
 import pinSettings from '../helpers/pinSettings'
@@ -14,6 +15,9 @@ const BluePin = (props) => {
   const [bluePinLatitude, setBluePinLatitude] = useState(item.latitude);
   const [bluePinLongitude, setBluePinLongitude] = useState(item.longitude);
 
+  const context = useContext(AuthContext);
+  const claimer_id = context.id;
+
   useEffect(() => {
     if (claimed) {
       setpinColor(orangeIcon);
@@ -24,10 +28,9 @@ const BluePin = (props) => {
 
     const pinID = id;
     //track user id
-    const userID = 2;
 
     // add user's ID as claiamer_id in DB
-    return axios.put(`/api/pins/${pinID}`, { userID, pinID })
+    return axios.put(`/api/pins/${pinID}`, { claimer_id, pinID })
       .then(() => {
         setClaimed(true);
       });
