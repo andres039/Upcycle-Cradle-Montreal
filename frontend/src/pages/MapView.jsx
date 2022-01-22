@@ -5,6 +5,7 @@ import Instructions from "../components/Instructions";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+import './MapView.scss';
 
 const MapView = (props) => {
   const { latitude, longitude, setLatitude, setLongitude, newItemMode, oldPins } = props;
@@ -34,12 +35,18 @@ const MapView = (props) => {
         savedItems={oldPins}
       />
       <section className="sidebar">
-        <SidebarHeader />
-        <Link to="/newitem">
-          <button type="button">+ new Item</button>
-        </Link>
+        <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only"/>
+        <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only"/>
+        <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only"/>
+        
+        <div className="sidebar__text">
+          <SidebarHeader />
+          <Link to="/newitem">
+            <button type="button">+ New item</button>
+          </Link>
 
-        <Instructions />
+          <Instructions />
+        </div>
       </section>
     </div>
   );
