@@ -8,10 +8,37 @@ const NewItemForm = (props) => {
   const [description, setDescription] = useState("");
   const [condition, setCondition] = useState("New");
   const [picture, setPicture] = useState("");
+  const [savePinError, setSavePinError] = useState(false);
+
+  const handleSavePin = () => {
+
+    if (
+      title === "" ||
+      description === "" ||
+      condition === "" ||
+      picture === "" ||
+      !props.longitude ||
+      !props.latitude
+    ) {
+      console.log("ERROR")
+      setSavePinError(true);
+      return
+    }
+    validate({
+      title,
+      description,
+      condition,
+      picture,
+      longitude: props.longitude.toFixed(4),
+      latitude: props.latitude.toFixed(4),
+      creator_id: 1,
+      date: currentDate()
+    })
+  }
+
 
   const validate = (itemData) => {
     const tokenKey = localStorage.getItem("token")
-    //localStorage.removeItem("token") -- for logout
     return axios.post("/api/pins", itemData, { headers: { token: tokenKey } }).then(() => {
       window.location.reload();
     });
@@ -55,12 +82,12 @@ const NewItemForm = (props) => {
           name="condition"
           value={condition}
           onChange={(event) => setCondition(event.target.value)}>
-            <option value="New">New</option>
-            <option value="Like new">Like new</option>
-            <option value="Fair">Fair</option>
-            <option value="Old">Old</option>
-            <option value="Small imperfections">Small imperfections</option>
-            <option value="Damaged">Damaged</option>
+          <option value="New">New</option>
+          <option value="Like new">Like new</option>
+          <option value="Fair">Fair</option>
+          <option value="Old">Old</option>
+          <option value="Small imperfections">Small imperfections</option>
+          <option value="Damaged">Damaged</option>
         </select>
 
         <label>Picture</label>
@@ -75,16 +102,7 @@ const NewItemForm = (props) => {
       </form>
 
       <Button
-        onClick={() => validate({
-          title,
-          description,
-          condition,
-          picture,
-          longitude: props.longitude.toFixed(4),
-          latitude: props.latitude.toFixed(4),
-          creator_id: 1,
-          date: currentDate()
-        })}
+        onClick={() => handleSavePin()}
       >
         Save
       </Button>

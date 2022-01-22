@@ -1,41 +1,55 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 const { useState, createContext } = require("react");
-
-
 export const AuthContext = createContext();
-//in App.jsx ==> {user, login, logout = useContext(authContext)}
+
 
 const withAuthProvider = (WrappedComponent) => (props) => {
 
+  //Tracking user-related states
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
-  const [username, setUsername] = useState("");
   const [showEmailError, setShowEmailError] = useState(false);
-  const [showConfirmationPassError, setShowConfirmationPassError] =
-    useState(false);
+  const [showConfirmationPassError, setShowConfirmationPassError] = useState(false);
   const [loginError, setLoginError] = useState("");
 
+  //handle navigation upon successful authentication
   const navigate = useNavigate();
 
+  // Functions handling username, password, confirmation password and email changes
+  const handleUsername = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleConfirmationPassword = (e) => {
+    setConfirmationPassword(e.target.value);
+  };
 
 
+  //Handling login functions
   const handleLogin = (loginData) => {
-    console.log("loginData", loginData)
     return axios
       .post("/login", loginData)
       .then((response) => {
         localStorage.setItem("token", response.data.token);
 
-        // setPin(itemData);
       })
       .then(() => navigate("/mapview")).catch((err) => {
-        console.log("this is the error:", err);
+        console.log("Login error:", err);
         setShowEmailError(true);
       });
   }
-
 
 
   const handleLoginSubmit = event => {
@@ -51,24 +65,8 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   }
 
 
-  // Handling the name change
-  const handleUsername = (e) => {
-    setUsername(e.target.value);
-  };
 
-  // Handling the email change
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  // Handling the password change
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleConfirmationPassword = (e) => {
-    setConfirmationPassword(e.target.value);
-  };
+  // Handling registration functions
 
   const handleRegistration = (itemData) => {
     if (password !== confirmationPassword) {
@@ -82,17 +80,22 @@ const withAuthProvider = (WrappedComponent) => (props) => {
         .then((response) => {
           localStorage.setItem("token", response.data.token);
 
-          // setPin(itemData);
         })
         .then(() => navigate("/mapview")).catch((err) => {
-          console.log("this is the error:", err);
+          console.log("Registration error:", err);
           setShowEmailError(true);
         });
     }
   };
 
-
-  const providerData = { email, password, confirmationPassword, username, setEmail, setConfirmationPassword, setPassword, setUsername, handleRegistration, confirmationPassword, handleUsername, handlePassword, handleEmail, handleConfirmationPassword, showConfirmationPassError, showEmailError, handleLogin, handleLoginSubmit, loginError }
+  // variables to include in user state-related files:
+  const providerData = {
+    email, password, confirmationPassword, username,
+    setEmail, setConfirmationPassword, setPassword, setUsername, handleRegistration,
+    confirmationPassword, handleUsername, handlePassword, handleEmail,
+    handleConfirmationPassword, showConfirmationPassError, showEmailError,
+    handleLogin, handleLoginSubmit, loginError
+  }
 
   return (
     <AuthContext.Provider value={providerData}>
