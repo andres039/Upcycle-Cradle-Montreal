@@ -1,11 +1,14 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, use } from "react-router-dom";
 
 const { useState, createContext, useEffect } = require("react");
 export const AuthContext = createContext();
 
 
 const withAuthProvider = (WrappedComponent) => (props) => {
+
+  const userID = localStorage.getItem("user");
+  const current_user = userID ? parseInt(userID) : null;
 
   //Tracking user-related states
   const [username, setUsername] = useState("");
@@ -15,8 +18,10 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   const [showEmailError, setShowEmailError] = useState(false);
   const [showConfirmationPassError, setShowConfirmationPassError] = useState(false);
   const [loginError, setLoginError] = useState("");
-  const [id, setId] = useState(null);
+  const [id, setId] = useState(current_user);
   const [errorMessage, setErrorMessage] = useState("");
+
+
 
   //handle navigation upon successful authentication
   const navigate = useNavigate();
@@ -67,7 +72,10 @@ const withAuthProvider = (WrappedComponent) => (props) => {
       });
   }
 
-  const getUserId = (data) => setId(data);
+  const getUserId = (data) => {
+    setId(data);
+    localStorage.setItem("user", data);
+  }
 
   const handleLoginSubmit = (event) => {
     event.preventDefault();
