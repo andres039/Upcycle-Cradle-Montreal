@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const { useState, createContext } = require("react");
+const { useState, createContext, useEffect } = require("react");
 
 export const AuthContext = createContext();
 //in App.jsx ==> {user, login, logout = useContext(authContext)}
@@ -14,9 +14,14 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   const [showConfirmationPassError, setShowConfirmationPassError] =
     useState(false);
   const [loginError, setLoginError] = useState("");
-
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
+  const handleErrorMessageReset = () => {
+    setErrorMessage('')
+  }
+
+  
   const handleLogin = (loginData) => {
     console.log("loginData", loginData);
     return axios
@@ -31,10 +36,10 @@ const withAuthProvider = (WrappedComponent) => (props) => {
         //optional chaining
         console.log("Error record:", err?.response?.data?.message);
         if (err?.response?.data?.message === "Incorrect password"){
-          setShowConfirmationPassError(true)
+          setErrorMessage(err?.response?.data?.message)
           return
         }
-        setShowEmailError(true);
+        setErrorMessage(err?.response?.data?.message);
         return;
       });
   };
@@ -42,7 +47,7 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   const handleLoginSubmit = (event) => {
     event.preventDefault();
     if (email === "" || password === "") {
-      setLoginError(true);
+      setErrorMessage("Please fill in all the fields");
       return;
     }
     handleLogin({ email, password });
@@ -57,7 +62,7 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
-
+  
   // Handling the password change
   const handlePassword = (e) => {
     setPassword(e.target.value);
@@ -108,6 +113,8 @@ const withAuthProvider = (WrappedComponent) => (props) => {
     handleLogin,
     handleLoginSubmit,
     loginError,
+    errorMessage,
+    handleErrorMessageReset
   };
 
   return (

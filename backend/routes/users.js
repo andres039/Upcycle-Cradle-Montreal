@@ -152,7 +152,7 @@ router.post("/login", async (req, res) => {
       email,
     ]);
     if (users.rows.length === 0)
-      return res.status(401).json({ error: "Email is incorrect" });
+      return res.status(401).json({ message: "Email is incorrect" });
     //password check
     const validPassword = await bcrypt.compare(
       password,
@@ -164,8 +164,7 @@ router.post("/login", async (req, res) => {
         message: "Incorrect password",
       });
     }
-    else {
-     console.log("Good password!");
+    //sets up the token
     const user_id = users.rows[0].id;
     const token = jwt.sign({ user_id, email }, process.env.TOKEN_KEY, {
       expiresIn: "2h",
@@ -174,7 +173,7 @@ router.post("/login", async (req, res) => {
     const user = users.rows[0];
     user.token = token;
     return res.status(200).json({message: "Success", token, user});
-  }
+  
   } catch (error) {
     console.log(error)
   }

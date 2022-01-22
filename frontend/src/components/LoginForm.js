@@ -1,9 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-import axios from "axios"
+import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 
 const LoginForm = (props) => {
-
   const context = useContext(AuthContext);
 
   const email = context.email;
@@ -17,21 +16,15 @@ const LoginForm = (props) => {
   const loginError = context.loginError;
   const showEmailError = context.showEmailError;
   const showConfirmationPassError = context.showConfirmationPassError;
-
+  const errorMessage = context.errorMessage;
+  const handleErrorMessageReset = context.handleErrorMessageReset;
+  useEffect(() => {
+    handleErrorMessageReset();
+  }, []);
   return (
-
     <div>
       <section className="login">
-        {loginError && (
-          <h1>🔥 Please fill the email and password fields, or register to start using 🦝Trash Panda🐼 🔥</h1>
-        )}
-        {showEmailError && (
-          <h1>🔥 Incorrect Email. Please verify your email or register at 🦝Trash Panda🐼 🔥</h1>
-        )}
-
-        {showConfirmationPassError && (
-          <h1>🔥 Incorrect Password. Please verify your password or register at 🦝Trash Panda🐼 🔥</h1>
-        )}  
+        {errorMessage && <h1>🔥 {errorMessage} 🔥</h1>}
         <form>
           <label>Email: </label>
           <input
@@ -40,10 +33,8 @@ const LoginForm = (props) => {
             type="email"
             // placeholder="email"
 
-
             value={email}
             onChange={handleEmail}
-
           />
 
           <label>Password: </label>
@@ -53,15 +44,14 @@ const LoginForm = (props) => {
             type="password"
             // placeholder="password"
 
-
             value={password}
             onChange={handlePassword}
           />
-          <button onClick={handleLoginSubmit} className="btn" type="submit">Login</button>
+          <button onClick={handleLoginSubmit} className="btn" type="submit">
+            Login
+          </button>
         </form>
-
       </section>
-
     </div>
   );
 };
