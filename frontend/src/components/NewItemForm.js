@@ -123,12 +123,15 @@ const NewItemForm = (props) => {
           value={picture}
           onChange={(event) => setPicture(event.target.value)}
         />
-        <Button onClick={() => handleSavePin()} type="Submit">
-          Save
-        </Button>
-        <Link to="/mapview">
-          <Button onClick={() => deletePin()}>Cancel</Button>
-        </Link>
+        <div className="new-item-form__buttons">
+          <Button onClick={() => handleSavePin()} type="Submit">
+            Save
+          </Button>
+          <Link to="/mapview">
+            <Button onClick={() => deletePin()}>Cancel</Button>
+
+          </Link>
+        </div>
       </form>
 
     </section>
