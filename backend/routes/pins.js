@@ -1,14 +1,16 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
+const express = require("express");
+const jwt = require("jsonwebtoken");
 const router = express.Router();
 const { Pool } = require("pg");
 const dbParams = require("../lib/db.js");
 const db = new Pool(dbParams);
+const database = require("./dbQueries/pinsQueries");
 db.connect();
 
 //Select all pins
 router.get("/api/pins", (req, res) => {
-  db.query("SELECT * FROM pins;")
+  database
+    .getAllPins(db)
     .then((response) => res.send(response.rows))
     .catch((err) => {
       console.log("API/pins error:", err);
@@ -19,7 +21,8 @@ router.get("/api/pins", (req, res) => {
 //Select individual pins
 
 router.get("/api/pins/:id", (req, res) => {
-  db.query("SELECT * FROM pins WHERE id=$1;", [req.params.id])
+  database
+    .getPinsById(db, req.params.id)
     .then((response) => res.send(response.rows))
     .catch((err) => {
       console.log("API/pins error:", err);
@@ -30,41 +33,35 @@ router.get("/api/pins/:id", (req, res) => {
 //Delete individual pins
 
 router.delete("/api/pins/:id", (req, res) => {
-  db.query("DELETE FROM pins WHERE id = $1 RETURNING *;", [req.params.id])
+  database
+    .deletePins(db, req.params.id)
     .then((response) => {
-      res.send(200)
+      res.send(200);
     })
     .catch((err) => {
       console.log("API/pins error:", err);
       res.status(500).send();
     });
-})
+});
 
 //Update individual pins
 
 router.put("/api/pins/:id", async (req, res) => {
-
   res.status(200).send();
 
   try {
-
     const { userID, pinID } = req.body;
-    const updatedPin = await db.query(
-      "UPDATE pins SET claimer_id = $1 WHERE id = $2 RETURNING *;", [userID, pinID]
-    ).then((response) => {
-
+    await database.updateIndividualPins(db, userID, pinID).then((response) => {
       res.json(response.rows);
     });
   } catch (err) {
     console.error(err.message);
   }
-
 });
 
 //create a new pin
 
 router.post("/api/pins", async (req, res) => {
-
   try {
     const verification = jwt.verify(req.headers.token, process.env.TOKEN_KEY);
     const {
@@ -99,4 +96,4 @@ router.post("/api/pins", async (req, res) => {
   }
 });
 
-module.exports = router
+module.exports = router;

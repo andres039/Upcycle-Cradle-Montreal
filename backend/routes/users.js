@@ -6,12 +6,13 @@ const router = express.Router();
 const { Pool } = require("pg");
 const dbParams = require("../lib/db.js");
 const db = new Pool(dbParams);
+const database = require("./dbQueries/usersQueries")
 db.connect();
 
 //Select all users
 
 router.get("/api/users", (req, res) => {
-  db.query("SELECT * FROM users;")
+  database.getAllUsers(db)
     .then((response) => res.send(response.rows))
     .catch((err) => {
       console.log("API/users error:", err);
@@ -22,7 +23,7 @@ router.get("/api/users", (req, res) => {
 //Select individual users
 
 router.get("/api/users/:id", (req, res) => {
-  db.query("SELECT * FROM users WHERE id=$1;", [req.params.id])
+  database.getUsersById(db, req.params.id)
     .then((response) => res.send(response.rows))
     .catch((err) => {
       console.log("API/users error:", err);
@@ -43,14 +44,11 @@ router.post("/register", async (req, res) => {
 
     //check if user already exist
 
-    db.query("SELECT id FROM users WHERE email=$1;", [email]).then(
+    database.getUsersByEmail(db, email).then(
       (response) => {
         if (response.rowCount === 0) {
-          return db
-            .query(
-              "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *",
-              [username, email, hashedPassword]
-            )
+   //if user doesn't exists, insert user into table users
+          return database.insertNewUser(db, username, email, hashedPassword)
             .then((resp) => {
               const user_id = resp.rows[0].id;
               const token = jwt.sign(
@@ -91,9 +89,7 @@ router.post("/login", async (req, res) => {
   try {
     //email check
     const { email, password } = req.body;
-    const users = await db.query("SELECT * FROM users WHERE email=$1;", [
-      email,
-    ]);
+    const users = await database.getUsersByEmail(db, email);
     if (users.rows.length === 0)
       return res.status(401).json({ message: "Email is incorrect" });
     //password check
