@@ -47,24 +47,19 @@ router.delete("/api/pins/:id", (req, res) => {
 //Update individual pins
 
 router.put("/api/pins/:id", async (req, res) => {
-
-  console.log("PUT/API/PINS", req.body)
+  console.log("PUT/API/PINS", req.body);
   res.status(200).send();
 
-
   try {
-
     const { current_user_id, pinID } = req.body;
-    const updatedPin = await db.query(
-      "UPDATE pins SET claimer_id = $1 WHERE id = $2 RETURNING *;", [current_user_id, pinID]
-    ).then((response) => {
-
-      res.json(response.rows);
-    });
+    await database
+      .updateIndividualPins(db, current_user_id, pinID)
+      .then((response) => {
+        res.json(response.rows);
+      });
   } catch (err) {
     console.error(err.message);
   }
-
 });
 
 //create a new pin
@@ -84,9 +79,8 @@ router.post("/api/pins", async (req, res) => {
       claimer_id,
     } = req.body;
 
-    const newPin = await db.query(
-      "INSERT INTO pins (title, description, picture, condition, latitude, longitude, date, creator_id, claimer_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
-      [
+    const newPin = database.insertNewPin(
+        db,
         title,
         description,
         picture,
@@ -96,7 +90,8 @@ router.post("/api/pins", async (req, res) => {
         date,
         creator_id,
         claimer_id,
-      ]
+    )
+      
     );
     res.json(newPin);
   } catch (err) {
