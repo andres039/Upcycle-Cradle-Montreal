@@ -48,11 +48,10 @@ router.put("/api/pins/:id", async (req, res) => {
 
   try {
     const { current_user_id, pinID } = req.body;
-    const updatedPin = await db
-      .query("UPDATE pins SET claimer_id = $1 WHERE id = $2 RETURNING *;", [
+    const updatedPin = await database.updateindividualPins(db,
         current_user_id,
         pinID,
-      ])
+      )
       .then((response) => {
         res.json(response.rows);
       });
