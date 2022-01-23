@@ -2,3 +2,24 @@ li {
   padding-bottom: 2rem;
   text-align: left;
 }
+
+.sidebar__map-legend {
+  &--title {
+    margin: 0.5em 0em 0.5em 0em;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  
+  &--row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    padding: 0.05em 0.5em 0.05em 1em;
+  }
+  
+  &--pin-icon {
+    width: 0.8em;
+    height: 1.4em;
+  }
+}

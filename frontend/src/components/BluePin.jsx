@@ -3,7 +3,7 @@ import { Marker, Popup, useMapEvents } from 'react-leaflet';
 import axios from "axios";
 
 import Button from './Button';
-import pinSettings from '../helpers/pinSettings'
+import pinSettings from '../helpers/pinSettings';
 
 import './BluePin.scss';
 

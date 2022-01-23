@@ -19,7 +19,7 @@
   color: $light-blue;
 
   &__logo {
-    width: 200px;
+    width: 180px;
   }
 
   &__text {
@@ -30,6 +30,10 @@
     flex-flow: column;
     gap: 1rem;
     width: 25vw;
+  }
+
+  &__user {
+    margin: 0 auto 0.8em auto;
   }
 }
 
