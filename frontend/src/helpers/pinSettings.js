@@ -20,7 +20,7 @@ const pinSettings = () => {
   const orangeIcon = customPin(orangePinUrl);
   const violetIcon = customPin(violetPinUrl);
 
-  return { blueIcon, greenIcon, orangeIcon, violetIcon };
+  return { blueIcon, greenIcon, orangeIcon, violetIcon, bluePinUrl, greenPinUrl, orangePinUrl, violetPinUrl };
 }
 
 export default pinSettings;

@@ -9,8 +9,72 @@
   display: flex;
 }
 
+.login-page {
+  position: relative;
+  display: flex;
+  flex-flow: row;
+  height: 100vh;
+  width: 100vw;
+  background: $black;
+  color: $light-purple;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  gap: 6em;
+
+  &__logo {
+    width: 500px;
+  }
+
+  &__text {
+    position: absolute;
+    top: 5em;
+    left: 14em;
+    display: flex;
+    flex-flow: row;
+    gap: 5rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__register-link {
+    color: $reg-orange;
+  }
+}
+
+.login {
+  display: flex;
+  flex-direction: row;
+  width: 500px;
+  text-align: left;
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    &__title {
+      font-size: 2em;
+    }
+
+    &__label {
+      font-size: 1.4em;
+      font-weight: bold;
+    }
+
+    &__input {
+      font-size: 1.3em;
+      color: $dark-purple;
+      height: 1.5em;
+      border-radius: 5px;
+      background-color: $grey;
+    }
+  }
+}
+
 .sidebar {
-  position: relative; // new
+  position: relative;
   display: flex;
   flex-flow: column;
   height: 100vh;
@@ -19,7 +83,7 @@
   color: $light-blue;
 
   &__logo {
-    width: 200px;
+    width: 180px;
   }
 
   &__text {
@@ -31,10 +95,24 @@
     gap: 1rem;
     width: 25vw;
   }
+
+  &__user {
+    margin: 0 auto 0.8em auto;
+  }
 }
 
 .form {
   display: flex;
   flex-flow: column;
   padding-left: 1rem;
+}
+
+@media only screen and (max-width: 1580px) {
+  .App {
+    font-size: 1.1em;
+  }
+
+  .sidebar__logo {
+    width: 150px;
+  }
 }

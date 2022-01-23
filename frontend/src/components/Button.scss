@@ -1,0 +1,35 @@
+@import "../styles/variables.scss";
+
+.button {
+  padding: 0.7em 1.5em;
+  border-radius: 16px;
+  border: none;
+  font-size: 0.9em;
+  color: $white;
+  cursor: pointer;
+
+  &--confirm {
+    background-color: $green;
+  }
+
+  &--confirm:hover {
+    background-color: $plant-green;
+  }
+
+  &--cancel {
+    background-color: $orange;
+  }
+
+  &--cancel:hover {
+    background-color: $red;
+  }
+
+  &--claimed {
+    background-color: $yellow;
+    color: $black;
+  }
+
+  &--claimed:hover {
+    background-color: $reg-orange;
+  }
+}
