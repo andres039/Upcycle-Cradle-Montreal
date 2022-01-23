@@ -12,8 +12,8 @@ import "./Button.scss";
   if (props.cancel) {
     buttonClass += " button--cancel";
   }
-  if (props.newItem) {
-    buttonClass += " button--new-item";
+  if (props.claimed) {
+    buttonClass += " button--claimed";
   }
   
   return <button onClick={props.onClick} className={buttonClass}>{props.children}</button>;

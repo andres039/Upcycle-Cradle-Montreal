@@ -2,7 +2,7 @@
 
 .button {
   padding: 0.5em 1.5em;
-  border-radius: 5px;
+  border-radius: 16px;
   border: none;
   font-size: 0.9em;
   color: $white;
@@ -24,7 +24,8 @@
     background-color: $red;
   }
 
-  &--new-item {
-    background-color: $aqua;
+  &--claimed {
+    background-color: $yellow;
+    color: $black;
   }
 }
