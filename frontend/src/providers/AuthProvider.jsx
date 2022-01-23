@@ -1,48 +1,81 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-const { useState, createContext, useEffect } = require("react");
+import { useNavigate, use } from "react-router-dom";
 
+const { useState, createContext, useEffect } = require("react");
 export const AuthContext = createContext();
-//in App.jsx ==> {user, login, logout = useContext(authContext)}
+
 
 const withAuthProvider = (WrappedComponent) => (props) => {
+
+  const userID = localStorage.getItem("user");
+  const current_user = userID ? parseInt(userID) : null;
+
+  //Tracking user-related states
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
-  const [username, setUsername] = useState("");
   const [showEmailError, setShowEmailError] = useState(false);
-  const [showConfirmationPassError, setShowConfirmationPassError] =
-    useState(false);
+  const [showConfirmationPassError, setShowConfirmationPassError] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const [id, setId] = useState(current_user);
   const [errorMessage, setErrorMessage] = useState("");
+
+
+
+  //handle navigation upon successful authentication
   const navigate = useNavigate();
 
   const handleErrorMessageReset = () => {
     setErrorMessage('')
   }
 
-  
+  // Functions handling username, password, confirmation password and email changes
+  const handleUsername = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleConfirmationPassword = (e) => {
+    setConfirmationPassword(e.target.value);
+  };
+
+
+  //Handling login functions
+
   const handleLogin = (loginData) => {
     console.log("loginData", loginData);
     return axios
       .post("/login", loginData)
       .then((response) => {
+        getUserId(response.data.user.id)
         localStorage.setItem("token", response.data.token);
 
-        // setPin(itemData);
       })
       .then(() => navigate("/mapview"))
       .catch((err) => {
         //optional chaining
         console.log("Error record:", err?.response?.data?.message);
-        if (err?.response?.data?.message === "Incorrect password"){
+        if (err?.response?.data?.message === "Incorrect password") {
           setErrorMessage(err?.response?.data?.message)
           return
         }
         setErrorMessage(err?.response?.data?.message);
         return;
       });
-  };
+  }
+
+  const getUserId = (data) => {
+    setId(data);
+    localStorage.setItem("user", data);
+  }
 
   const handleLoginSubmit = (event) => {
     event.preventDefault();
@@ -53,46 +86,50 @@ const withAuthProvider = (WrappedComponent) => (props) => {
     handleLogin({ email, password });
   };
 
-  // Handling the name change
-  const handleUsername = (e) => {
-    setUsername(e.target.value);
+  const handleRegistrationSubmit = (e) => {
+    e.preventDefault();
+    if (
+      username === "" ||
+      email === "" ||
+      password === "" ||
+      confirmationPassword === ""
+    ) {
+      setErrorMessage('Please enter all the fields');
+      return
+    } else {
+      handleRegistration({ email, password, username });
+    }
   };
 
-  // Handling the email change
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  
-  // Handling the password change
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
 
-  const handleConfirmationPassword = (e) => {
-    setConfirmationPassword(e.target.value);
-  };
+
+  // Handling registration functions
 
   const handleRegistration = (itemData) => {
     if (password !== confirmationPassword) {
-      console.log("🔥 passwords must match 🔥");
-      setShowConfirmationPassError(true);
+
+      setErrorMessage("🔥 passwords must match 🔥");
+      // setShowConfirmationPassError(true);
       return;
     } else {
+
       return axios
         .post("/register", itemData)
         .then((response) => {
           localStorage.setItem("token", response.data.token);
 
-          // setPin(itemData);
         })
         .then(() => navigate("/mapview"))
         .catch((err) => {
+          console.log("Registration error:", err);
+          // setShowEmailError(true);
           console.log("Error record:", err.response);
-          setShowEmailError(true);
+          setErrorMessage("Email already in use")
         });
     }
   };
 
+  // variables to include in user state-related files:
   const providerData = {
     email,
     password,
@@ -114,17 +151,17 @@ const withAuthProvider = (WrappedComponent) => (props) => {
     handleLoginSubmit,
     loginError,
     errorMessage,
-    handleErrorMessageReset
-  };
+    handleErrorMessageReset,
+    handleRegistrationSubmit,
+    id,
+    setId
+  }
 
   return (
     <AuthContext.Provider value={providerData}>
       <WrappedComponent {...props} />
     </AuthContext.Provider>
   );
-};
+}
 
 export default withAuthProvider;
-
-
-//REACT: Displaying error messages coming from a post request error in a form. I'm not sure how to handle or access the error that comes from a login attempt.

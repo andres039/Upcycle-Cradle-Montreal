@@ -50,9 +50,9 @@ router.put("/api/pins/:id", async (req, res) => {
 
   try {
 
-    const { userID, pinID } = req.body;
+    const { current_user_id, pinID } = req.body;
     const updatedPin = await db.query(
-      "UPDATE pins SET claimer_id = $1 WHERE id = $2 RETURNING *;", [userID, pinID]
+      "UPDATE pins SET claimer_id = $1 WHERE id = $2 RETURNING *;", [current_user_id, pinID]
     ).then((response) => {
 
       res.json(response.rows);
@@ -69,7 +69,6 @@ router.put("/api/pins/:id", async (req, res) => {
 //create a new pin
 
 router.post("/api/pins", async (req, res) => {
-  console.log("req.headers", req.headers)
 
   try {
     const verification = jwt.verify(req.headers.token, process.env.TOKEN_KEY);

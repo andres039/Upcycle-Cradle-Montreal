@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Marker, Popup, useMapEvents } from 'react-leaflet';
 import axios from "axios";
+import { AuthContext } from "../providers/AuthProvider";
 
 import Button from './Button';
 import pinSettings from '../helpers/pinSettings';
@@ -16,27 +17,39 @@ const BluePin = (props) => {
   const [bluePinLatitude, setBluePinLatitude] = useState(item.latitude);
   const [bluePinLongitude, setBluePinLongitude] = useState(item.longitude);
 
+  const context = useContext(AuthContext);
+  const current_user_id = context.id;
+
+
+  //check if the current user is the pin claimer ---> set it to violet
+
   useEffect(() => {
-    if (claimed) {
+    if (claimed && current_user_id !== item.creator_id) {
       setpinColor(orangeIcon);
+    }
+  }, []);
+
+
+  useEffect(() => {
+
+    if (claimed && current_user_id === item.creator_id) {
+
+      setpinColor(violetIcon);
     }
   }, [claimed]);
 
-  const claimItem = () => {
 
+  const claimItem = () => {
     const pinID = id;
-    //track user id
-    const userID = 2;
 
     // add user's ID as claiamer_id in DB
-    return axios.put(`/api/pins/${pinID}`, { userID, pinID })
+    return axios.put(`/api/pins/${pinID}`, { current_user_id, pinID })
       .then(() => {
         setClaimed(true);
       });
   }
 
-  //userID => get request to db, then set the state for delete button(show
-  // if exists, then when delete is pressed, delete request to db)
+
 
   const deletePin = (deleteType) => {
     const pinID = id;
