@@ -44,12 +44,10 @@ router.delete("/api/pins/:id", (req, res) => {
 
 router.put("/api/pins/:id", async (req, res) => {
 
-  res.status(200).send();
-
   try {
 
     const { current_user_id, pinID } = req.body;
-    const updatedPin = await db.query(
+    await db.query(
       "UPDATE pins SET claimer_id = $1 WHERE id = $2 RETURNING *;", [current_user_id, pinID]
     ).then((response) => {
 

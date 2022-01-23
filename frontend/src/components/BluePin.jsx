@@ -22,12 +22,7 @@ const BluePin = (props) => {
 
 
   //check if the current user is the pin claimer ---> set it to violet
-
-  useEffect(() => {
-    if (claimed && current_user_id === item.claimer_id) {
-      setpinColor(orangeIcon);
-    }
-  }, []);
+  //item is CLAIMED, current user didn't create and didn't claim
 
 
   useEffect(() => {
@@ -37,14 +32,28 @@ const BluePin = (props) => {
     }
   }, [claimed]);
 
-
   useEffect(() => {
-
     if (!claimed && current_user_id === item.creator_id) {
       setpinColor(greenIcon);
     }
-  }, []);
+  }, [claimed]);
 
+  useEffect(() => {
+    if (claimed && current_user_id === item.claimer_id) {
+      setpinColor(orangeIcon);
+    }
+  }, [claimed]);
+
+
+  useEffect(() => {
+
+    if (claimed && current_user_id !== item.creator_id && current_user_id !== claimed) {
+      setBluePinLatitude(null);
+      setBluePinLongitude(null);
+    }
+
+
+  }, [claimed]);
 
 
   const claimItem = () => {
@@ -52,8 +61,10 @@ const BluePin = (props) => {
 
     // add user's ID as claiamer_id in DB
     return axios.put(`/api/pins/${pinID}`, { current_user_id, pinID })
-      .then(() => {
-        setClaimed(true);
+      .then((result) => {
+        console.log(result.data)
+        setClaimed(current_user_id);
+        setpinColor(orangeIcon);
       });
   }
 
@@ -76,7 +87,8 @@ const BluePin = (props) => {
       });
   }
 
-  return (bluePinLatitude === null || (claimed && current_user_id !== item.creator_id && current_user_id !== item.claimer_id)) ? null : (
+
+  return bluePinLatitude === null ? null : (
     <Marker position={[bluePinLatitude, bluePinLongitude]} icon={pinColor}>
       <Popup className="pin-popup__new">
         <h1 className="pin-popup__new-title">{item.title}</h1>
