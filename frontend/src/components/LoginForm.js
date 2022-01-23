@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 
+import Button from "./Button"
+
 const LoginForm = (props) => {
   const context = useContext(AuthContext);
 
@@ -22,37 +24,34 @@ const LoginForm = (props) => {
     handleErrorMessageReset();
   }, []);
   return (
-    <div>
-      <section className="login">
-        {errorMessage && <h1>🔥 {errorMessage} 🔥</h1>}
-        <form>
-          <label>Email: </label>
-          <input
-            className="email"
-            name="email"
-            type="email"
-            // placeholder="email"
+    <section className="login">
+      {errorMessage && <h1>🔥 {errorMessage} 🔥</h1>}
+      <form className="login-form">
+        <label className="login-form__label">Email </label>
+        <input
+          className="login-form__input"
+          name="email"
+          type="email"
+          // placeholder="email"
 
-            value={email}
-            onChange={handleEmail}
-          />
+          value={email}
+          onChange={handleEmail}
+        />
+        <label className="login-form__label">Password </label>
+        <input
+          className="login-form__input"
+          name="password"
+          type="password"
+          // placeholder="password"
 
-          <label>Password: </label>
-          <input
-            className="password"
-            name="password"
-            type="password"
-            // placeholder="password"
-
-            value={password}
-            onChange={handlePassword}
-          />
-          <button onClick={handleLoginSubmit} className="btn" type="submit">
-            Login
-          </button>
-        </form>
-      </section>
-    </div>
+          value={password}
+          onChange={handlePassword}
+        />
+        <Button confirm onClick={handleLoginSubmit} className="btn" type="submit">
+          Login
+        </Button>
+      </form>
+    </section>
   );
 };
 

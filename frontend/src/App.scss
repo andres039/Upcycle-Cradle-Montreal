@@ -9,8 +9,59 @@
   display: flex;
 }
 
+.login-page {
+  position: relative;
+  display: flex;
+  flex-flow: row;
+  height: 100vh;
+  width: 100vw;
+  background: $black;
+  color: $light-blue;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  gap: 6em;
+
+  &__logo {
+    width: 500px;
+  }
+
+  &__register-link {
+    color: $reg-orange;
+  }
+}
+
+.login {
+  display: flex;
+  flex-direction: row;
+  width: 500px;
+  text-align: left;
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    &__title {
+      font-size: 2em;
+    }
+
+    &__label {
+      font-size: 1.4em;
+      font-weight: bold;
+    }
+
+    &__input {
+      font-size: 1.3em;
+      height: 1.2em;
+      border-radius: 5px;
+    }
+  }
+}
+
 .sidebar {
-  position: relative; // new
+  position: relative;
   display: flex;
   flex-flow: column;
   height: 100vh;
