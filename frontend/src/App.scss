@@ -16,7 +16,7 @@
   height: 100vh;
   width: 100vw;
   background: $black;
-  color: $light-blue;
+  color: $light-purple;
   margin: 0;
   padding: 0;
   justify-content: center;
@@ -65,6 +65,7 @@
 
     &__input {
       font-size: 1.3em;
+      color: $dark-purple;
       height: 1.5em;
       border-radius: 5px;
       background-color: $grey;
