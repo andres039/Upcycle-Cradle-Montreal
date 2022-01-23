@@ -25,6 +25,7 @@ const SidebarHeader = (props) => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     navigate("/");
   }
 
