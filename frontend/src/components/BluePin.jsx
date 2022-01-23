@@ -27,7 +27,7 @@ const BluePin = (props) => {
     if (claimed && current_user_id === item.claimer_id) {
       setpinColor(orangeIcon);
     }
-  }, []);
+  }, [claimed]);
 
 
   useEffect(() => {
@@ -53,6 +53,7 @@ const BluePin = (props) => {
     // add user's ID as claiamer_id in DB
     return axios.put(`/api/pins/${pinID}`, { current_user_id, pinID })
       .then(() => {
+        console.log('pinID:', pinID)
         setClaimed(true);
       });
   }

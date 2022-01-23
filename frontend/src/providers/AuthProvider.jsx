@@ -7,7 +7,6 @@ export const AuthContext = createContext();
 const withAuthProvider = (WrappedComponent) => (props) => {
   const userID = localStorage.getItem("user");
   const current_user = userID ? parseInt(userID) : null;
-
   //Tracking user-related states
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");

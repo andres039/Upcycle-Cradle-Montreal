@@ -22,7 +22,7 @@ router.get("/api/pins", (req, res) => {
 //Select individual pins
 
 router.get("/api/pins/:id", (req, res) => {
-  query.getPinsById(db, req.params.id)
+  queries.getPinsById(db, req.params.id)
     .then((response) => res.send(response.rows))
     .catch((err) => {
       console.log("API/pins error:", err);
