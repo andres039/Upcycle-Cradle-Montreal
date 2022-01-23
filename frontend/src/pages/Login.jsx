@@ -1,17 +1,22 @@
 import { Link } from "react-router-dom";
+
 import LoginForm from "../components/LoginForm";
+import "./Login.scss";
 
 const Login = () => {
   return (
-    <div className="login-page">
-      <img className="login-page__logo" src="images/logo.png" alt="Trash Panda Montreal" />
-      <div>
-        <LoginForm />
-        <Link to="/register">
-          <span className="login-page__register-link">Register</span>
-        </Link>
+    <main className="login-page">
+      <img className="bg-image" src="images/montreal-map.png" alt="background for decoration only"/>
+      <div className="login-page__text">
+        <img className="login-page__logo" src="images/logo.png" alt="Trash Panda Montreal" />
+        <div>
+          <LoginForm />
+          <Link to="/register">
+            <span className="login-page__register-link">Register</span>
+          </Link>
+        </div>
       </div>
-    </div>
+    </main>
   );
 };
 

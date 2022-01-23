@@ -27,6 +27,17 @@
     width: 500px;
   }
 
+  &__text {
+    position: absolute;
+    top: 5em;
+    left: 14em;
+    display: flex;
+    flex-flow: row;
+    gap: 5rem;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__register-link {
     color: $reg-orange;
   }
@@ -54,7 +65,7 @@
 
     &__input {
       font-size: 1.3em;
-      height: 1.2em;
+      height: 1.5em;
       border-radius: 5px;
     }
   }
