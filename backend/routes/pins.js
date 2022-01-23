@@ -33,7 +33,7 @@ router.get("/api/pins/:id", (req, res) => {
 //Delete individual pins
 
 router.delete("/api/pins/:id", (req, res) => {
-  query.deletePins(db, req.params.id)
+  queries.deletePins(db, req.params.id)
     .then((response) => {
       res.send(200);
     })
