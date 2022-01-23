@@ -58,12 +58,24 @@ const BluePin = (props) => {
 
   const claimItem = () => {
     const pinID = id;
+    const userID = current_user_id
 
     // add user's ID as claiamer_id in DB
-    return axios.put(`/api/pins/${pinID}`, { current_user_id, pinID })
+    return axios.put(`/api/pins/${pinID}`, { userID, pinID })
       .then(() => {
         setClaimed(current_user_id);
         setpinColor(orangeIcon);
+      });
+  }
+
+  const unclaimItem = () => {
+    const pinID = id;
+    const userID = null;
+
+    return axios.put(`/api/pins/${pinID}`, { userID, pinID })
+      .then(() => {
+        setClaimed(null);
+        setpinColor(blueIcon);
       });
   }
 
@@ -94,10 +106,11 @@ const BluePin = (props) => {
         <p>{item.description}</p>
         <img className="pin-popup__new-picture" src={`${item.picture}`} alt='Item' />
         <p><strong>Condition:</strong> {item.condition}</p>
-        {claimed && claimed !== 'delete countdown' && <p class="pin-popup__new-buttons-claimed">You claimed this item. Please pick up at your earliest convenience.</p>}
-        {claimed === 'delete countdown' && <p class="pin-popup__new-buttons-picked-up">You have closed the deal! The pin will be deleted shortly.</p>}
+        {claimed && claimed !== 'delete countdown' && <p className="pin-popup__new-buttons-claimed">You claimed this item. Please pick up at your earliest convenience.</p>}
+        {claimed === 'delete countdown' && <p className="pin-popup__new-buttons-picked-up">You have closed the deal! The pin will be deleted shortly.</p>}
         <div className="pin-popup__new-buttons">
-          {!claimed && <Button claimed onClick={() => claimItem()}>Claimed</Button>}
+          {!claimed && <Button claimed onClick={() => claimItem()}>Claim</Button>}
+          {claimed && <Button claimed onClick={() => unclaimItem()}>Unclaim</Button>}
           {claimed && <Button confirm onClick={() => deletePin('claimer delete')}>Picked up</Button>}
           {/* Put condition on delete button to only allow the creator to use it (user === item.creator_id) once user tracking is set up */}
           <Button cancel onClick={() => deletePin('creator delete')}>Delete</Button>
