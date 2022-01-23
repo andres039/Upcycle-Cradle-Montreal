@@ -106,7 +106,8 @@ const BluePin = (props) => {
         <p>{item.description}</p>
         <img className="pin-popup__new-picture" src={`${item.picture}`} alt='Item' />
         <p><strong>Condition:</strong> {item.condition}</p>
-        {claimed && claimed !== 'delete countdown' && <p className="pin-popup__new-buttons-claimed">You claimed this item. Please pick up at your earliest convenience.</p>}
+        {claimed && claimed !== 'delete countdown' && item.claimer_id === current_user_id && <p className="pin-popup__new-buttons-claimed">You claimed this item. Please pick up at your earliest convenience.</p>}
+        {claimed && claimed !== 'delete countdown' && item.creator_id === current_user_id && <p className="pin-popup__new-buttons-claimed">This item has been claimed!</p>}
         {claimed === 'delete countdown' && <p className="pin-popup__new-buttons-picked-up">You have closed the deal! The pin will be deleted shortly.</p>}
         <div className="pin-popup__new-buttons">
           {!claimed && current_user_id !== item.creator_id && <Button claimed onClick={() => claimItem()}>Claim</Button>}
