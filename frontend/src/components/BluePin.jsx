@@ -61,8 +61,7 @@ const BluePin = (props) => {
 
     // add user's ID as claiamer_id in DB
     return axios.put(`/api/pins/${pinID}`, { current_user_id, pinID })
-      .then((result) => {
-        console.log(result.data)
+      .then(() => {
         setClaimed(current_user_id);
         setpinColor(orangeIcon);
       });
