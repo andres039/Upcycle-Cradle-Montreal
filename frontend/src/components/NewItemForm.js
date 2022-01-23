@@ -37,7 +37,7 @@ const NewItemForm = (props) => {
       setErrorMessage("Please fill all the fields");
       return;
     }
-    validate({
+    validateSavePin({
       title,
       description,
       condition,
@@ -49,7 +49,7 @@ const NewItemForm = (props) => {
     });
   };
 
-  const validate = (itemData) => {
+  const validateSavePin = (itemData) => {
     const tokenKey = localStorage.getItem("token");
     return axios
       .post("/api/pins", itemData, { headers: { token: tokenKey } })
