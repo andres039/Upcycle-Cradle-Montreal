@@ -41,7 +41,6 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
 
-
     //check if user already exist
 
     db.query("SELECT id FROM users WHERE email=$1;", [email])
@@ -63,10 +62,8 @@ router.post("/register", async (req, res) => {
               );
               // save user token
               const user = resp.rows[0];
-              console.log(user);
               user.token = token;
-              console.log(user.token);
-              // res.cookie(process.env.AUTH_COOKIE, token);
+
               return res.status(200).send({
                 status: "logged in",
                 message: "Login successful",
@@ -92,6 +89,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
+    //email check
     const { email, password } = req.body;
     const users = await db.query("SELECT * FROM users WHERE email=$1;", [
       email,
@@ -117,9 +115,8 @@ router.post("/login", async (req, res) => {
     const user = users.rows[0];
     user.token = token;
     return res.status(200).json({ message: "Success", token, user });
-
   } catch (error) {
-    console.log("Query error:", error)
+    console.log("Query error:", error);
   }
 });
 

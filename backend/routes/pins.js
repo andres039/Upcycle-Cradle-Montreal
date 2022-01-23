@@ -27,9 +27,9 @@ router.get("/api/pins/:id", (req, res) => {
     });
 });
 
+//Delete individual pins
 
 router.delete("/api/pins/:id", (req, res) => {
-  console.log(req.params)
   db.query("DELETE FROM pins WHERE id = $1 RETURNING *;", [req.params.id])
     .then((response) => {
       res.send(200)
@@ -40,13 +40,11 @@ router.delete("/api/pins/:id", (req, res) => {
     });
 })
 
-
+//Update individual pins
 
 router.put("/api/pins/:id", async (req, res) => {
 
-  console.log("PUT/API/PINS", req.body)
   res.status(200).send();
-
 
   try {
 
@@ -63,16 +61,13 @@ router.put("/api/pins/:id", async (req, res) => {
 
 });
 
-
-
-
 //create a new pin
 
 router.post("/api/pins", async (req, res) => {
 
   try {
+    //test compare with users
     const verification = jwt.verify(req.headers.token, process.env.TOKEN_KEY);
-    console.log(verification)
     const {
       title,
       description,

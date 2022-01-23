@@ -1,39 +1,43 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from 'axios';
+import axios from "axios";
 import Button from "./Button";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
-import './NewItemForm.scss';
+import "./NewItemForm.scss";
 
 const NewItemForm = (props) => {
+  const context = useContext(AuthContext);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [condition, setCondition] = useState("New");
   const [picture, setPicture] = useState("");
   const [savePinError, setSavePinError] = useState(false);
 
-  const context = useContext(AuthContext);
   const id = context.id;
-
-
+  const handleErrorMessageReset = context.handleErrorMessageReset;
+  const errorMessage = context.errorMessage;
+  const setErrorMessage = context.setErrorMessage;
   const navigate = useNavigate();
 
   const handleSavePin = () => {
-
+    if (!props.longitude ||
+      !props.latitude)
+      {
+        setErrorMessage("Please select a location on the map")
+      }
     if (
       title === "" ||
       description === "" ||
       condition === "" ||
-      picture === "" ||
-      !props.longitude ||
-      !props.latitude
+      picture === ""
     ) {
-      console.log("ERROR")
-      setSavePinError(true);
-      return
+      console.log("ERROR");
+      setErrorMessage("Please fill all the fields");
+      return;
     }
-    validate({
+    validateSavePin({
       title,
       description,
       condition,
@@ -41,34 +45,42 @@ const NewItemForm = (props) => {
       longitude: props.longitude.toFixed(4),
       latitude: props.latitude.toFixed(4),
       creator_id: id,
-      date: currentDate()
-    })
-  }
-
-
-  const validate = (itemData) => {
-    const tokenKey = localStorage.getItem("token")
-    return axios.post("/api/pins", itemData, { headers: { token: tokenKey } }).then(() => {
-      window.location.reload();
+      date: currentDate(),
     });
   };
+
+  const validateSavePin = (itemData) => {
+    const tokenKey = localStorage.getItem("token");
+    return axios
+      .post("/api/pins", itemData, { headers: { token: tokenKey } })
+      .then(() => {
+        window.location.reload();
+      });
+  };
+  useEffect(() => {
+    handleErrorMessageReset();
+  }, []);
 
   const deletePin = () => {
     props.setLatitude(null);
     props.setLongitude(null);
-  }
+  };
 
   const currentDate = () => {
     const timeElapsed = Date.now();
     const today = new Date(timeElapsed);
     return today.toDateString();
-  }
+  };
 
   return (
-
     <section className="new-item">
+      <h1>{errorMessage}</h1>
       <h1 className="new-item-form__title">New Item</h1>
-      <form onSubmit={(e) => e.preventDefault()} autoComplete="off" className="form">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        autoComplete="off"
+        className="form"
+      >
         <label className="new-item-form__label">Title</label>
         <input
           className="new-item__input"
@@ -88,10 +100,12 @@ const NewItemForm = (props) => {
         />
 
         <label className="new-item-form__label">Condition</label>
-        <select className="new-item__select"
+        <select
+          className="new-item__select"
           name="condition"
           value={condition}
-          onChange={(event) => setCondition(event.target.value)}>
+          onChange={(event) => setCondition(event.target.value)}
+        >
           <option value="New">New</option>
           <option value="Like new">Like new</option>
           <option value="Fair">Fair</option>
@@ -121,7 +135,6 @@ const NewItemForm = (props) => {
       </form>
 
     </section>
-
   );
 };
 export default NewItemForm;

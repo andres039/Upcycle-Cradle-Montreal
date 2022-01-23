@@ -4,9 +4,7 @@ import { useNavigate, use } from "react-router-dom";
 const { useState, createContext, useEffect } = require("react");
 export const AuthContext = createContext();
 
-
 const withAuthProvider = (WrappedComponent) => (props) => {
-
   const userID = localStorage.getItem("user");
   const current_user = userID ? parseInt(userID) : null;
 
@@ -16,19 +14,18 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
   const [showEmailError, setShowEmailError] = useState(false);
-  const [showConfirmationPassError, setShowConfirmationPassError] = useState(false);
+  const [showConfirmationPassError, setShowConfirmationPassError] =
+    useState(false);
   const [loginError, setLoginError] = useState("");
   const [id, setId] = useState(current_user);
   const [errorMessage, setErrorMessage] = useState("");
-
-
 
   //handle navigation upon successful authentication
   const navigate = useNavigate();
 
   const handleErrorMessageReset = () => {
-    setErrorMessage('')
-  }
+    setErrorMessage("");
+  };
 
   // Functions handling username, password, confirmation password and email changes
   const handleUsername = (e) => {
@@ -47,7 +44,6 @@ const withAuthProvider = (WrappedComponent) => (props) => {
     setConfirmationPassword(e.target.value);
   };
 
-
   //Handling login functions
 
   const handleLogin = (loginData) => {
@@ -55,27 +51,26 @@ const withAuthProvider = (WrappedComponent) => (props) => {
     return axios
       .post("/login", loginData)
       .then((response) => {
-        getUserId(response.data.user.id)
+        getUserId(response.data.user.id);
         localStorage.setItem("token", response.data.token);
-
       })
       .then(() => navigate("/mapview"))
       .catch((err) => {
         //optional chaining
         console.log("Error record:", err?.response?.data?.message);
         if (err?.response?.data?.message === "Incorrect password") {
-          setErrorMessage(err?.response?.data?.message)
-          return
+          setErrorMessage(err?.response?.data?.message);
+          return;
         }
         setErrorMessage(err?.response?.data?.message);
         return;
       });
-  }
+  };
 
   const getUserId = (data) => {
     setId(data);
     localStorage.setItem("user", data);
-  }
+  };
 
   const handleLoginSubmit = (event) => {
     event.preventDefault();
@@ -94,40 +89,36 @@ const withAuthProvider = (WrappedComponent) => (props) => {
       password === "" ||
       confirmationPassword === ""
     ) {
-      setErrorMessage('Please enter all the fields');
-      return
+      setErrorMessage("Please enter all the fields");
+      return;
     } else {
       handleRegistration({ email, password, username });
     }
   };
 
-
-
   // Handling registration functions
 
   const handleRegistration = (itemData) => {
     if (password !== confirmationPassword) {
-
       setErrorMessage("🔥 passwords must match 🔥");
       // setShowConfirmationPassError(true);
       return;
     } else {
-
       return axios
         .post("/register", itemData)
         .then((response) => {
           localStorage.setItem("token", response.data.token);
-
         })
         .then(() => navigate("/mapview"))
         .catch((err) => {
           console.log("Registration error:", err);
           // setShowEmailError(true);
           console.log("Error record:", err.response);
-          setErrorMessage("Email already in use")
+          setErrorMessage("Email already in use");
         });
     }
   };
+
 
   // variables to include in user state-related files:
   const providerData = {
@@ -151,17 +142,17 @@ const withAuthProvider = (WrappedComponent) => (props) => {
     handleLoginSubmit,
     loginError,
     errorMessage,
+    setErrorMessage,
     handleErrorMessageReset,
     handleRegistrationSubmit,
     id,
-    setId
-  }
+    setId,
+  };
 
   return (
     <AuthContext.Provider value={providerData}>
       <WrappedComponent {...props} />
     </AuthContext.Provider>
   );
-}
-
+};
 export default withAuthProvider;
