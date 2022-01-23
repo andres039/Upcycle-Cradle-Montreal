@@ -4,6 +4,8 @@ import { Marker, Popup, useMapEvents } from 'react-leaflet';
 import Button from './Button';
 import pinSettings from '../helpers/pinSettings'  
 
+import './Pin.scss';
+
 const Pin = (props) => {
   const { blueIcon, greenIcon, orangeIcon, violetIcon } = pinSettings();
   const [pinColor, setpinColor] = useState(blueIcon);
@@ -32,10 +34,10 @@ const Pin = (props) => {
   
   return latitude === null ? null : (
     <Marker position={[latitude, longitude]} icon={pinColor}>
-      <Popup>
-        <h1>{item.title}</h1>
+      <Popup className="pin-popup__new">
+        <h1 className="pin-popup__new-title">{item.title}</h1>
         <p>{item.description}</p>
-        <Button onClick={() => deletePin()}>Delete</Button>
+        <Button cancel onClick={() => deletePin()}>Delete</Button>
       </Popup>
     </Marker>
   )

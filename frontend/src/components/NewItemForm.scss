@@ -12,6 +12,12 @@
     color: $light-purple;
     margin-bottom: 0.3rem;
   }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0.2em;
+  }
 }
 
 .new-item {
@@ -36,4 +42,12 @@
   resize: none;
   height: 2em;
   font-size: 0.8em;
+}
+
+@media only screen and (max-width: 1580px) {
+  .new-item-form {
+    &__title {
+      margin-top: 0.5em;
+    }
+  }
 }

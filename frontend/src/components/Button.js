@@ -1,20 +1,22 @@
 import React from "react";
 //If there is time to refactor: import classNames from "classnames";
 
+import "./Button.scss";
+
  const Button = (props) => {
-  let buttonClass = props.class;
+  let buttonClass = "button";
   
-  if (props.save) {
-    buttonClass += " button--save";
+  if (props.confirm) {
+    buttonClass += " button--confirm";
   }
   if (props.cancel) {
     buttonClass += " button--cancel";
   }
-  if (props.login) {
-    buttonClass += " button--login";
+  if (props.claimed) {
+    buttonClass += " button--claimed";
   }
   
   return <button onClick={props.onClick} className={buttonClass}>{props.children}</button>;
 }
 
-export default Button
+export default Button;

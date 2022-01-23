@@ -1,0 +1,30 @@
+@import "../styles/variables.scss";
+
+.pin-popup__new {
+  font-size: 1.1em;
+
+  &-title {
+    font-size: 1.3em;
+  }
+
+  &-picture {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &-buttons {
+    display: flex;
+    justify-content: space-around;
+
+    &-claimed {
+      color: $yellow;
+      font-weight: bold;
+    }
+
+    &-picked-up {
+      color: $orange;
+      font-weight: bold;
+    }
+  }
+}

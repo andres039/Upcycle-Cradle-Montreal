@@ -25,6 +25,7 @@ const SidebarHeader = (props) => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     navigate("/");
   }
 
@@ -57,9 +58,9 @@ const SidebarHeader = (props) => {
       <header>
         <img className="sidebar__logo" src="images/logo.png" alt="Trash Panda Montreal" />
 
-        <h3>Signed in as {user}</h3>
+        <h3 className="sidebar__user">Signed in as {user}</h3>
 
-        <Button onClick={() => logout()}>
+        <Button cancel onClick={() => logout()}>
           Logout
         </Button>
       </header>

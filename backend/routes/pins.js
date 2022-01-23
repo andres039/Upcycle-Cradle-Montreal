@@ -1,3 +1,4 @@
+const { query } = require("express");
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
@@ -5,11 +6,12 @@ const { Pool } = require("pg");
 const { database } = require("pg/lib/defaults");
 const dbParams = require("../lib/db.js");
 const db = new Pool(dbParams);
+const queries = require("./dbQueries/pinQueries")
 db.connect();
 
 //Select all pins
 router.get("/api/pins", (req, res) => {
-  db.query("SELECT * FROM pins;")
+  queries.getAllPins(db)
     .then((response) => res.send(response.rows))
     .catch((err) => {
       console.log("API/pins error:", err);
@@ -20,7 +22,7 @@ router.get("/api/pins", (req, res) => {
 //Select individual pins
 
 router.get("/api/pins/:id", (req, res) => {
-  db.query("SELECT * FROM pins WHERE id=$1;", [req.params.id])
+  query.getPinsById(db, req.params.id)
     .then((response) => res.send(response.rows))
     .catch((err) => {
       console.log("API/pins error:", err);
@@ -31,7 +33,7 @@ router.get("/api/pins/:id", (req, res) => {
 //Delete individual pins
 
 router.delete("/api/pins/:id", (req, res) => {
-  db.query("DELETE FROM pins WHERE id = $1 RETURNING *;", [req.params.id])
+  query.deletePins(db, req.params.id)
     .then((response) => {
       res.send(200);
     })
@@ -44,11 +46,10 @@ router.delete("/api/pins/:id", (req, res) => {
 //Update individual pins
 
 router.put("/api/pins/:id", async (req, res) => {
-  res.status(200).send();
 
   try {
     const { current_user_id, pinID } = req.body;
-    const updatedPin = await database.updateindividualPins(db,
+     await queries.updateIndividualPins(db,
         current_user_id,
         pinID,
       )
@@ -78,7 +79,7 @@ router.post("/api/pins", async (req, res) => {
       claimer_id,
     } = req.body;
 
-    const newPin = await database.insertNewPin(
+    const newPin = await queries.insertNewPin(
       db,
       title,
       description,
