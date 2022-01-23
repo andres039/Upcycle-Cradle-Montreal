@@ -8,7 +8,7 @@
 .leaflet-popup {
   &-content-wrapper{
     background-color: $black;
-    opacity: 0.95;
+    opacity: 0.9;
     color: $light-blue;
     font-size: 1.5em;
     padding: 0.5em;
@@ -16,7 +16,7 @@
 
   &-tip {
     background: $black;
-    opacity: 0.95;
+    opacity: 0.9;
   }
 
   &-content {

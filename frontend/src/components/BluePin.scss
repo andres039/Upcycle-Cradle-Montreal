@@ -19,10 +19,12 @@
 
     &-claimed {
       color: $yellow;
+      font-weight: bold;
     }
 
     &-picked-up {
       color: $orange;
+      font-weight: bold;
     }
   }
 }
