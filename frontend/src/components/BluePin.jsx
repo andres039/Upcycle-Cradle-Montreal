@@ -109,11 +109,11 @@ const BluePin = (props) => {
         {claimed && claimed !== 'delete countdown' && <p className="pin-popup__new-buttons-claimed">You claimed this item. Please pick up at your earliest convenience.</p>}
         {claimed === 'delete countdown' && <p className="pin-popup__new-buttons-picked-up">You have closed the deal! The pin will be deleted shortly.</p>}
         <div className="pin-popup__new-buttons">
-          {!claimed && <Button claimed onClick={() => claimItem()}>Claim</Button>}
-          {claimed && <Button claimed onClick={() => unclaimItem()}>Unclaim</Button>}
-          {claimed && <Button confirm onClick={() => deletePin('claimer delete')}>Picked up</Button>}
+          {!claimed && current_user_id !== item.creator_id && <Button claimed onClick={() => claimItem()}>Claim</Button>}
+          {claimed && current_user_id !== item.creator_id && <Button claimed onClick={() => unclaimItem()}>Unclaim</Button>}
+          {claimed && current_user_id !== item.creator_id && <Button confirm onClick={() => deletePin('claimer delete')}>Picked up</Button>}
           {/* Put condition on delete button to only allow the creator to use it (user === item.creator_id) once user tracking is set up */}
-          <Button cancel onClick={() => deletePin('creator delete')}>Delete</Button>
+          {current_user_id === item.creator_id && <Button cancel onClick={() => deletePin('creator delete')}>Delete</Button>}
         </div>
       </Popup>
     </Marker>
