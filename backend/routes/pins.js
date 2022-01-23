@@ -4,7 +4,7 @@ const router = express.Router();
 const { Pool } = require("pg");
 const dbParams = require("../lib/db.js");
 const db = new Pool(dbParams);
-const database = require("./dbQueries/pinsQueries");
+const database = require("./dbQueries/pinQueries");
 db.connect();
 
 //Select all pins
