@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Marker, Popup, useMapEvents } from 'react-leaflet';
 
 import Button from './Button';
-import pinSettings from '../helpers/pinSettings'
+import pinSettings from '../helpers/pinSettings'  
 
 const Pin = (props) => {
   const { blueIcon, greenIcon, orangeIcon, violetIcon } = pinSettings();

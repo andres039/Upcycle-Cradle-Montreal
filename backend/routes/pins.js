@@ -47,16 +47,24 @@ router.delete("/api/pins/:id", (req, res) => {
 //Update individual pins
 
 router.put("/api/pins/:id", async (req, res) => {
+
+  console.log("PUT/API/PINS", req.body)
   res.status(200).send();
 
+
   try {
-    const { userID, pinID } = req.body;
-    await database.updateIndividualPins(db, userID, pinID).then((response) => {
+
+    const { current_user_id, pinID } = req.body;
+    const updatedPin = await db.query(
+      "UPDATE pins SET claimer_id = $1 WHERE id = $2 RETURNING *;", [current_user_id, pinID]
+    ).then((response) => {
+
       res.json(response.rows);
     });
   } catch (err) {
     console.error(err.message);
   }
+
 });
 
 //create a new pin
