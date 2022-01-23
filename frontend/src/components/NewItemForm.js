@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useContext } from "react";
+import axios from 'axios';
 import Button from "./Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 import "./NewItemForm.scss";
@@ -13,37 +13,45 @@ const NewItemForm = (props) => {
   const [description, setDescription] = useState("");
   const [condition, setCondition] = useState("New");
   const [picture, setPicture] = useState("");
-  const setErrorMessage = context.setErrorMessage;
-  const errorMessage = context.errorMessage;
-  //const handleNewItemSubmit = context.handleNewItemSubmit;
-  const handleErrorMessageReset = context.handleErrorMessageReset;
+  const [savePinError, setSavePinError] = useState(false);
 
-  const handleNewItem = context.handleNewItem;
+  const context = useContext(AuthContext);
+  const id = context.id;
 
-  const handleNewItemSubmit = (e) => {
-    e.preventDefault();
+
+  const navigate = useNavigate();
+
+  const handleSavePin = () => {
+
     if (
       title === "" ||
       description === "" ||
       condition === "" ||
-      picture === ""
+      picture === "" ||
+      !props.longitude ||
+      !props.latitude
     ) {
-      setErrorMessage("Please enter all the fields");
+      console.log("ERROR")
+      setSavePinError(true);
       return
     }
-    if (!props.longitude || !props.latitude) {
-      setErrorMessage("Please select a location on the map");
-      return
-    }
-    handleNewItem({
+    validate({
       title,
       description,
       condition,
       picture,
       longitude: props.longitude.toFixed(4),
       latitude: props.latitude.toFixed(4),
-      creator_id: 1,
-      date: currentDate(),
+      creator_id: id,
+      date: currentDate()
+    })
+  }
+
+
+  const validate = (itemData) => {
+    const tokenKey = localStorage.getItem("token")
+    return axios.post("/api/pins", itemData, { headers: { token: tokenKey } }).then(() => {
+      window.location.reload();
     });
   };
   useEffect(() => {
@@ -105,8 +113,7 @@ const NewItemForm = (props) => {
           className="new-item__select"
           name="condition"
           value={condition}
-          onChange={(event) => setCondition(event.target.value)}
-        >
+          onChange={(event) => setCondition(event.target.value)}>
           <option value="New">New</option>
           <option value="Like new">Like new</option>
           <option value="Fair">Fair</option>
@@ -124,9 +131,16 @@ const NewItemForm = (props) => {
           value={picture}
           onChange={(event) => setPicture(event.target.value)}
         />
+        <Button onClick={() => handleSavePin()} type="Submit">
+          Save
+        </Button>
+        <Link to="/mapview">
+          <Button onClick={() => deletePin()}>Cancel</Button>
+
+        </Link>
       </form>
 
-      <Button onClick={handleNewItemSubmit}>Save</Button>
+      <Button onClick={validate}>Save</Button>
       <Link to="/mapview">
         <Button onClick={() => deletePin()}>Cancel</Button>
       </Link>

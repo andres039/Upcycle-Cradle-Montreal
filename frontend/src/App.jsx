@@ -12,7 +12,6 @@ import Register from "./pages/Register";
 import MapView from "./pages/MapView";
 import NewItem from "./pages/NewItem";
 import Home from "./pages/Home";
-// import LoginForm from './components/LoginForm';
 
 function App() {
   const context = useContext(AuthContext);
@@ -35,9 +34,7 @@ function App() {
   const isLoggedIn = localStorage.getItem("token");
   // const isLoggedIn = !!localStorage.getItem("token") //This state has been converted to a boolean. For example: Boolean(localStorage.getItem("token")) => equivalent of line 33, !!.
   // const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
-  console.log("Token from app", localStorage.getItem("token"));
   const [oldPins, setOldPins] = useState([]);
-  console.log("is logged in", isLoggedIn);
 
   //Clear local Storage on loading server for the first time. This is a provisional fix to test registration.
 

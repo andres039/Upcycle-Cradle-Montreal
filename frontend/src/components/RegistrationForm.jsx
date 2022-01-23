@@ -34,36 +34,6 @@ const RegistrationForm = (props) => {
     handleErrorMessageReset();
   }, []);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (
-  //     username === "" ||
-  //     email === "" ||
-  //     password === "" ||
-  //     confirmationPassword === ""
-  //   ) {
-  //     setError(Please enter all the fields);
-
-  //   } else {
-  //     setError(false);
-  //     handleRegistration({ email, password, username });
-  //   }
-  // };
-
-
-  // Showing error message if error is true
-  // const errorMessage2 = () => {
-  //   return (
-  //     <div
-  //       className="error"
-  //       style={{
-  //         display: error ? "" : "none",
-  //       }}
-  //     >
-  //       <h1>Please enter all the fields</h1>
-  //     </div>
-  //   );
-  // };
 
   //
 
@@ -73,14 +43,14 @@ const RegistrationForm = (props) => {
         <h1>Register</h1>
       </div>
 
-     { /*Calling to the methods
+      { /*Calling to the methods
       <div className="messages">
         {errorMessage2()}
         {/* {successMessage()} </div>*/}
-       
+
       {/*password doesnt match */}
-      {errorMessage &&   <h1>🔥 {errorMessage} 🔥</h1>}
-      
+      {errorMessage && <h1>🔥 {errorMessage} 🔥</h1>}
+
       <form>
         {/* Labels and inputs for form data */}
         <label className="username">Username: </label>

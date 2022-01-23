@@ -43,8 +43,8 @@ router.post("/register", async (req, res) => {
 
     //check if user already exist
 
-    db.query("SELECT id FROM users WHERE email=$1;", [email]).then(
-      (response) => {
+    db.query("SELECT id FROM users WHERE email=$1;", [email])
+      .then((response) => {
         if (response.rowCount === 0) {
           return db
             .query(
@@ -76,7 +76,7 @@ router.post("/register", async (req, res) => {
           res.status(401).send(response);
         }
       }
-    );
+      );
   } catch (err) {
     console.log("Query failed:", err.message);
     res.send("Query failed:", err.message);
@@ -105,9 +105,8 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({
         status: "Unauthorized",
         message: "Incorrect password",
-      });
+      })
     }
-    //sets up the token
     const user_id = users.rows[0].id;
     const token = jwt.sign({ user_id, email }, process.env.TOKEN_KEY, {
       expiresIn: "2h",
@@ -120,5 +119,8 @@ router.post("/login", async (req, res) => {
     console.log("Query error:", error);
   }
 });
+
+//sets up the token
+
 
 module.exports = router;
