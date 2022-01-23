@@ -48,8 +48,9 @@ router.put("/api/pins/:id", async (req, res) => {
 
   try {
 
+    //userId should become currenUserId
     const { userID, pinID } = req.body;
-    const updatedPin = await db.query(
+    await db.query(
       "UPDATE pins SET claimer_id = $1 WHERE id = $2 RETURNING *;", [userID, pinID]
     ).then((response) => {
 
@@ -66,6 +67,7 @@ router.put("/api/pins/:id", async (req, res) => {
 router.post("/api/pins", async (req, res) => {
 
   try {
+    //test compare with users
     const verification = jwt.verify(req.headers.token, process.env.TOKEN_KEY);
     const {
       title,

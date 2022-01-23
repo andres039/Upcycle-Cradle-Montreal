@@ -18,8 +18,8 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   const navigate = useNavigate();
 
   const handleErrorMessageReset = () => {
-    setErrorMessage('')
-  }
+    setErrorMessage("");
+  };
 
   const handleLogin = (loginData) => {
     console.log("loginData", loginData);
@@ -34,9 +34,9 @@ const withAuthProvider = (WrappedComponent) => (props) => {
       .catch((err) => {
         //optional chaining
         console.log("Error record:", err?.response?.data?.message);
-        if (err?.response?.data?.message === "Incorrect password"){
-          setErrorMessage(err?.response?.data?.message)
-          return
+        if (err?.response?.data?.message === "Incorrect password") {
+          setErrorMessage(err?.response?.data?.message);
+          return;
         }
         setErrorMessage(err?.response?.data?.message);
         return;
@@ -61,7 +61,7 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
-  
+
   // Handling the password change
   const handlePassword = (e) => {
     setPassword(e.target.value);
@@ -73,7 +73,6 @@ const withAuthProvider = (WrappedComponent) => (props) => {
 
   const handleRegistration = (itemData) => {
     if (password !== confirmationPassword) {
-      
       setErrorMessage("🔥 passwords must match 🔥");
       return;
     } else {
@@ -87,24 +86,36 @@ const withAuthProvider = (WrappedComponent) => (props) => {
         .then(() => navigate("/mapview"))
         .catch((err) => {
           console.log("Error record:", err.response);
-          setErrorMessage("Email already in use")
+          setErrorMessage("Email already in use");
         });
     }
   };
+
   const handleRegistrationSubmit = (e) => {
-      e.preventDefault();
-      if (
-        username === "" ||
-        email === "" ||
-        password === "" ||
-        confirmationPassword === ""
-      ) {
-        setErrorMessage('Please enter all the fields');
-        return
-      } else {
-        handleRegistration({ email, password, username });
-      }
-     };
+    e.preventDefault();
+    if (
+      username === "" ||
+      email === "" ||
+      password === "" ||
+      confirmationPassword === ""
+    ) {
+      setErrorMessage("Please enter all the fields");
+      return;
+    } else {
+      handleRegistration({ email, password, username });
+    }
+  };
+
+  const handleNewItem = (itemData) => {
+    const tokenKey = localStorage.getItem("token");
+    //localStorage.removeItem("token") -- for logout
+    console.log(itemData)
+    return axios
+      .post("/api/pins", itemData, { headers: { token: tokenKey } })
+      .then(() => {
+        window.location.reload();
+      });
+    }
 
   const providerData = {
     email,
@@ -127,8 +138,10 @@ const withAuthProvider = (WrappedComponent) => (props) => {
     handleLoginSubmit,
     loginError,
     errorMessage,
+    setErrorMessage,
     handleErrorMessageReset,
-    handleRegistrationSubmit
+    handleRegistrationSubmit,
+    handleNewItem
   };
 
   return (
@@ -136,9 +149,7 @@ const withAuthProvider = (WrappedComponent) => (props) => {
       <WrappedComponent {...props} />
     </AuthContext.Provider>
   );
-};
 
+  }
 export default withAuthProvider;
 
-
-//REACT: Displaying error messages coming from a post request error in a form. I'm not sure how to handle or access the error that comes from a login attempt.
