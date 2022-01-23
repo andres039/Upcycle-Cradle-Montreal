@@ -22,7 +22,7 @@ const BluePin = (props) => {
   //check if the current user is the pin claimer ---> set it to violet
 
   useEffect(() => {
-    if (claimed && current_user_id !== item.creator_id) {
+    if (claimed && current_user_id === item.claimer_id) {
       setpinColor(orangeIcon);
     }
   }, []);
@@ -31,10 +31,18 @@ const BluePin = (props) => {
   useEffect(() => {
 
     if (claimed && current_user_id === item.creator_id) {
-
       setpinColor(violetIcon);
     }
   }, [claimed]);
+
+
+  useEffect(() => {
+
+    if (!claimed && current_user_id === item.creator_id) {
+      setpinColor(greenIcon);
+    }
+  }, []);
+
 
 
   const claimItem = () => {
@@ -66,7 +74,7 @@ const BluePin = (props) => {
       });
   }
 
-  return bluePinLatitude === null ? null : (
+  return (bluePinLatitude === null || (claimed && current_user_id !== item.creator_id && current_user_id !== item.claimer_id)) ? null : (
     <Marker position={[bluePinLatitude, bluePinLongitude]} icon={pinColor}>
       <Popup>
         <h1>{item.title}</h1>
