@@ -119,21 +119,7 @@ const withAuthProvider = (WrappedComponent) => (props) => {
     }
   };
 
-  const handleRegistrationSubmit = (e) => {
-    e.preventDefault();
-    if (
-      username === "" ||
-      email === "" ||
-      password === "" ||
-      confirmationPassword === ""
-    ) {
-      setErrorMessage("Please enter all the fields");
-      return;
-    } else {
-      handleRegistration({ email, password, username });
-    }
-  };
-  
+
   // variables to include in user state-related files:
   const providerData = {
     email,
@@ -159,7 +145,6 @@ const withAuthProvider = (WrappedComponent) => (props) => {
     setErrorMessage,
     handleErrorMessageReset,
     handleRegistrationSubmit,
-    handleNewItem,
     id,
     setId,
   };
