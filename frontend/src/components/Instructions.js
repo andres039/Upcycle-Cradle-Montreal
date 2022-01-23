@@ -13,20 +13,20 @@ const Instructions = () => {
         <div className="sidebar__map-legend">
           <h4 className="sidebar__map-legend--title">Legend</h4>
           <div className="sidebar__map-legend--row">
-            <img className="sidebar__map-legend--pin-icon" src={violetPinUrl} alt="Violet map pin" />
-            <span>Your created item pin</span>
-          </div>
-          <div className="sidebar__map-legend--row">
             <img className="sidebar__map-legend--pin-icon" src={bluePinUrl} alt="Blue map pin" />
-            <span>Available item pin</span>
+            <span>Available item</span>
           </div>
           <div className="sidebar__map-legend--row">
             <img className="sidebar__map-legend--pin-icon" src={orangePinUrl} alt="Orange map pin" />
-            <span>Claimed item pin</span>
+            <span>Claimed item</span>
           </div>
           <div className="sidebar__map-legend--row">
             <img className="sidebar__map-legend--pin-icon" src={greenPinUrl} alt="Green map pin" />
-            <span>New item pin</span>
+            <span>Your created item (unclaimed)</span>
+          </div>
+          <div className="sidebar__map-legend--row">
+            <img className="sidebar__map-legend--pin-icon" src={violetPinUrl} alt="Violet map pin" />
+            <span>Your created item (claimed)</span>
           </div>
         </div>
       </section>
