@@ -40,24 +40,26 @@
 
   &__register-link {
     color: $reg-orange;
+    justify-content: start;
   }
 }
 
 .login {
   display: flex;
-  flex-direction: row;
-  width: 500px;
+  flex-direction: column;
   text-align: left;
   margin: 1em;
 
+  &-error {
+    font-size: 1.2em;
+    color: $orange;
+    font-weight: bold;
+  }
+  
   &-form {
     display: flex;
     flex-direction: column;
     gap: 1em;
-
-    &__title {
-      font-size: 2em;
-    }
 
     &__label {
       font-size: 1.4em;
@@ -70,6 +72,7 @@
       height: 1.5em;
       border-radius: 5px;
       background-color: $grey;
+      margin-bottom: 0.75em;
     }
   }
 }

@@ -29,7 +29,7 @@ const LoginForm = (props) => {
   }, []);
   return (
     <section className="login">
-      {errorMessage && <h1>🔥 {errorMessage} 🔥</h1>}
+      {errorMessage && <p className="login-error">🔥 {errorMessage} 🔥</p>}
       <form className="login-form">
         <label className="login-form__label">Email </label>
         <input
