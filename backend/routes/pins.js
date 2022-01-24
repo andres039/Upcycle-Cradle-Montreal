@@ -8,6 +8,7 @@ const queries = require("./dbQueries/pinQueries");
 db.connect();
 
 //Select all pins
+
 router.get("/api/pins", (req, res) => {
   queries
     .getAllPins(db)
@@ -59,7 +60,9 @@ router.put("/api/pins/:id", async (req, res) => {
 
 router.post("/api/pins", async (req, res) => {
   try {
+
     //test compare with users
+
     jwt.verify(req.headers.token, process.env.TOKEN_KEY);
     const {
       title,
