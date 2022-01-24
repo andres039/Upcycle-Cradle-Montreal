@@ -9,15 +9,16 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   const current_user = userID ? parseInt(userID) : null;
 
   //Tracking user-related states
+  const [id, setId] = useState(current_user);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
+
   const [showEmailError, setShowEmailError] = useState(false);
-  const [showConfirmationPassError, setShowConfirmationPassError] =
-    useState(false);
+  const [showConfirmationPassError, setShowConfirmationPassError] = useState(false);
+
   const [loginError, setLoginError] = useState("");
-  const [id, setId] = useState(current_user);
   const [errorMessage, setErrorMessage] = useState("");
 
   //handle navigation upon successful authentication
@@ -47,7 +48,6 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   //Handling login functions
 
   const handleLogin = (loginData) => {
-    console.log("loginData", loginData);
     return axios
       .post("/login", loginData)
       .then((response) => {
@@ -109,7 +109,6 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   const handleRegistration = (itemData) => {
     if (password !== confirmationPassword) {
       setErrorMessage("🔥 passwords must match 🔥");
-      // setShowConfirmationPassError(true);
       return;
     } else {
       return axios
@@ -121,8 +120,6 @@ const withAuthProvider = (WrappedComponent) => (props) => {
         })
         .then(() => navigate("/mapview"))
         .catch((err) => {
-          console.log("Registration error:", err);
-          // setShowEmailError(true);
           console.log("Error record:", err.response);
           setErrorMessage("Email already in use");
         });

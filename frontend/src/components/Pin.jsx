@@ -7,12 +7,12 @@ import pinSettings from '../helpers/pinSettings'
 import './Pin.scss';
 
 const Pin = (props) => {
-  const { blueIcon, greenIcon, orangeIcon, violetIcon } = pinSettings();
+  const { blueIcon, greenIcon } = pinSettings();
   const [pinColor, setpinColor] = useState(blueIcon);
-  
+
   const { latitude, longitude, setLatitude, setLongitude, newItemMode, item } = props;
 
-  useEffect(() =>{
+  useEffect(() => {
     if (!latitude) {
       setpinColor(greenIcon);
     }
@@ -31,7 +31,7 @@ const Pin = (props) => {
     setLatitude(null);
     setLongitude(null);
   }
-  
+
   return latitude === null ? null : (
     <Marker position={[latitude, longitude]} icon={pinColor}>
       <Popup className="pin-popup__new">
