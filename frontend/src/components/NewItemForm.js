@@ -21,7 +21,7 @@ const NewItemForm = (props) => {
   const setErrorMessage = context.setErrorMessage;
   const navigate = useNavigate();
   const setUsername = context.setUsername;
-
+  const [savedMessage, setSavedMessage] = ("message")
   const handleSavePin = () => {
     if (!props.longitude ||
       !props.latitude) {
@@ -47,6 +47,7 @@ const NewItemForm = (props) => {
       creator_id: id,
       date: currentDate(),
     });
+    
   };
 
   const validateSavePin = (itemData) => {
@@ -59,7 +60,7 @@ const NewItemForm = (props) => {
       })
       .then(() => {
         window.location.reload();
-      });
+      }).then(() => setSavedMessage("test"));
   };
   useEffect(() => {
     handleErrorMessageReset();
@@ -68,6 +69,8 @@ const NewItemForm = (props) => {
   const deletePin = () => {
     props.setLatitude(null);
     props.setLongitude(null);
+    console.log("delete pin");
+    setSavedMessage(null);
   };
 
   const currentDate = () => {
@@ -79,6 +82,7 @@ const NewItemForm = (props) => {
   return (
     <section className="new-item">
       <h1>{errorMessage}</h1>
+      {savedMessage && <h1>Your post has been saved</h1>}
       <h1 className="new-item-form__title">New Item</h1>
       <form
         onSubmit={(e) => e.preventDefault()}
