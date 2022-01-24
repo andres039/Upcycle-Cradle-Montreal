@@ -31,6 +31,7 @@ const deletePins = (db, id) => {
       return null;
     });
 };
+
 exports.deletePins = deletePins;
 
 const updateIndividualPins = (db, current_user_id, pinID) => {

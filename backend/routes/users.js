@@ -1,5 +1,4 @@
 const express = require("express");
-//bcrypt
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
@@ -36,14 +35,10 @@ router.post("/register", async (req, res) => {
   try {
     // Get user input
     const { username, email, password } = req.body;
-
     //hash the password
-
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
-
     //check if user already exist
-
     database.getUsersByEmail(db, email).then(
       (response) => {
         if (response.rowCount === 0) {
@@ -79,7 +74,6 @@ router.post("/register", async (req, res) => {
     console.log("Query failed:", err.message);
     res.send("Query failed:", err.message);
   }
-
   // Our register logic ends here
 });
 
@@ -117,6 +111,5 @@ router.post("/login", async (req, res) => {
 });
 
 //sets up the token
-
 
 module.exports = router;

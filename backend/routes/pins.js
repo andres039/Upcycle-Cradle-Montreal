@@ -1,9 +1,7 @@
-const { query } = require("express");
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
 const { Pool } = require("pg");
-const { database } = require("pg/lib/defaults");
 const dbParams = require("../lib/db.js");
 const db = new Pool(dbParams);
 const queries = require("./dbQueries/pinQueries");
@@ -37,7 +35,7 @@ router.get("/api/pins/:id", (req, res) => {
 router.delete("/api/pins/:id", (req, res) => {
   queries
     .deletePins(db, req.params.id)
-    .then((response) => {
+    .then(() => {
       res.send(200);
     })
     .catch((err) => {
@@ -50,8 +48,8 @@ router.delete("/api/pins/:id", (req, res) => {
 
 router.put("/api/pins/:id", async (req, res) => {
   try {
-    const { userId, pinID } = req.body;
-    await queries.updateIndividualPins(db, userId, pinID).then((response) => {
+    const { userID, pinID } = req.body;
+    await queries.updateIndividualPins(db, userID, pinID).then((response) => {
       res.json(response.rows);
     });
   } catch (err) {
@@ -59,12 +57,10 @@ router.put("/api/pins/:id", async (req, res) => {
   }
 });
 
-//create a new pin
-
 router.post("/api/pins", async (req, res) => {
   try {
     //test compare with users
-    const verification = jwt.verify(req.headers.token, process.env.TOKEN_KEY);
+    jwt.verify(req.headers.token, process.env.TOKEN_KEY);
     const {
       title,
       description,
