@@ -109,7 +109,8 @@ const withAuthProvider = (WrappedComponent) => (props) => {
         .post("/register", itemData)
         .then((response) => {
           localStorage.setItem("token", response.data.token);
-          getUserId(response.data.user.id)
+          getUserId(response.data.user.id);
+          setUsername(response.data.user.username);
         })
         .then(() => navigate("/mapview"))
         .catch((err) => {
