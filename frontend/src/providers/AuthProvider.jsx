@@ -51,8 +51,10 @@ const withAuthProvider = (WrappedComponent) => (props) => {
       .post("/login", loginData)
       .then((response) => {
         getUserId(response.data.user.id);
+        getUsername(response.data.user.username);
+
         localStorage.setItem("token", response.data.token);
-        setUsername(response.data.user.username)
+        setUsername(getUsername(response.data.user.username))
       })
       .then(() => navigate("/mapview"))
       .catch((err) => {
@@ -70,6 +72,11 @@ const withAuthProvider = (WrappedComponent) => (props) => {
   const getUserId = (data) => {
     setId(data);
     localStorage.setItem("user", data);
+  };
+
+  const getUsername = (data) => {
+    setUsername(data);
+    localStorage.setItem("username", data);
   };
 
   const handleLoginSubmit = (event) => {
@@ -109,7 +116,7 @@ const withAuthProvider = (WrappedComponent) => (props) => {
         .then((response) => {
           localStorage.setItem("token", response.data.token);
           getUserId(response.data.user.id);
-          setUsername(response.data.user.username);
+          getUsername(response.data.user.username);
         })
         .then(() => navigate("/mapview"))
         .catch((err) => {

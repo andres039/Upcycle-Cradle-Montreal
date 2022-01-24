@@ -20,13 +20,13 @@ const NewItemForm = (props) => {
   const errorMessage = context.errorMessage;
   const setErrorMessage = context.setErrorMessage;
   const navigate = useNavigate();
+  const setUsername = context.setUsername;
 
   const handleSavePin = () => {
     if (!props.longitude ||
-      !props.latitude)
-      {
-        setErrorMessage("Please select a location on the map")
-      }
+      !props.latitude) {
+      setErrorMessage("Please select a location on the map")
+    }
     if (
       title === "" ||
       description === "" ||
@@ -53,6 +53,10 @@ const NewItemForm = (props) => {
     const tokenKey = localStorage.getItem("token");
     return axios
       .post("/api/pins", itemData, { headers: { token: tokenKey } })
+      .then(() => {
+        setUsername()
+
+      })
       .then(() => {
         window.location.reload();
       });
