@@ -6,12 +6,13 @@ const { Pool } = require("pg");
 const { database } = require("pg/lib/defaults");
 const dbParams = require("../lib/db.js");
 const db = new Pool(dbParams);
-const queries = require("./dbQueries/pinQueries")
+const queries = require("./dbQueries/pinQueries");
 db.connect();
 
 //Select all pins
 router.get("/api/pins", (req, res) => {
-  queries.getAllPins(db)
+  queries
+    .getAllPins(db)
     .then((response) => res.send(response.rows))
     .catch((err) => {
       console.log("API/pins error:", err);
@@ -22,7 +23,8 @@ router.get("/api/pins", (req, res) => {
 //Select individual pins
 
 router.get("/api/pins/:id", (req, res) => {
-  queries.getPinsById(db, req.params.id)
+  queries
+    .getPinsById(db, req.params.id)
     .then((response) => res.send(response.rows))
     .catch((err) => {
       console.log("API/pins error:", err);
@@ -33,7 +35,8 @@ router.get("/api/pins/:id", (req, res) => {
 //Delete individual pins
 
 router.delete("/api/pins/:id", (req, res) => {
-  queries.deletePins(db, req.params.id)
+  queries
+    .deletePins(db, req.params.id)
     .then((response) => {
       res.send(200);
     })
@@ -46,16 +49,11 @@ router.delete("/api/pins/:id", (req, res) => {
 //Update individual pins
 
 router.put("/api/pins/:id", async (req, res) => {
-
   try {
-    const { current_user_id, pinID } = req.body;
-     await queries.updateIndividualPins(db,
-        current_user_id,
-        pinID,
-      )
-      .then((response) => {
-        res.json(response.rows);
-      });
+    const { userId, pinID } = req.body;
+    await queries.updateIndividualPins(db, userId, pinID).then((response) => {
+      res.json(response.rows);
+    });
   } catch (err) {
     console.error(err.message);
   }

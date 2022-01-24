@@ -10,7 +10,7 @@ import Button from "../components/Button";
 import './MapView.scss';
 
 const MapView = (props) => {
-  const { latitude, longitude, setLatitude, setLongitude, newItemMode, oldPins } = props;
+  const { latitude, longitude, setLatitude, setLongitude, newItemMode, oldPins, setOldPins } = props;
   //   const [oldPins, setOldPins] = useState([]);
 
   //   useEffect(() => {
@@ -35,12 +35,13 @@ const MapView = (props) => {
         setLongitude={setLongitude}
         newItemMode={newItemMode}
         savedItems={oldPins}
+        setOldPins={setOldPins}
       />
       <section className="sidebar">
-        <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only"/>
-        <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only"/>
-        <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only"/>
-        
+        <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only" />
+        <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only" />
+        <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only" />
+
         <div className="sidebar__text">
           <SidebarHeader />
           <Link to="/newitem" className="new-item__button">

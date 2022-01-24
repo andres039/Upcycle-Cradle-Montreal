@@ -24,7 +24,8 @@ const Map = (props) => {
     newItemMode,
     savedItems,
     creator_id,
-    claimer_id
+    claimer_id,
+    setOldPins
   } = props;
 
   const newItem = {
@@ -37,10 +38,10 @@ const Map = (props) => {
 
   const parsedPins = savedItems
 
-    ? savedItems.map((savedItem) => {
+    ? savedItems.map((savedItem, index) => {
 
       return (
-        <BluePin key={savedItem.id} id={savedItem.id} item={savedItem} />
+        <BluePin key={savedItem.id} id={savedItem.id} item={savedItem} setOldPins={setOldPins} index={index} />
       );
 
     })
@@ -61,6 +62,7 @@ const Map = (props) => {
         setLatitude={setLatitude}
         setLongitude={setLongitude}
         newItemMode={newItemMode}
+        setOldPins={setOldPins}
       />
       {parsedPins}
     </MapContainer>

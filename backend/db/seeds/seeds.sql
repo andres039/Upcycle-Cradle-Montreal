@@ -23,7 +23,7 @@ VALUES ('Blue', 'Nice bizantine chair', 'https://i.pinimg.com/originals/d9/8c/98
 -- orange
 ('Orange', 'shelf', 'booboo', 'Like old', 45.7571, -73.5832, '2022-01-15', 1, 2),
 -- invisible
-('TV', 'TV', 'blan', 'Like old', 45.8071, -73.5832, '2022-01-15', 1, 3);
+('Invisible', 'TV', 'blan', 'Like old', 45.8071, -73.5832, '2022-01-15', 1, 3);
 -- ('Red wire', 'wireeee', 'backend/public/images/chair1.jpg', 'Like old', 45.6171, -73.5832, '2022-01-15', 1, null),
 -- ('Painting', 'cool stuff', 'stuff', 'New', 45.6371, -73.5832, '2022-01-15', 1, null);
 

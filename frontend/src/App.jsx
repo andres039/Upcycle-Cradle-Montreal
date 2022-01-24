@@ -73,6 +73,7 @@ function App() {
                 setLongitude={setLongitude}
                 newItemMode={false}
                 oldPins={oldPins}
+                setOldPins={setOldPins}
               />
             }
           />
@@ -107,6 +108,7 @@ function App() {
                 setLongitude={setLongitude}
                 newItemMode={true}
                 oldPins={oldPins}
+                setOldPins={setOldPins}
               />
             ) : (
               <Navigate to="/login" />
