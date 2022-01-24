@@ -1,0 +1,13 @@
+@import "../styles/variables.scss";
+
+.welcome-page {
+  &__login-link, &__register-link {
+    color: $light-purple;
+    font-size: 1.8em;
+    margin: auto 2em auto 2em;
+  }
+
+  &__login-link:hover, &__register-link:hover {
+    color: $aqua;
+  }
+}
