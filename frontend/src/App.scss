@@ -40,7 +40,10 @@
 
   &__register-link {
     color: $reg-orange;
-    justify-content: start;
+  }
+
+  &__register-link:hover {
+    color: $aqua;
   }
 }
 
