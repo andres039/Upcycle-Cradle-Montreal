@@ -20,6 +20,9 @@ const LoginForm = (props) => {
   const showConfirmationPassError = context.showConfirmationPassError;
   const errorMessage = context.errorMessage;
   const handleErrorMessageReset = context.handleErrorMessageReset;
+  const username = context.username;
+
+  console.log(context)
 
   useEffect(() => {
     handleErrorMessageReset();

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useNavigate, use } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const { useState, createContext, useEffect } = require("react");
 export const AuthContext = createContext();
@@ -53,6 +53,7 @@ const withAuthProvider = (WrappedComponent) => (props) => {
       .then((response) => {
         getUserId(response.data.user.id);
         localStorage.setItem("token", response.data.token);
+        setUsername(response.data.user.username)
       })
       .then(() => navigate("/mapview"))
       .catch((err) => {

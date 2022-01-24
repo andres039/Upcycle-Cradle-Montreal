@@ -14,7 +14,8 @@ const SidebarHeader = (props) => {
   const navigate = useNavigate();
 
   const context = useContext(AuthContext);
-  const username = context.username;
+  const username = context.username
+  // const email = context.email;
 
   /*Return an object containing the characteristics of a new posting */
   //When posting something pass a body as JSON 
@@ -26,6 +27,10 @@ const SidebarHeader = (props) => {
     });
   };
 
+  // useEffect(() => {
+  //   console.log(context)
+  //   setUsername(context.username);
+  // }, [context])
 
   const logout = () => {
     localStorage.removeItem("token");

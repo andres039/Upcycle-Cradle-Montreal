@@ -5,7 +5,7 @@ import SidebarHeader from "../components/SidebarHeader";
 import './NewItem.scss';
 
 const NewItem = (props) => {
-  const { latitude, longitude, setLatitude, setLongitude, newItemMode, oldPins } = props;
+  const { latitude, longitude, setLatitude, setLongitude, newItemMode, oldPins, setOldPins } = props;
 
   return (
 
@@ -18,13 +18,14 @@ const NewItem = (props) => {
         setLongitude={setLongitude}
         newItemMode={newItemMode}
         savedItems={oldPins}
+        setOldPins={setOldPins}
       />
 
       <section className="sidebar">
-        <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only"/>
-        <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only"/>
-        <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only"/>
-        
+        <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only" />
+        <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only" />
+        <img className="bg-image" src="images/dresser-bridge.jpg" alt="background for decoration only" />
+
         <div className="sidebar__text">
           <SidebarHeader />
           <NewItemForm
@@ -33,7 +34,7 @@ const NewItem = (props) => {
             setLatitude={setLatitude}
             setLongitude={setLongitude}
           />
-         </div>
+        </div>
       </section>
 
     </div>
