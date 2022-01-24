@@ -27,6 +27,7 @@ const LoginForm = (props) => {
   useEffect(() => {
     handleErrorMessageReset();
   }, []);
+  
   return (
     <section className="login">
       {errorMessage && <p className="login-error">🔥 {errorMessage} 🔥</p>}
