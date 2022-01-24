@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { Marker, Popup, useMapEvents } from 'react-leaflet';
+import { Marker, Popup } from 'react-leaflet';
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 
@@ -17,13 +17,10 @@ const BluePin = (props) => {
   const [bluePinLatitude, setBluePinLatitude] = useState(item.latitude);
   const [bluePinLongitude, setBluePinLongitude] = useState(item.longitude);
   const [currentItem, setCurrentItem] = useState(item);
+  const [pickedUp, setPickedUp] = useState("");
 
   const context = useContext(AuthContext);
   const current_user_id = context.id;
-
-
-  //check if the current user is the pin claimer ---> set it to violet
-  //item is CLAIMED, current user didn't create and didn't claim
 
 
   useEffect(() => {
@@ -89,6 +86,7 @@ const BluePin = (props) => {
 
 
   const deletePin = (deleteType) => {
+    console.log(deleteType)
     const pinID = id;
     return axios.delete(`/api/pins/${pinID}`, { pinID })
       .then(() => {
@@ -96,13 +94,12 @@ const BluePin = (props) => {
           setBluePinLatitude(null);
           setBluePinLongitude(null);
         } else {
-          setClaimed('delete countdown');
-          setTimeout(() => {
-            setBluePinLatitude(null);
-            setBluePinLongitude(null);
-          }, 10000);
+          alert("And here's another one saved from the landfill!");
         }
-      });
+      })
+      .catch((error) => {
+        console.log("error message:", error);
+      })
   }
 
 
@@ -113,13 +110,12 @@ const BluePin = (props) => {
         <p>{currentItem.description}</p>
         <img className="pin-popup__new-picture" src={`${currentItem.picture}`} alt='Item' />
         <p><strong>Condition:</strong> {currentItem.condition}</p>
-        {claimed && claimed !== 'delete countdown' && currentItem.claimer_id === current_user_id && <p className="pin-popup__new-buttons-claimed">You claimed this currentItem. Please pick up at your earliest convenience.</p>}
-        {claimed && claimed !== 'delete countdown' && currentItem.creator_id === current_user_id && <p className="pin-popup__new-buttons-claimed">This item has been claimed!</p>}
-        {claimed === 'delete countdown' && <p className="pin-popup__new-buttons-picked-up">You have closed the deal! The pin will be deleted shortly.</p>}
+        {claimed && pickedUp !== 'delete countdown' && currentItem.claimer_id === current_user_id && <p className="pin-popup__new-buttons-claimed">You claimed this currentItem. Please pick up at your earliest convenience.</p>}
+        {claimed && pickedUp !== 'delete countdown' && currentItem.creator_id === current_user_id && <p className="pin-popup__new-buttons-claimed">This item has been claimed!</p>}
         <div className="pin-popup__new-buttons">
           {!claimed && current_user_id !== currentItem.creator_id && <Button claimed onClick={() => claimItem()}>Claim</Button>}
           {claimed && current_user_id !== currentItem.creator_id && <Button claimed onClick={() => unclaimItem()}>Unclaim</Button>}
-          {claimed && current_user_id !== currentItem.creator_id && <Button confirm onClick={() => deletePin('claimer delete')}>Picked up</Button>}
+          {claimed && current_user_id !== currentItem.creator_id && <Button cancel onClick={() => deletePin('claimer delete')}>Picked up</Button>}
           {/* Put condition on delete button to only allow the creator to use it (user === currentItem.creator_id) once user tracking is set up */}
           {current_user_id === currentItem.creator_id && <Button cancel onClick={() => deletePin('creator delete')}>Delete</Button>}
         </div>
