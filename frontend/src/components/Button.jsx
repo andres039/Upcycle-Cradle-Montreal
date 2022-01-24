@@ -1,11 +1,9 @@
 import React from "react";
-//If there is time to refactor: import classNames from "classnames";
-
 import "./Button.scss";
 
- const Button = (props) => {
+const Button = (props) => {
   let buttonClass = "button";
-  
+
   if (props.confirm) {
     buttonClass += " button--confirm";
   }
@@ -15,7 +13,7 @@ import "./Button.scss";
   if (props.claimed) {
     buttonClass += " button--claimed";
   }
-  
+
   return <button onClick={props.onClick} className={buttonClass}>{props.children}</button>;
 }
 

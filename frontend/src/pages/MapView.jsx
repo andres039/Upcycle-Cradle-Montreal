@@ -1,42 +1,23 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 
 import Map from "../components/Map";
 import SidebarHeader from "../components/SidebarHeader";
 import Instructions from "../components/Instructions";
-import Button from "../components/Button";
 
 import './MapView.scss';
-import withAuthProvider from "../providers/AuthProvider";
 
 const MapView = (props) => {
   const { latitude, longitude, setLatitude, setLongitude, newItemMode, oldPins, setOldPins } = props;
   const context = useContext(AuthContext);
-  const username = context.username;
   const setUsername = context.setUsername;
 
 
-
   useEffect(() => {
-    setUsername(localStorage.getItem("username"))
+    setUsername(localStorage.getItem("username"));
+  }, []);
 
-  }, [])
-  //   const [oldPins, setOldPins] = useState([]);
-
-  //   useEffect(() => {
-  //   axios.get("http://localhost:8081/api/pins").then((result) => {
-  //     console.log(result.data);
-  //     return setOldPins(result.data);
-  //   }).then(result => console.log('oldpins', oldPins));
-  // }, [])
-
-  // useEffect(() => {
-  //   axios.get("localhost:8081/api/pins", { mode: "cors", method: "get" }).then((res) => {
-  //     console.log( "pullingdb:", res);
-  //   });
-  // }, []);
 
   return (
     <div className="container">

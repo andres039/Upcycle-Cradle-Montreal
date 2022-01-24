@@ -1,30 +1,31 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Button from "./Button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 import "./NewItemForm.scss";
 
 const NewItemForm = (props) => {
-  const context = useContext(AuthContext);
+  const { longitude, latitude, setLatitude, setLongitude } = props;
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [condition, setCondition] = useState("New");
   const [picture, setPicture] = useState("");
-  const [savePinError, setSavePinError] = useState(false);
 
+  //current user
+  const context = useContext(AuthContext);
   const id = context.id;
+
   const handleErrorMessageReset = context.handleErrorMessageReset;
   const errorMessage = context.errorMessage;
   const setErrorMessage = context.setErrorMessage;
-  const navigate = useNavigate();
   const setUsername = context.setUsername;
 
   const handleSavePin = () => {
-    if (!props.longitude ||
-      !props.latitude) {
+    if (!longitude ||
+      !latitude) {
       setErrorMessage("Please select a location on the map")
     }
     if (
@@ -42,8 +43,8 @@ const NewItemForm = (props) => {
       description,
       condition,
       picture,
-      longitude: props.longitude.toFixed(4),
-      latitude: props.latitude.toFixed(4),
+      longitude: longitude.toFixed(4),
+      latitude: latitude.toFixed(4),
       creator_id: id,
       date: currentDate(),
     });
@@ -66,8 +67,8 @@ const NewItemForm = (props) => {
   }, []);
 
   const deletePin = () => {
-    props.setLatitude(null);
-    props.setLongitude(null);
+    setLatitude(null);
+    setLongitude(null);
   };
 
   const currentDate = () => {
