@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../providers/AuthProvider";
 
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +12,9 @@ const SidebarHeader = (props) => {
   const [pin, setPin] = useState("");
   const [user, setUser] = useState("");
   const navigate = useNavigate();
+
+  const context = useContext(AuthContext);
+  const username = context.username;
 
   /*Return an object containing the characteristics of a new posting */
   //When posting something pass a body as JSON 
@@ -58,7 +62,7 @@ const SidebarHeader = (props) => {
       <header>
         <img className="sidebar__logo" src="images/logo.png" alt="Trash Panda Montreal" />
 
-        <h3 className="sidebar__user">Signed in as {user}</h3>
+        <h3 className="sidebar__user">Signed in as {username}</h3>
 
         <Button cancel onClick={() => logout()}>
           Logout
