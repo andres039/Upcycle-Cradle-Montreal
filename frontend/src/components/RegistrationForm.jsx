@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
-// import Button from 'components/Button'
+import Button from './Button';
 
 const RegistrationForm = (props) => {
   // States for registration
@@ -38,10 +38,7 @@ const RegistrationForm = (props) => {
   //
 
   return (
-    <div className="form">
-      <div>
-        <h1>Register</h1>
-      </div>
+    <section className="login">
 
       { /*Calling to the methods
       <div className="messages">
@@ -49,50 +46,50 @@ const RegistrationForm = (props) => {
         {/* {successMessage()} </div>*/}
 
       {/*password doesnt match */}
-      {errorMessage && <h1>🔥 {errorMessage} 🔥</h1>}
+      {errorMessage && <p className="login-error">🔥 {errorMessage} 🔥</p>}
 
-      <form>
+      <form className="login-form">
         {/* Labels and inputs for form data */}
-        <label className="username">Username: </label>
+        <label className="login-form__label">Username: </label>
         <input
+          className="login-form__input"
           name="username"
           type="text"
-          className="username"
           onChange={handleUsername}
           value={username}
         />
 
-        <label className="email">Email: </label>
+        <label className="login-form__label">Email: </label>
         <input
+          className="login-form__input"
           onChange={handleEmail}
-          className="email"
           value={email}
           type="email"
         />
 
-        <label className="password">Password: </label>
+        <label className="login-form__label">Password: </label>
         <input
+          className="login-form__input"
           type="password"
           name="password"
-          className="password"
           value={password}
           onChange={handlePassword}
         />
 
-        <label className="password">Confirm Password: </label>
+        <label className="login-form__label">Confirm Password: </label>
         <input
+          className="login-form__input"
           type="password"
           name="confirmation_password"
-          className="confirmation_password"
           value={confirmationPassword}
           onChange={handleConfirmationPassword}
         />
 
-        <button onClick={handleRegistrationSubmit} className="btn" type="submit">
-          Submit
-        </button>
+        <Button confirm onClick={handleRegistrationSubmit} className="btn" type="submit">
+          Register
+        </Button>
       </form>
-    </div>
+    </section>
   );
 };
 

@@ -4,14 +4,18 @@ const logo = require("../logo.png");
 
 const Register = () => {
   return (
-    <main>
-      <img src={logo} style={{ width: "700px" }} />
-      <RegistrationForm />
+    <main className="login-page">
+      <img className="bg-image__welcome" src="images/dresser-bridge.jpg" alt="background for decoration only"/>
+      <div className="login-page__text">
+        <img className="login-page__logo" src="images/logo.png" alt="Trash Panda Montreal" />
+        <div>
+          <RegistrationForm />
 
-      <Link to="/login">
-        <div>Login</div>
-      </Link>
-
+          <Link to="/login">
+            <span className="login-page__register-link">Login</span>
+          </Link>
+        </div>
+      </div>
     </main>
   );
 };
