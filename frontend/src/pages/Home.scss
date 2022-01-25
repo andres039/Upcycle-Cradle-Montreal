@@ -8,6 +8,24 @@
     gap: 7.3rem;
     justify-content: center;
     align-items: center;
+    padding: 5em;
+  }
+
+  &__about {
+    display: flex;
+    //flex-grow: 3;
+    text-align: left;
+    font-size: 1.3em;
+  }
+
+  &__links {
+    position: absolute;
+    bottom: 6em;
+    display: flex;
+    flex-flow: row;
+    gap: 7.3rem;
+    justify-content: center;
+    align-items: center;
   }
 
   &__login-link, &__register-link {
@@ -18,5 +36,13 @@
 
   &__login-link:hover, &__register-link:hover {
     color: $aqua;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .welcome-page {
+    &__about {
+      //flex-grow: initial;
+    }
   }
 }
