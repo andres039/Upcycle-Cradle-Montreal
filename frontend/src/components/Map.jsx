@@ -11,7 +11,6 @@ const Map = (props) => {
   const mapTilesId = "mapbox/streets-v11";
   const mapAccessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-
   const {
     latitude,
     longitude,
@@ -19,25 +18,39 @@ const Map = (props) => {
     setLongitude,
     newItemMode,
     savedItems,
-    setOldPins
+    setOldPins,
   } = props;
 
   const newItem = {
     title: "New Item Form Data",
-    description: "Your new item data will show here after you press the save button."
+    description:
+      "Your new item data will show here after you press the save button.",
   };
 
-
-  //any blue pin: 
+  //any blue pin:
   const parsedPins = savedItems
-
-    ? savedItems.map((savedItem, index) => {
-
-      return (
-        <BluePin key={savedItem.id} id={savedItem.id} item={savedItem} setOldPins={setOldPins} index={index} />
-      );
-
-    })
+    ? savedItems.map((savedItem) => {
+        return (
+          <BluePin
+            key={savedItem.id}
+            id={savedItem.id}
+            item={savedItem}
+            // setOldPins={setOldPins}
+            // index={index}
+            updatePin={(updatePin, pinID) => {
+              setOldPins((prev) => {
+                //prev[index] = updatePin;
+                return prev.map((pin) => (pin.id === pinID ? updatePin : pin));
+              });
+            }}
+            deletePin={(pinID) => {
+              setOldPins((prev) => {
+                return prev.filter((pin) => pin.id !== pinID);
+              });
+            }}
+          />
+        );
+      })
     : [];
 
   return (
@@ -55,7 +68,6 @@ const Map = (props) => {
         setLatitude={setLatitude}
         setLongitude={setLongitude}
         newItemMode={newItemMode}
-        setOldPins={setOldPins}
       />
       {parsedPins}
     </MapContainer>

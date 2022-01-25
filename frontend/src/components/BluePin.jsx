@@ -16,11 +16,12 @@ const BluePin = (props) => {
   const [claimed, setClaimed] = useState(item.claimer_id)
   const [bluePinLatitude, setBluePinLatitude] = useState(item.latitude);
   const [bluePinLongitude, setBluePinLongitude] = useState(item.longitude);
-  const [currentItem, setCurrentItem] = useState(item);
+  //const [currentItem, setCurrentItem] = useState(item);
+  const currentItem = item;
 
   const context = useContext(AuthContext);
   const current_user_id = context.id;
-
+  console.log("context username:", context.username);
 
   useEffect(() => {
     //current user created an item that is claimed by another user
@@ -61,11 +62,12 @@ const BluePin = (props) => {
     // add user's ID as claiamer_id in DB
     return axios.put(`/api/pins/${pinID}`, { userID, pinID })
       .then((response) => {
-        setCurrentItem(response.data[0])
-        setOldPins((prev) => {
-          prev[index] = response.data[0];
-          return prev;
-        })
+        //setCurrentItem(response.data[0])
+        // setOldPins((prev) => {
+        //   prev[index] = response.data[0];
+        //   return prev;
+        // })
+        props.updatePin(response.data[0], pinID)
         setClaimed(current_user_id);
         setpinColor(orangeIcon);
       })
@@ -77,9 +79,16 @@ const BluePin = (props) => {
     const userID = null;
 
     return axios.put(`/api/pins/${pinID}`, { userID, pinID })
-      .then(() => {
+      .then((response) => {
+        //setCurrentItem(response.data[0])
+        // setOldPins((prev) => {
+        //   prev[index] = response.data[0];
+        //   return prev;
+        // })
+        props.updatePin(response.data[0], pinID)
         setClaimed(null);
         setpinColor(blueIcon);
+       // window.location.reload();
       })
       .catch((error) => console.log("error:", error));
   };
@@ -92,15 +101,11 @@ const BluePin = (props) => {
       .then(() => {
         if (deleteType !== 'creator delete') {
           alert("And here's another one saved from the landfill!");
-          setBluePinLatitude(null);
-          setBluePinLongitude(null);
-          window.location.reload();
-        } else {
-          setBluePinLatitude(null);
-          setBluePinLongitude(null);
-          window.location.reload();
-
-        }
+          //window.location.reload();
+        } 
+        setBluePinLatitude(null);
+        setBluePinLongitude(null);
+        props.deletePin(pinID);
       })
       .catch((error) => {
         console.log("error message:", error);
