@@ -24,9 +24,8 @@ const NewItemForm = (props) => {
   const setUsername = context.setUsername;
 
   const handleSavePin = () => {
-    if (!longitude ||
-      !latitude) {
-      setErrorMessage("Please select a location on the map")
+    if (!longitude || !latitude) {
+      setErrorMessage("Please select a location on the map");
     }
     if (
       title === "" ||
@@ -55,8 +54,7 @@ const NewItemForm = (props) => {
     return axios
       .post("/api/pins", itemData, { headers: { token: tokenKey } })
       .then(() => {
-        setUsername()
-
+        setUsername();
       })
       .then(() => {
         window.location.reload();
@@ -133,12 +131,12 @@ const NewItemForm = (props) => {
             Save
           </Button>
           <Link to="/mapview">
-            <Button cancel onClick={() => deletePin()}>Cancel</Button>
-
+            <Button cancel onClick={() => deletePin()}>
+              Cancel
+            </Button>
           </Link>
         </div>
       </form>
-
     </section>
   );
 };

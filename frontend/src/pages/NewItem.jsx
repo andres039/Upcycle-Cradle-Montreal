@@ -2,15 +2,21 @@ import NewItemForm from "../components/NewItemForm";
 import Map from "../components/Map";
 import SidebarHeader from "../components/SidebarHeader";
 
-import './NewItem.scss';
+import "./NewItem.scss";
 
 const NewItem = (props) => {
-  const { latitude, longitude, setLatitude, setLongitude, newItemMode, oldPins, setOldPins } = props;
+  const {
+    latitude,
+    longitude,
+    setLatitude,
+    setLongitude,
+    newItemMode,
+    oldPins,
+    setOldPins,
+  } = props;
 
   return (
-
     <div className="container">
-
       <Map
         latitude={latitude}
         longitude={longitude}
@@ -22,7 +28,11 @@ const NewItem = (props) => {
       />
 
       <section className="sidebar">
-        <img className="bg-image" src="images/trunk.jpg" alt="background for decoration only" />
+        <img
+          className="bg-image"
+          src="images/trunk.jpg"
+          alt="background for decoration only"
+        />
 
         <div className="sidebar__text">
           <SidebarHeader />
@@ -34,7 +44,6 @@ const NewItem = (props) => {
           />
         </div>
       </section>
-
     </div>
   );
 };

@@ -35,11 +35,8 @@ const Map = (props) => {
             key={savedItem.id}
             id={savedItem.id}
             item={savedItem}
-            // setOldPins={setOldPins}
-            // index={index}
             updatePin={(updatePin, pinID) => {
               setOldPins((prev) => {
-                //prev[index] = updatePin;
                 return prev.map((pin) => (pin.id === pinID ? updatePin : pin));
               });
             }}

@@ -1,28 +1,18 @@
-import axios from "axios";
-import { useEffect, useState, useCallback, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
-import Button from './Button';
+import Button from "./Button";
 
-const RegistrationForm = (props) => {
-  // States for registration
-
-  const [error, setError] = useState(false);
-
-
+const RegistrationForm = () => {
   // Handling the name change
 
   const context = useContext(AuthContext);
 
-  const showConfirmationPassError = context.showConfirmationPassError;
-  const showEmailError = context.showEmailError;
   const email = context.email;
   const username = context.username;
   const password = context.password;
   const confirmationPassword = context.confirmationPassword;
 
-  const handleRegistration = context.handleRegistration;
   const handleEmail = context.handleEmail;
   const handleUsername = context.handleUsername;
   const handlePassword = context.handlePassword;
@@ -34,18 +24,8 @@ const RegistrationForm = (props) => {
     handleErrorMessageReset();
   }, []);
 
-
-  //
-
   return (
     <section className="login">
-
-      { /*Calling to the methods
-      <div className="messages">
-        {errorMessage2()}
-        {/* {successMessage()} </div>*/}
-
-      {/*password doesnt match */}
       {errorMessage && <p className="login-error">🔥 {errorMessage} 🔥</p>}
 
       <form className="login-form">
@@ -85,7 +65,12 @@ const RegistrationForm = (props) => {
           onChange={handleConfirmationPassword}
         />
 
-        <Button confirm onClick={handleRegistrationSubmit} className="btn" type="submit">
+        <Button
+          confirm
+          onClick={handleRegistrationSubmit}
+          className="btn"
+          type="submit"
+        >
           Register
         </Button>
       </form>
@@ -94,5 +79,3 @@ const RegistrationForm = (props) => {
 };
 
 export default RegistrationForm;
-
-//REACT, FORMS(registration): Display error message coming from the backend during user registration.
