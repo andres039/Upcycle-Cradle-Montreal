@@ -1,6 +1,7 @@
 import { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import Button from "../components/Button";
 
 import Map from "../components/Map";
 import SidebarHeader from "../components/SidebarHeader";
@@ -17,6 +18,8 @@ const MapView = (props) => {
   useEffect(() => {
     setUsername(localStorage.getItem("username"));
   }, []);
+
+
 
 
   return (
@@ -44,12 +47,13 @@ const MapView = (props) => {
                   <div className="dot"></div>
                   <div className="dot"></div>
                 </div>
-                <span>+ New item</span>
+                <span>+ item</span>
               </div>
             </div>
           </Link>
 
           <Instructions />
+
         </div>
       </section>
     </div>

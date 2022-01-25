@@ -2,7 +2,7 @@ import React from "react";
 import "./Button.scss";
 
 const Button = (props) => {
-  const {confirm, cancel, claimed} = props
+  const { confirm, cancel, claimed } = props
   let buttonClass = "button";
 
   if (confirm) {

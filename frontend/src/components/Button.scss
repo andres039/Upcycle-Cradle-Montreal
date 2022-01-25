@@ -2,27 +2,42 @@
 
 .button {
   padding: 0.7em 1.5em;
-  border-radius: 16px;
-  border: none;
+  border-radius: 10px;
+  background-color: none;
+  
   font-size: 0.9em;
   color: $white;
   cursor: pointer;
-
-  &--confirm {
-    background-color: $green;
+  
+  &--confirm {   
+    background-color: rgba(56, 189, 116, 0.45);
   }
-
+  
   &--confirm:hover {
-    background-color: $plant-green;
+    
+    background-color: rgba(24, 152, 82, 0.2);
+    box-shadow: 0 0.7em 0.5em -0.4em rgb(24, 152, 82);
+    transform: translateY(-0.25em);
+  }
+  &--confirm:focus {
+    transform: translateY(-0.25em);  
   }
 
-  &--cancel {
-    background-color: $orange;
+  &--cancel {   
+    background-color: rgba(252, 75, 44, 0.577);
   }
 
   &--cancel:hover {
-    background-color: $red;
+    font-size: 0.9em;
+    box-shadow: 0 0.7em 0.5em -0.4em rgb(218, 57, 71);
+    transform: translateY(-0.25em);
   }
+
+  &--cancel:focus {
+    transform: translateY(-0.25em);  
+  }
+
+
 
   &--claimed {
     background-color: $yellow;
@@ -32,4 +47,6 @@
   &--claimed:hover {
     background-color: $reg-orange;
   }
+
+  
 }

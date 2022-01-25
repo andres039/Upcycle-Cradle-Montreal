@@ -1,8 +1,11 @@
 @import "./styles/variables.scss";
 
+
+
 .App {
   text-align: center;
   font-size: 1.4em;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .container {
@@ -16,7 +19,7 @@
   height: 100vh;
   width: 100vw;
   background: $black;
-  color: $light-purple;
+  color: $light-blue;
   margin: 0;
   padding: 0;
   justify-content: center;
