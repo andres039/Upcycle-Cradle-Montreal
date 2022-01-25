@@ -12,16 +12,14 @@ const BluePin = (props) => {
   const { blueIcon, greenIcon, orangeIcon, violetIcon } = pinSettings();
   const [pinColor, setpinColor] = useState(blueIcon);
 
-  const { id, item, setOldPins, index } = props;
+  const { id, item } = props;
   const [claimed, setClaimed] = useState(item.claimer_id)
   const [bluePinLatitude, setBluePinLatitude] = useState(item.latitude);
   const [bluePinLongitude, setBluePinLongitude] = useState(item.longitude);
-  //const [currentItem, setCurrentItem] = useState(item);
   const currentItem = item;
 
   const context = useContext(AuthContext);
   const current_user_id = context.id;
-  console.log("context username:", context.username);
 
   useEffect(() => {
     //current user created an item that is claimed by another user

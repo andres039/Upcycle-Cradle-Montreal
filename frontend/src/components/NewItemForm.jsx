@@ -59,7 +59,8 @@ const NewItemForm = (props) => {
 
       })
       .then(() => {
-        window.location.reload();
+        setErrorMessage("Your item has been posted")
+        //window.location.reload();
       });
   };
   useEffect(() => {

@@ -22,7 +22,7 @@ console.log("username test:", username);
       <header>
         <img className="sidebar__logo" src="images/logo.png" alt="Trash Panda Montreal" />
 
-        <h3 className="sidebar__user">Signed in as {localStorage.getItem("username")}</h3>
+        <h3 className="sidebar__user">Signed in as {username}</h3>
 
         <Button cancel onClick={() => logout()}>
           Logout
