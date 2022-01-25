@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
-
+import { AuthContext } from "../providers/AuthProvider";
 
 const SidebarHeader = () => {
-
+const context = useContext(AuthContext);
+const username = context.username
+console.log("username test:", username);
   const navigate = useNavigate();
 
   const logout = () => {
