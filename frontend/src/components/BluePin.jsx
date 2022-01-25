@@ -112,7 +112,7 @@ const BluePin = (props) => {
         <p><strong>Condition:</strong> {currentItem.condition}</p>
 
         {/* messages for claimed items */}
-        {claimed && currentItem.claimer_id === current_user_id && <p className="pin-popup__new-buttons-claimed">You claimed this currentItem. Please pick up at your earliest convenience.</p>}
+        {claimed && currentItem.claimer_id === current_user_id && <p className="pin-popup__new-buttons-claimed">You claimed this {currentItem.title}. Please pick up at your earliest convenience.</p>}
         {claimed && currentItem.creator_id === current_user_id && <p className="pin-popup__new-buttons-claimed">This item has been claimed!</p>}
 
         <div className="pin-popup__new-buttons">
