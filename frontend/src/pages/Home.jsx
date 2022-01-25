@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <main className="login-page">
       <img className="bg-image__welcome" src="images/dresser-bridge.jpg" alt="background for decoration only"/>
-      <div className="login-page__text">
+      <div className="welcome-page__text">
         <img className="login-page__logo" src="images/logo.png" alt="Trash Panda Montreal" />
       
         <Link to="/login">

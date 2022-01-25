@@ -29,8 +29,6 @@
 
   &__text {
     position: absolute;
-    top: 5em;
-    left: 14em;
     display: flex;
     flex-flow: row;
     gap: 5rem;
@@ -52,6 +50,7 @@
   flex-direction: column;
   text-align: left;
   margin: 1em;
+  width: 19em;
 
   &-error {
     font-size: 1.2em;
@@ -75,7 +74,7 @@
       height: 1.5em;
       border-radius: 5px;
       background-color: $grey;
-      margin-bottom: 0.75em;
+      margin: 0 auto 0.5em auto;
     }
   }
 }

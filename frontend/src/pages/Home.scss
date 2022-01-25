@@ -1,10 +1,19 @@
 @import "../styles/variables.scss";
 
 .welcome-page {
+  &__text {
+    position: absolute;
+    display: flex;
+    flex-flow: row;
+    gap: 7.3rem;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__login-link, &__register-link {
     color: $light-purple;
     font-size: 1.8em;
-    margin: auto 2em auto 2em;
+    padding: 4em 0.75em auto 0.75em;
   }
 
   &__login-link:hover, &__register-link:hover {
