@@ -88,7 +88,7 @@ const BluePin = (props) => {
     return axios.delete(`/api/pins/${pinID}`, { pinID })
       .then(() => {
         if (deleteType !== 'creator delete') {
-          alert("And here's another one saved from the landfill!");
+          alert("You are awesome! One more item saved from the landfill!");
         } 
         setBluePinLatitude(null);
         setBluePinLongitude(null);
