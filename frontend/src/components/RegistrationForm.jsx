@@ -30,7 +30,7 @@ const RegistrationForm = () => {
 
       <form className="login-form">
         {/* Labels and inputs for form data */}
-        <label className="login-form__label">Username: </label>
+        <label className="login-form__label">Username </label>
         <input
           className="login-form__input"
           name="username"
@@ -39,7 +39,7 @@ const RegistrationForm = () => {
           value={username}
         />
 
-        <label className="login-form__label">Email: </label>
+        <label className="login-form__label">Email </label>
         <input
           className="login-form__input"
           onChange={handleEmail}
@@ -47,7 +47,7 @@ const RegistrationForm = () => {
           type="email"
         />
 
-        <label className="login-form__label">Password: </label>
+        <label className="login-form__label">Password </label>
         <input
           className="login-form__input"
           type="password"
@@ -56,7 +56,7 @@ const RegistrationForm = () => {
           onChange={handlePassword}
         />
 
-        <label className="login-form__label">Confirm Password: </label>
+        <label className="login-form__label">Confirm Password </label>
         <input
           className="login-form__input"
           type="password"
