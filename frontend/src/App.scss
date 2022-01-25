@@ -26,7 +26,6 @@
   &__logo {
     width: 500px;
     display: flex;
-    //flex-grow: 2;
   }
 
   &__text {
@@ -136,9 +135,14 @@
   }
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1200px) {
   .login-page__logo {
       width: 300px;
-      //flex-grow: initial;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .login-page__logo {
+      width: 200px;
   }
 }
