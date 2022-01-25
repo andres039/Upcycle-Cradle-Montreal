@@ -14,8 +14,6 @@ const LoginForm = () => {
   const errorMessage = context.errorMessage;
   const handleErrorMessageReset = context.handleErrorMessageReset;
 
-  console.log(context)
-
   useEffect(() => {
     handleErrorMessageReset();
   }, []);

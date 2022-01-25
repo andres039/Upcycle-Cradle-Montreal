@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const { useState, createContext, useEffect } = require("react");
+const { useState, createContext } = require("react");
 export const AuthContext = createContext();
 
 const withAuthProvider = (WrappedComponent) => (props) => {
@@ -59,7 +59,6 @@ const withAuthProvider = (WrappedComponent) => (props) => {
       })
       .then(() => navigate("/mapview"))
       .catch((err) => {
-        //optional chaining
         console.log("Error record:", err?.response?.data?.message);
         if (err?.response?.data?.message === "Incorrect password") {
           setErrorMessage(err?.response?.data?.message);
