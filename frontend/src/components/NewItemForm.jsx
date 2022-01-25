@@ -57,7 +57,8 @@ const NewItemForm = (props) => {
         setUsername();
       })
       .then(() => {
-        window.location.reload();
+        setErrorMessage("Your item has been posted")
+        setTimeout(window.location.reload(), 3000);
       });
   };
   useEffect(() => {

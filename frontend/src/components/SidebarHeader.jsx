@@ -27,7 +27,7 @@ const SidebarHeader = () => {
         />
 
         <h3 className="sidebar__user">
-          Signed in as {username}
+          Signed in as {localStorage.getItem("username")}
         </h3>
 
         <Button cancel onClick={() => logout()}>
