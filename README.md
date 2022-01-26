@@ -1,5 +1,5 @@
 
-#  Trash_panda Backend
+#  Trash Panda Backend
 
 ## Setup
 
