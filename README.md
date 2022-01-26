@@ -11,8 +11,8 @@
 This project uses PostgreSQL to manage the database, make sure it is already in you machine or [click here to install.](https://www.postgresql.org/download/)                                             
                
 1. Create a database with the command `CREATE DATABASE trash_panda;`
-2. Create tables with the command `\i schema\schema.sql;`
-3. Seed the tables with initial information with the command `\i seeds\seeds.sql;`
+2. Create tables with the command `\i schema/schema.sql;`
+3. Seed the tables with initial information with the command `\i seeds/seeds.sql;`
 4. Copy the `.env.example` file to`.env.development` and fill in the necessary PostgreSQL configuration. For the `TOKEN_KEY` section you can make up your own provisional string inside quotation marks. This is only to initialize the token.
 
 ## Run The Server
