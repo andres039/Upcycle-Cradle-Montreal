@@ -44,7 +44,7 @@ const MapView = (props) => {
                   <div className="dot"></div>
                   <div className="dot"></div>
                 </div>
-                <span>+ New item</span>
+                <span>+ item</span>
               </div>
             </div>
           </Link>

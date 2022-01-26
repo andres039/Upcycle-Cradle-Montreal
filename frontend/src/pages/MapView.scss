@@ -15,7 +15,7 @@ a {
 }
 .my-super-cool-btn{
   position:relative;
-  color: $green;
+  color: rgb(240, 239, 239);
   letter-spacing:1px;
   font-size:1.4rem;
   font-weight: bold;
@@ -27,8 +27,8 @@ a {
   display:flex;
   align-items:center;
   justify-content:center;
-  width:220px;
-  height:80px;
+  width:100px;
+  height:100px;
 }
 .my-super-cool-btn span:before{
   content:'';
@@ -37,7 +37,8 @@ a {
   display:block;
   position:absolute;
   border-radius:100%;
-  border:7px solid #F3CF14;
+  background-color: rgba(255, 234, 2, 0.15);
+  border:3px solid rgba(5, 167, 10, 0.65);
   box-sizing:border-box;
   transition: all .85s cubic-bezier(0.25, 1, 0.33, 1);
   box-shadow: 0 30px 85px rgba(0,0,0,0.14), 0 15px 35px rgba(0,0,0,0.14);
@@ -55,7 +56,7 @@ a {
   width:8px;
   height:8px;
   display:block;
-  background-color:#F3CF14;
+  background-color:#4a9302;
   border-radius:100%;
   position:absolute;
   transition: all .85s cubic-bezier(0.25, 1, 0.33, 1);
