@@ -137,7 +137,7 @@
   }
 }
 
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1300px), (max-height: 700px) {
   .container {
     display: flex;
     flex-direction: column;
@@ -145,7 +145,7 @@
 
   .sidebar {
     width: 100vw;
-    height: 75vh;
+    height: 100vh;
 
     &__text {
       width: 88vw;
@@ -164,5 +164,13 @@
 @media only screen and (max-width: 600px) {
   .login-page__logo {
       width: 200px;
+  }
+
+  .sidebar {
+    height: 100vh;
+
+    &__text {
+      width: 88vw;
+    }
   }
 }
