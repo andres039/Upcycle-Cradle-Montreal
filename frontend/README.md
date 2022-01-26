@@ -1,70 +1,97 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#  Trash_panda Backend
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+*  From the command line `cd` into the backend directory                                                                                                                    
+* Install dependencies with `npm install`
 
-### `npm start`
+## Creating and seeding the Database
+ 
+This project uses PostgreSQL to manage the database, make sure it is already in you machine or [install it](https://www.postgresql.org/download/)                                             
+               
+1. Create a database with the command `CREATE DATABASE trash_panda;`
+2. Create tables with the command `\i schema\schema.sql;`
+3. Seed the tables with initial information with the command `\i seeds\seeds.sql;`
+4. Copy the `.env.example` file to`.env.development` and fill in the necessary PostgreSQL configuration. For the `TOKEN_KEY` section you can make up your own provisional string inside quotation marks. This is only to initialize the token.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Run The Server
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Simply start the server with `npm start`
 
-### `npm test`
+## API 
+   
+ 
+## Users
+                   
+`GET /api/users`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Response 
+```json                                                                                                                       
+[
+  {
+    "id":1,
+     “username":"Homer Simpson",
+     "email":"homer@nuclearplant.com",
+     "password":"$2b$10$z73BvDx35ei1w/tF6aoWu.JQUxRvEbiFu25B072fT3tceZ4sppRWa"
+  } 
+]         
+```       
+`POST /register`
+                                                                                                                     
+Body:
+```json
+[
+  {
+	“username”: `string`,
+	“email”: `string`,
+            “password”: `string`
+     }
 
-### `npm run build`
+]
+ ```
+`POST /login`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Body: 
+```json
+[
+  {
+      “email”: `string`,
+      “password:” `string`		
+  }
+]
+```
+***
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+##Pins
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`GET /api/pins`
 
-### `npm run eject`
+Response
+```json
+ [               
+  {
+   "id":85,
+   "title":"a",
+   "description":"a",
+   "picture":"a",
+   "condition":"New",
+   "latitude":45.4877,
+   "longitude":-73.5636,
+   "date":"2022-01-25T05:00:00.000Z",
+   "creator_id":2,
+   "claimer_id":null
+   }
+]
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+`PUT /api/pins/:id` 
+   
+Body: 
+```json 
+{
+  “current_user_id”: `Integer`,
+  “pinID”: `Integer`
+}
+```
+`DELETE /api/pins/:id`                                 
