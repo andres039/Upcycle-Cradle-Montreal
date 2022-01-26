@@ -8,7 +8,7 @@
 
 ## Creating and seeding the Database
  
-This project uses PostgreSQL to manage the database, make sure it is already in you machine or [install it](https://www.postgresql.org/download/)                                             
+This project uses PostgreSQL to manage the database, make sure it is already in you machine or [click here to install.](https://www.postgresql.org/download/)                                             
                
 1. Create a database with the command `CREATE DATABASE trash_panda;`
 2. Create tables with the command `\i schema\schema.sql;`
@@ -27,7 +27,7 @@ Simply start the server with `npm start`
 `GET /api/users`
 
 Response 
-```json                                                                                                                       
+```json                                                              
 [
   {
     "id":1,
@@ -38,14 +38,14 @@ Response
 ]         
 ```       
 `POST /register`
-                                                                                                                     
+                                                     
 Body:
 ```json
 [
   {
-	"username": `string`,
-	"email": `string`,
-            “password”: `string`
+	"username": "string",
+	"email": "string",
+  "password": "string"
      }
 
 ]
@@ -56,8 +56,8 @@ Body:
 ```json
 [
   {
-      "email": `string`,
-      "password": `string`		
+      "email": "string",
+      "password": "string"		
   }
 ]
 ```
@@ -90,8 +90,8 @@ Response
 Body: 
 ```json 
 {
-  "current_user_id": `Integer`,
-  "pinID": `Integer`
+  "current_user_id": "Integer",
+  "pinID": "Integer"
 }
 ```
 `DELETE /api/pins/:id`                                 
