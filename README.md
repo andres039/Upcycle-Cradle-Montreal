@@ -5,7 +5,13 @@ The app that allows Montrealers to extend the life of discarded furniture. It ad
 
 ## Final Product
 
+## Project Structure
 
+* Backend 
+** Database
+*** Schema
+*** Seeds
+** Api Routes
 
 ## Trash Panda Frontend
 
