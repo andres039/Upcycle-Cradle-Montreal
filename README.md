@@ -63,7 +63,7 @@ Body:
 ```
 ***
 
-##Pins
+## Pins
 
 `GET /api/pins`
 
