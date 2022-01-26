@@ -29,11 +29,11 @@ Simply start the server with `npm start`
 Response 
 ```json                                                              
 [
-  {
-    "id":1,
-     "username":"Homer Simpson",
-     "email":"homer@nuclearplant.com",
-     "password":"$2b$10$z73BvDx35ei1w/tF6aoWu.JQUxRvEbiFu25B072fT3tceZ4sppRWa"
+ {
+  "id":1,
+  "username":"Homer Simpson",
+  "email":"homer@nuclearplant.com",
+  "password":"$2b$10$z73BvDx35ei1w/tF6aoWu.JQUxRvEbiFu25B072fT3tceZ4sppRWa"
   } 
 ]         
 ```       
@@ -42,11 +42,11 @@ Response
 Body:
 ```json
 [
-  {
+ {
 	"username": "string",
 	"email": "string",
   "password": "string"
-     }
+  }
 
 ]
  ```
@@ -55,7 +55,7 @@ Body:
 Body: 
 ```json
 [
-  {
+ {
   "email": "string",
   "password": "string"		
   }
@@ -69,19 +69,19 @@ Body:
 
 Response
 ```json
- [               
-  {
-   "id":85,
-   "title":"a",
-   "description":"a",
-   "picture":"a",
-   "condition":"New",
-   "latitude":45.4877,
-   "longitude":-73.5636,
-   "date":"2022-01-25T05:00:00.000Z",
-   "creator_id":2,
-   "claimer_id":null
-   }
+[               
+ {
+  "id":85,
+  "title":"a",
+  "description":"a",
+  "picture":"a",
+  "condition":"New",
+  "latitude":45.4877,
+  "longitude":-73.5636,
+  "date":"2022-01-25T05:00:00.000Z",
+  "creator_id":2,
+  "claimer_id":null
+  }
 ]
 
 ```
@@ -90,8 +90,8 @@ Response
 Body: 
 ```json 
 {
-  "current_user_id": "Integer",
-  "pinID": "Integer"
+ "current_user_id": "Integer",
+ "pinID": "Integer"
 }
 ```
 `DELETE /api/pins/:id`                                 
