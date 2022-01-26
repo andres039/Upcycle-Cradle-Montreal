@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Button from "./Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 import "./NewItemForm.scss";
@@ -76,6 +76,15 @@ const NewItemForm = (props) => {
     return today.toDateString();
   };
 
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("username");
+    navigate("/");
+  };
+
   return (
     <section className="new-item">
       <h1>{errorMessage}</h1>
@@ -138,6 +147,15 @@ const NewItemForm = (props) => {
           </Link>
         </div>
       </form>
+      <div>
+        <br />
+        <br />
+
+        <Button cancel onClick={() => logout()}>
+          Logout
+        </Button>
+
+      </div>
     </section>
   );
 };
