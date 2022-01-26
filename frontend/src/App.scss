@@ -137,6 +137,17 @@
   }
 }
 
+@media only screen and (max-width: 1300px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100vw;
+  }
+}
+
 @media only screen and (max-width: 1200px) {
   .login-page {
     &__text {

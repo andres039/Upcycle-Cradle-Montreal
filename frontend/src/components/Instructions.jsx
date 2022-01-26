@@ -19,7 +19,7 @@ const Instructions = () => {
   };
 
   return (
-    <section>
+    <section className="sidebar__instructions">
       <section>
         <div className="sidebar__map-legend">
           <h4 className="sidebar__map-legend--title">Legend</h4>

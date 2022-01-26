@@ -23,3 +23,10 @@
     width: 500px;
   }
 }
+
+@media only screen and (max-width: 1300px) {
+  .leaflet-container {
+    width: 100vw;
+    order: 2;
+  }
+}
