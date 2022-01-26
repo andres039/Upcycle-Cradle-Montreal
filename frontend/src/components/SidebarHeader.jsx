@@ -1,21 +1,6 @@
-import React, { useContext } from "react";
-import Button from "./Button";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../providers/AuthProvider";
+import React from "react";
 
 const SidebarHeader = () => {
-  const context = useContext(AuthContext);
-  const username = context.username;
-  const setUsername = context.setUsername;
-  console.log("username test:", username);
-  // const navigate = useNavigate();
-
-  // const logout = () => {
-  //   localStorage.removeItem("token");
-  //   localStorage.removeItem("user");
-  //   localStorage.removeItem("username");
-  //   navigate("/");
-  // };
 
   return (
     <section>
@@ -30,9 +15,6 @@ const SidebarHeader = () => {
           Signed in as {localStorage.getItem("username")}
         </h3>
 
-        {/* <Button cancel onClick={() => logout()}>
-        Logout
-        </Button> */}
       </header>
     </section>
   );
