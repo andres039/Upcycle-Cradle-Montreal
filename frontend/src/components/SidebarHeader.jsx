@@ -8,14 +8,14 @@ const SidebarHeader = () => {
   const username = context.username;
   const setUsername = context.setUsername;
   console.log("username test:", username);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    localStorage.removeItem("username");
-    navigate("/");
-  };
+  // const logout = () => {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("user");
+  //   localStorage.removeItem("username");
+  //   navigate("/");
+  // };
 
   return (
     <section>
@@ -30,9 +30,9 @@ const SidebarHeader = () => {
           Signed in as {localStorage.getItem("username")}
         </h3>
 
-        <Button cancel onClick={() => logout()}>
-          Logout
-        </Button>
+        {/* <Button cancel onClick={() => logout()}>
+        Logout
+        </Button> */}
       </header>
     </section>
   );
