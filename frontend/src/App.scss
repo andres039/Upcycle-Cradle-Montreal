@@ -145,6 +145,10 @@
 
   .sidebar {
     width: 100vw;
+
+    &__text {
+      width: 100vw;
+    }
   }
 }
 
