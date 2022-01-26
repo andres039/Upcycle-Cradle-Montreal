@@ -7,11 +7,17 @@ The app that allows Montrealers to extend the life of discarded furniture. It ad
 
 ## Project Structure
 
-* Backend 
-** Database
-*** Schema
-*** Seeds
-** Api Routes
+- [Back-End](/master/backend) 
+  - [Database]
+    - [Schema]
+    - [Seeds]
+  - [API-Routes]
+- [Front-End]
+  - [Components]
+  - [Helpers]
+  - [Pages]
+  - [Probiders]
+  - [Styles]
 
 ## Trash Panda Frontend
 
@@ -22,15 +28,15 @@ The app that allows Montrealers to extend the life of discarded furniture. It ad
 
 ### Front End Dependencies
 
-"axios": "^0.24.0",
-"dotenv": "^12.0.3",
-"leaflet": "^1.7.1",
-"react": "^17.0.2",
-"react-dom": "^17.0.2",
-"react-leaflet": "^3.2.4",
-"react-router-dom": "^6.2.1",
-"react-scripts": "5.0.0",
-"web-vitals": "^2.1.3"
+- "axios": "^0.24.0",
+- "dotenv": "^12.0.3",
+- "leaflet": "^1.7.1",
+- "react": "^17.0.2",
+- "react-dom": "^17.0.2",
+- "react-leaflet": "^3.2.4",
+- "react-router-dom": "^6.2.1",
+- "react-scripts": "5.0.0",
+- "web-vitals": "^2.1.3"
 
 ## Trash Panda Backend
 
@@ -133,14 +139,14 @@ Body:
 
 ### Dependencies
 
-"bcrypt": "^5.0.1",
-"cookie-parser": "~1.4.4",
-"cors": "^2.8.5",
-"debug": "~2.6.9",
-"dotenv": "^14.1.0",
-"express": "~4.16.1",
-"jsonwebtoken": "^8.5.1",
-"morgan": "~1.9.1",
-"nodemon": "^2.0.15",
-"npm": "^8.3.1",
-"pg": "^8.7.1"
+- "bcrypt": "^5.0.1",
+- "cookie-parser": "~1.4.4",
+- "cors": "^2.8.5",
+- "debug": "~2.6.9",
+- "dotenv": "^14.1.0",
+- "express": "~4.16.1",
+- "jsonwebtoken": "^8.5.1",
+- "morgan": "~1.9.1",
+- "nodemon": "^2.0.15",
+- "npm": "^8.3.1",
+- "pg": "^8.7.1"
