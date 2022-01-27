@@ -27,7 +27,7 @@ The app that allows Montrealers to extend the life of discarded furniture. It ad
   - Components
   - Helpers
   - Pages
-  - Probiders
+  - Providers
   - Styles
 
 ## Trash Panda Frontend
@@ -61,7 +61,7 @@ The app that allows Montrealers to extend the life of discarded furniture. It ad
 This project uses PostgreSQL to manage the database, make sure it is already in you machine or [click here to install.](https://www.postgresql.org/download/)                                             
                
 1. Create a database with the command `CREATE DATABASE trash_panda;`
-2. Copy the `.env.example` file to`.env.development` and fill in the necessary PostgreSQL configuration. For the `TOKEN_KEY` section you can make up your own provisional string inside quotation marks. This is only to initialize the token.
+2. Copy the `.env.example` file to`.env.development` and fill in the necessary PostgreSQL configuration. For the `TOKEN_KEY` section you can make up your own provisional string inside quotation marks. This is only to initialize the JWT token.
 3. Create tables with the command `\i schema/schema.sql;`
 4. Seed the tables with initial information with the command `\i seeds/seeds.sql;`
 
