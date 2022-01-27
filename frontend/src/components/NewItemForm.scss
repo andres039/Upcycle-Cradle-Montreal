@@ -44,10 +44,50 @@
   font-size: 0.8em;
 }
 
-@media only screen and (max-width: 1580px) {
+@media only screen and (max-width: 1300px) {
   .new-item-form {
-    &__title {
-      margin-top: 0.5em;
+    &__label {
+      margin-bottom: 0;
     }
+  }
+
+  .new-item {
+    &__input, &__text-area, &__select  {
+      margin-top: 0.1rem;
+      margin-bottom: 0.75rem;
+      height: 1.15em;
+    }
+  }
+
+  .new-item__text-area {
+    height: 2.2em;
+  }
+
+  .new-item__select {
+    height: 1.5em;
+  }
+}
+
+@media only screen and (max-height: 400px) {
+  .new-item-form {
+    &__label {
+      margin-bottom: 0;
+    }
+  }
+
+  .new-item {
+    &__input, &__text-area, &__select  {
+      margin-top: 0.1rem;
+      margin-bottom: 0.3rem;
+      height: 1.15em;
+    }
+  }
+
+  .new-item__text-area {
+    height: 1.2em;
+  }
+
+  .new-item__select {
+    height: 1.2em;
   }
 }
