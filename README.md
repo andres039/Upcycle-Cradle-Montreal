@@ -4,9 +4,15 @@ The app that allows Montrealers to extend the life of discarded furniture. It ad
 
 ## Final Product
 
+
 ![welcome page](https://github.com/andres039/Upcycle-Cradle-Montreal/blob/master/frontend/public/images/welcome_page2.png)
 
-![login](https://github.com/andres039/Upcycle-Cradle-Montreal/blob/master/frontend/public/images/login_form.png)
+<p align="center">
+  <img src="https://github.com/andres039/Upcycle-Cradle-Montreal/blob/master/frontend/public/images/new_item_mobile.png" width=50% height=50% alt="Screenshot of mobile view of new item form">
+</p>
+<p align="center">
+  <img src="https://github.com/andres039/Upcycle-Cradle-Montreal/blob/master/frontend/public/images/map_mobile.png" width=50% height=50% alt="Screenshot of mobile view of map in the new item form">
+</p>
 
 ![claim item](https://github.com/andres039/Upcycle-Cradle-Montreal/blob/master/frontend/public/images/claim_item.png)
 
