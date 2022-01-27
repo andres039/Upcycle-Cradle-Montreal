@@ -10,7 +10,7 @@ const Home = () => {
         <img className="login-page__logo" src="images/logo.png" alt="Trash Panda Montreal" />
 
         <div>
-          <h1>Welcome</h1>
+          <h1>Welcome to Trash Panda MTL!</h1>
           <p className="welcome-page__about">This environmentally forward thinking app allows Montrealers to extend the life of discarded furniture. It addresses the issue of mass piles of perfectly usable items contributing to pollution. Let's make our community sustainable together!</p>
         </div>
       </div>
