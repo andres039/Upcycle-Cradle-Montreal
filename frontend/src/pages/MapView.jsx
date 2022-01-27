@@ -36,6 +36,7 @@ const MapView = (props) => {
         <div className="sidebar__text">
           <SidebarHeader />
           <Link to="/newitem" className="new-item__button">
+            {/* See MapView.scss for reference to source of the below code for + item button */}
             <div id="wrapper">
               <div className="my-super-cool-btn">
                 <div className="dots-container">
