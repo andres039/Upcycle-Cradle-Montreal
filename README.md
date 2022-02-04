@@ -1,6 +1,6 @@
 # Trash Panda
 
-The app that allows Montrealers to extend the life of discarded furniture. It addresses the issue of mass piles of perfectly usable items contributing to pollution.
+A web app that allows Montrealers to extend the life of discarded furniture by displaying their location on an interactive map. Registered users can indicate their interest in the item by claiming it and marking it as picked up. It addresses the issue of mass piles of perfectly usable items being sent to the landfill and contributing to pollution.
 
 ## Final Product
 
