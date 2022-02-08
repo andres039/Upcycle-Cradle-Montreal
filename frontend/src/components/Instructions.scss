@@ -1,5 +1,5 @@
 li {
-  padding-bottom: 2rem;
+  padding-bottom: 1.1rem;
   text-align: left;
 }
 
@@ -23,5 +23,11 @@ li {
       width: 0.8em;
       height: 1.4em;
     }
+  }
+}
+
+@media only screen and (max-height: 415px) {
+  li {
+    padding-bottom: 0.8rem;
   }
 }
