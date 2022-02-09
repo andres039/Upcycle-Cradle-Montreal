@@ -3,9 +3,9 @@ import RegistrationForm from "../components/RegistrationForm";
 
 const Register = () => {
   return (
-    <main className="login-page">
+    <main className="register-page">
       <img
-        className="bg-image__welcome"
+        className="bg-image__register"
         src="images/dresser-bridge.jpg"
         alt="background for decoration only"
       />
