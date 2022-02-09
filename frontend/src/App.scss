@@ -86,7 +86,6 @@
   position: relative;
   display: flex;
   flex-flow: column;
-  //height: 100vh;
   width: 28.5vw;
   background: $black;
   color: $light-blue;
@@ -127,20 +126,6 @@
   padding-left: 1rem;
 }
 
-@media only screen and (min-aspect-ratio: 23/13) and (max-height: 415px) {
-  .sidebar {
-    height: 152vh;
-  }
-
-  .bg-image {
-    height: 152vh;
-
-    &__register {
-      height: 110vh;
-    }
-  }
-}
-
 @media only screen and (max-width: 1580px) {
   .App {
     font-size: 1.1em;
@@ -159,7 +144,6 @@
 
   .sidebar {
     width: 100vw;
-    //height: 100vh;
 
     &__text {
       width: 88vw;
@@ -202,5 +186,23 @@
     &__text {
       width: 88vw;
     }
+  }
+}
+
+@media only screen and (min-aspect-ratio: 23/13) and (max-height: 415px) {
+  .bg-image {
+    height: 152vh;
+
+    &__register {
+      height: 165vh;
+    }
+  }
+
+  .register-page {
+    height: 165vh;
+  }
+  
+  .sidebar {
+    height: 152vh;
   }
 }
