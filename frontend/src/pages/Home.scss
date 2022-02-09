@@ -51,24 +51,25 @@
   .welcome-page {
     &__text {
       flex-flow: row wrap;
+      gap: 0rem;
       padding: 0.5em 2em;
     }
 
-    &__links {
-      bottom: initial;
-    }
-  }
-}
-
-@media only screen and (max-width: 800px) {
-  .welcome-page {
     &__title {
       font-size: 1.3em;
     }
 
     &__about {
-      font-size: 1.1em;
+      font-size: 1em;
       padding: 0;
+    }
+
+    &__links {
+      bottom: 2em;
+    }
+
+    &__login-link, &__register-link {
+      font-size: 1.4em;
     }
   }
 }

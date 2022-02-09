@@ -171,11 +171,15 @@
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .login-page__logo {
-      width: 200px;
+@media only screen and (max-width: 1000px) {
+  .login-page {
+    &__logo {
+      width: 100px;
+    }
   }
+}
 
+@media only screen and (max-width: 600px) {
   .sidebar {
     &__text {
       width: 88vw;
