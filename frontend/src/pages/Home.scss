@@ -59,3 +59,16 @@
     }
   }
 }
+
+@media only screen and (max-width: 800px) {
+  .welcome-page {
+    &__title {
+      font-size: 1.3em;
+    }
+
+    &__about {
+      font-size: 1.1em;
+      padding: 0;
+    }
+  }
+}
