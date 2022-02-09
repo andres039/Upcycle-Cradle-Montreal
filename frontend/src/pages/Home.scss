@@ -39,6 +39,14 @@
   }
 }
 
+@media only screen and (max-width: 1300px) {
+  .welcome-page {
+    &__about {
+      font-size: 1.4em;
+    }
+  }
+}
+
 @media only screen and (max-width: 1000px) {
   .welcome-page {
     &__text {
