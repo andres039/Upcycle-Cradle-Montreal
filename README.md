@@ -6,7 +6,7 @@ Registered users can indicate their interest in the item by claiming it and mark
 
 ## Final Product
 
-![animated demo GIF](hhttps://github.com/andres039/Upcycle-Cradle-Montreal/blob/master/frontend/public/images/demo.gif?raw=true)
+![animated demo GIF](https://github.com/andres039/Upcycle-Cradle-Montreal/blob/master/frontend/public/images/demo.gif?raw=true)
 
 ![welcome page](https://github.com/andres039/Upcycle-Cradle-Montreal/blob/master/frontend/public/images/welcome_page2.png)
 
